@@ -1,0 +1,7 @@
+@model DMMS.Web.ViewModels.DashboardViewModel
+@{ ViewData["Title"] = "營運總覽"; }
+@if (Model.DataError is not null) { <div class="alert alert-warning">@Model.DataError</div> }
+<div class="stat-grid">
+<div class="stat-card"><span>商品總數</span><strong>@Model.ProductCount</strong></div><div class="stat-card"><span>啟用商品</span><strong>@Model.EnabledProductCount</strong></div><div class="stat-card"><span>分類數</span><strong>@Model.CategoryCount</strong></div><div class="stat-card"><span>特口類數</span><strong>@Model.SpecialOptionGroupCount</strong></div><div class="stat-card"><span>加料數</span><strong>@Model.AddOnCount</strong></div><div class="stat-card warning"><span>缺少品號商品</span><strong>@Model.MissingCodeProductCount</strong></div>
+</div>
+<div class="panel mt-4"><div class="panel-title">快速開始</div><p class="text-muted mb-3">先建立商品與尺寸品號，後續可再配置特口與加料關聯。</p><a class="btn btn-outline-primary" asp-controller="Products" asp-action="Index">查看商品列表</a></div>
