@@ -68,7 +68,6 @@ public class SpecialOption
 public class ProductSpecialOption
 {
     public int ProductId { get; set; } public Product Product { get; set; } = null!;
-    public int? ProductSizeId { get; set; } public ProductSize? ProductSize { get; set; }
     public int SpecialOptionId { get; set; } public SpecialOption SpecialOption { get; set; } = null!;
     public bool IsEnabled { get; set; } = true;
 }
@@ -78,6 +77,17 @@ public class AddOn
     public decimal Price { get; set; } public string ExternalData { get; set; } = "";
     public bool IcedOnly { get; set; } public int? SizeOnlyId { get; set; } public bool FixedRatio { get; set; } public bool IsEnabled { get; set; } = true;
 }
-public class ProductAddOn { public int ProductId { get; set; } public Product Product { get; set; } = null!; public int AddOnId { get; set; } public AddOn AddOn { get; set; } = null!; public int? ProductSizeId { get; set; } public ProductSize? ProductSize { get; set; } }
+public class ProductAddOn
+{
+    public int Id { get; set; }
+    public int ProductId { get; set; } public Product Product { get; set; } = null!;
+    public int AddOnId { get; set; } public AddOn AddOn { get; set; } = null!;
+    public int ProductSizeId { get; set; } public ProductSize ProductSize { get; set; } = null!;
+    /// <summary>此尺寸實際輸出品號（含 @）。可由主檔帶入，也可覆寫（例如醇香蜂蜜 中杯 @IT1812(20) / 大杯 @IT1836(40)）。</summary>
+    public string ExternalData { get; set; } = "";
+    /// <summary>此尺寸實際加購價。可由主檔帶入，也可覆寫。</summary>
+    public decimal Price { get; set; }
+    public bool IsEnabled { get; set; } = true;
+}
 public class PlatformProductMapping { public int Id { get; set; } public string Platform { get; set; } = ""; public string? OriginalExternalId { get; set; } public string? Uuid { get; set; } public string? OriginalName { get; set; } public string? SourceMetadata { get; set; } }
 public class ExportHistory { public int Id { get; set; } public DateTime CreatedAt { get; set; } = DateTime.UtcNow; public string Platform { get; set; } = ""; }

@@ -1,3 +1,15 @@
+
+/* Choice pills + addon matrix */
+.choice-group{margin-bottom:14px;border-top:1px solid var(--line);padding-top:12px}
+.choice-group-title{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.choice-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;margin:0 8px 8px 0;background:#fff;cursor:pointer;font-size:14px}
+.choice-pill small{color:var(--muted);font-size:11px}
+.choice-pill:has(input:checked){border-color:var(--primary);background:#eef4ff;color:var(--primary);font-weight:600}
+.addon-table th,.addon-table td{vertical-align:top}
+.addon-cell{border-left:1px solid var(--line)}
+.check-line{display:block;margin-bottom:4px;font-size:13px}
+.addon-name-cell{min-width:170px}
+.addon-code,.addon-price{max-width:160px}
 /* Master data option rows (appended ahead so original responsive rules keep priority) */
 .box-row{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:#fbfcfe;display:grid;grid-template-columns:minmax(160px,1.6fr) 130px 170px 90px 110px 170px 1fr 70px 34px;gap:10px;align-items:end}
 .option-row .opt-field label{font-size:12px;color:var(--muted);margin-bottom:4px;display:block}

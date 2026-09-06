@@ -15,6 +15,7 @@ Uber Eats 外送平台菜單管理系統。第一階段以目前實際使用中�
 - Dashboard、商品管理列表、商品建立／編輯表單與繁體中文 Sidebar
 - 特口群組管理（冰度／溫度 BaseCode+Suffix、甜度 Standalone ExternalData、Min/Max、啟用、刪除保護）
 - 加料管理（@ 品號自動正規化、僅冰標記、刪除保護）
+- 商品主檔配置：勾選可用特口（冰度/甜度/溫度群組），加料逐尺寸啟用並可覆寫品號與價格（如醇香蜂蜜中杯 `@IT1812(20)` / 大杯 `@IT1836(40)`）
 - 第一階段實作規格：`SPEC.md`
 - 開發計畫：`IMPLEMENTATION-PLAN.md`
 
