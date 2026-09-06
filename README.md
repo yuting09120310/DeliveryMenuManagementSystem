@@ -13,6 +13,8 @@ Uber Eats 外送平台菜單管理系統。第一階段以目前實際使用中�
 - SQL Server `DMMS` Database 建立並確認 ONLINE，使用獨立 `dmms` schema 避免覆蓋既有 dbo 舊表
 - 第一個核心垂直切片：ExternalData 計算、商品驗證、EF Core Migration
 - Dashboard、商品管理列表、商品建立／編輯表單與繁體中文 Sidebar
+- 特口群組管理（冰度／溫度 BaseCode+Suffix、甜度 Standalone ExternalData、Min/Max、啟用、刪除保護）
+- 加料管理（@ 品號自動正規化、僅冰標記、刪除保護）
 - 第一階段實作規格：`SPEC.md`
 - 開發計畫：`IMPLEMENTATION-PLAN.md`
 
