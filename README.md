@@ -10,8 +10,9 @@ Uber Eats 外送平台菜單管理系統。第一階段以目前實際使用中�
 - ASP.NET Core 8 MVC 專案骨架
 - xUnit 測試專案
 - EF Core SQL Server、ClosedXML 依賴
-- SQL Server `DMMS` Database 建立並確認 ONLINE
-- 安全設定範本：`src/DMMS.Web/appsettings.Example.json`
+- SQL Server `DMMS` Database 建立並確認 ONLINE，使用獨立 `dmms` schema 避免覆蓋既有 dbo 舊表
+- 第一個核心垂直切片：ExternalData 計算、商品驗證、EF Core Migration
+- Dashboard、商品管理列表、商品建立／編輯表單與繁體中文 Sidebar
 - 第一階段實作規格：`SPEC.md`
 - 開發計畫：`IMPLEMENTATION-PLAN.md`
 
