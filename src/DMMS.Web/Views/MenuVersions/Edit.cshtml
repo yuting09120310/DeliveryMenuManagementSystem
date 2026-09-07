@@ -1,0 +1,4 @@
+@model DMMS.Web.ViewModels.MenuVersionEditViewModel
+@{ ViewData["Title"] = "菜單建置／UE 匯出"; }
+<form method="post"><input asp-for="Id" type="hidden" /><div asp-validation-summary="All" class="text-danger"></div><label asp-for="Name"></label><input asp-for="Name" class="form-control mb-2" /><label>平台</label><input asp-for="Platform" class="form-control mb-3" />
+<h3>選取商品</h3><div class="row">@foreach (var p in Model.Products) {<div class="col-md-4"><label class="border rounded p-2 d-block"><input type="checkbox" name="SelectedProductIds" value="@p.Id" checked="@Model.SelectedProductIds.Contains(p.Id)" /> @p.Name <small class="text-muted">(@p.Sizes.Count 尺寸)</small></label></div>}</div><button class="btn btn-primary mt-3">儲存並預覽</button></form>

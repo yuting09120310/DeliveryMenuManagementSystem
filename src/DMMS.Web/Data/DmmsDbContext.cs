@@ -16,6 +16,8 @@ public class DmmsDbContext(DbContextOptions<DmmsDbContext> options) : DbContext(
     public DbSet<ProductAddOn> ProductAddOns => Set<ProductAddOn>();
     public DbSet<PlatformProductMapping> PlatformProductMappings => Set<PlatformProductMapping>();
     public DbSet<ExportHistory> ExportHistories => Set<ExportHistory>();
+    public DbSet<MenuVersion> MenuVersions => Set<MenuVersion>();
+    public DbSet<MenuVersionProduct> MenuVersionProducts => Set<MenuVersionProduct>();
 
     protected override void OnModelCreating(ModelBuilder b)
     {
@@ -35,5 +37,8 @@ public class DmmsDbContext(DbContextOptions<DmmsDbContext> options) : DbContext(
         b.Entity<ProductSize>().Property(x => x.PriceAdjustment).HasPrecision(18, 2);
         b.Entity<AddOn>().Property(x => x.Price).HasPrecision(18, 2);
         b.Entity<ProductAddOn>().Property(x => x.Price).HasPrecision(18, 2);
+        b.Entity<MenuVersionProduct>().HasKey(x => new { x.MenuVersionId, x.ProductId });
+        b.Entity<MenuVersionProduct>().HasOne(x => x.MenuVersion).WithMany(x => x.Products).HasForeignKey(x => x.MenuVersionId).OnDelete(DeleteBehavior.Cascade);
+        b.Entity<MenuVersionProduct>().HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.NoAction);
     }
 }

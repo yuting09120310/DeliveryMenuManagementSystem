@@ -1,0 +1,4 @@
+@model IReadOnlyList<DMMS.Web.Models.MenuVersion>
+@{ ViewData["Title"] = "菜單建置／UE 匯出"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><p class="text-muted">版本化保存商品選取，預覽後匯出 UE 菜單。</p><a class="btn btn-primary" asp-action="Create">＋ 建立 UE 菜單 V1</a></div>
+<table class="table"><thead><tr><th>名稱</th><th>平台</th><th>狀態</th><th>商品數</th><th>建立時間</th><th></th></tr></thead><tbody>@foreach (var v in Model) {<tr><td>@v.Name</td><td>@v.Platform</td><td>@v.Status</td><td>@v.Products.Count</td><td>@v.CreatedAt.ToLocalTime()</td><td><a asp-action="Preview" asp-route-id="@v.Id">預覽</a>　<a asp-action="Build" asp-route-id="@v.Id">編輯</a></td></tr>}</tbody></table>

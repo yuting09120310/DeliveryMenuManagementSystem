@@ -33,8 +33,18 @@ Uber Eats 外送平台菜單管理系統。第一階段以目前實際使用中�
 
 ```bash
 cd /home/alexvm/projects/DeliveryMenuManagementSystem
-ASPNETCORE_URLS=http://0.0.0.0:5290 dotnet run --project src/DMMS.Web
+ASPNETCORE_URLS=http://0.0.0.0:5098 dotnet run --project src/DMMS.Web
 ```
+
+## UE 菜單 V1 匯出
+
+1. 開啟 `/MenuVersions`
+2. 點選「建立 UE 菜單 V1」
+3. 勾選要匯出的商品
+4. 儲存並檢視預覽／警告
+5. 點選「下載 Excel」
+
+匯出器使用 `src/DMMS.Web/Templates/ue-source.xlsx` 的實際 UE 模板標題，保留 `GlobalSettings`、`Menus`、`Categories&Items&Modifiers` 與 88 欄順序。
 
 ## 測試與建置
 
