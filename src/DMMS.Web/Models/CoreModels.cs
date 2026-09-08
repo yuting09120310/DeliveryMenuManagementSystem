@@ -74,19 +74,29 @@ public class ProductSpecialOption
 public class AddOn
 {
     public int Id { get; set; } public string Name { get; set; } = ""; public string? EnglishName { get; set; }
-    public decimal Price { get; set; } public string ExternalData { get; set; } = "";
-    public bool IcedOnly { get; set; } public int? SizeOnlyId { get; set; } public bool FixedRatio { get; set; } public bool IsEnabled { get; set; } = true;
+    /// <summary>預設加購價（未依尺寸特化時的 fallback）。</summary>
+    public decimal Price { get; set; }
+    /// <summary>預設品號（未依尺寸特化時的 fallback，含 @）。</summary>
+    public string ExternalData { get; set; } = "";
+    public bool IcedOnly { get; set; } public bool FixedRatio { get; set; } public bool IsEnabled { get; set; } = true;
+    public int SortOrder { get; set; }
+    public ICollection<AddOnSize> Sizes { get; set; } = new List<AddOnSize>();
+}
+/// <summary>加料依尺寸的品號／價格定義（如醇香蜂蜜 中杯 @IT1812(20)/10、大杯 @IT1836(40)/15）。</summary>
+public class AddOnSize
+{
+    public int Id { get; set; }
+    public int AddOnId { get; set; } public AddOn? AddOn { get; set; }
+    public string SizeName { get; set; } = "";
+    public string ExternalData { get; set; } = "";
+    public decimal Price { get; set; }
+    public bool IsEnabled { get; set; } = true;
+    public int SortOrder { get; set; }
 }
 public class ProductAddOn
 {
-    public int Id { get; set; }
     public int ProductId { get; set; } public Product Product { get; set; } = null!;
     public int AddOnId { get; set; } public AddOn AddOn { get; set; } = null!;
-    public int ProductSizeId { get; set; } public ProductSize ProductSize { get; set; } = null!;
-    /// <summary>此尺寸實際輸出品號（含 @）。可由主檔帶入，也可覆寫（例如醇香蜂蜜 中杯 @IT1812(20) / 大杯 @IT1836(40)）。</summary>
-    public string ExternalData { get; set; } = "";
-    /// <summary>此尺寸實際加購價。可由主檔帶入，也可覆寫。</summary>
-    public decimal Price { get; set; }
     public bool IsEnabled { get; set; } = true;
 }
 public class PlatformProductMapping { public int Id { get; set; } public string Platform { get; set; } = ""; public string? OriginalExternalId { get; set; } public string? Uuid { get; set; } public string? OriginalName { get; set; } public string? SourceMetadata { get; set; } }

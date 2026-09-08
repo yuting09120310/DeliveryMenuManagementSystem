@@ -20,61 +20,18 @@
 <section class="panel"><div class="panel-title">可用特口</div><p class="text-muted mb-0">尚未建立任何特口群組。請先到「特口群組（冰度/甜度）」新增。</p></section>
 }
 
-<section class="panel"><div class="panel-heading"><div><div class="panel-title mb-0">加料配置（可依尺寸覆寫品號／價格）</div><p class="text-muted mb-0">勾選可用加料。若不同尺寸品號不同（如醇香蜂蜜：中杯 <code>@@IT1812(20)</code>、大杯 <code>@@IT1836(40)</code>），在該尺寸列修改品號即可。</p></div></div>
+<section class="panel"><div class="panel-heading"><div><div class="panel-title mb-0">可用加料</div><p class="text-muted mb-0">勾選此商品可加哪些料。各尺寸的實際品號與價格已在「加料管理」主檔定義（例如醇香蜂蜜 中杯 <code>@@IT1812(20)</code>、大杯 <code>@@IT1836(40)</code>）。</p></div></div>
 @if (!Model.AvailableAddOns.Any()) { <div class="empty-state">尚未建立加料主檔，請先到「加料管理」新增。</div> } else {
-<table class="table align-middle addon-table"><thead><tr><th>加料</th>@foreach (var s in Model.Sizes.Where(x => !string.IsNullOrWhiteSpace(x.Name))) { <th>@s.Name</th> }</tr></thead><tbody>
+<div class="addon-choice-grid">
 @foreach (var ao in Model.AvailableAddOns) {
-    var rows = Model.AddOns.Where(r => r.AddOnId == ao.Id).ToList();
-    if (!rows.Any()) continue;
-    var anyOn = rows.Any(r => r.IsEnabled);
-    <tr data-addon-id="@ao.Id"><td class="addon-name-cell"><label class="choice-pill"><input type="checkbox" class="addon-master-check" data-addon-id="@ao.Id" @(anyOn ? "checked" : "") /> <span>@ao.Name</span></label><div class="small text-muted">主檔：<code>@ao.ExternalData</code> NT$@ao.Price</div></td>
-    @for (var si = 0; si < Model.Sizes.Count; si++) {
-        var size = Model.Sizes[si];
-        if (string.IsNullOrWhiteSpace(size.Name)) continue;
-        var row = rows.FirstOrDefault(r => r.SizeName == size.Name);
-        if (row is null) continue;
-        var idx = Model.AddOns.IndexOf(row);
-        <td class="addon-cell" data-size-name="@size.Name">
-            <input type="hidden" asp-for="AddOns[@idx].Id" />
-            <input type="hidden" asp-for="AddOns[@idx].AddOnId" />
-            <input type="hidden" asp-for="AddOns[@idx].SizeName" />
-            <input type="hidden" asp-for="AddOns[@idx].AddOnName" />
-            <label class="check-line"><input type="checkbox" class="addon-size-check" asp-for="AddOns[@idx].IsEnabled" /> 啟用</label>
-            <div class="small text-muted">品號</div>
-            <input asp-for="AddOns[@idx].ExternalData" class="form-control form-control-sm addon-code" placeholder="@@IT1812(20)" />
-            <div class="small text-muted mt-1">價格</div>
-            <input asp-for="AddOns[@idx].Price" class="form-control form-control-sm addon-price" type="number" step="1" min="0" />
-            <div class="small text-muted">@row.DefaultExternalData · 預設 NT$@row.DefaultPrice</div>
-        </td>
-    }
-    </tr>
+    var checkedAttr = Model.AddOnIds.Contains(ao.Id);
+    <label class="choice-pill addon-choice"><input type="checkbox" name="AddOnIds" value="@ao.Id" @(checkedAttr ? "checked" : "") /> <span>@ao.Name</span>@if (ao.IcedOnly) { <span class="badge text-bg-info">僅冰</span> }@if (ao.FixedRatio) { <span class="badge text-bg-secondary">固定比例</span> }</label>
+    if (!string.IsNullOrWhiteSpace(ao.SizeSummary)) { <div class="addon-size-hint">@ao.SizeSummary</div> }
 }
-</tbody></table>
-<p class="text-muted small">上方「主檔」為加料主檔的預設品號與價格；在每格修改即為此尺寸的覆寫值（用於匯出）。</p>
+</div>
+<p class="text-muted small mt-2">未列出的尺寸會使用加料主檔的預設品號與價格。</p>
 }
 </section>
 
 <div class="form-actions"><a class="btn btn-outline-secondary" asp-action="Index">取消</a><button class="btn btn-primary" type="submit">儲存商品</button></div></form>
-@section Scripts {
-<partial name="_ValidationScriptsPartial" />
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // 加料：列首 master checkbox 連動所有尺寸格
-    document.querySelectorAll('.addon-master-check').forEach(function (master) {
-        master.addEventListener('change', function () {
-            var tr = master.closest('tr[data-addon-id]');
-            tr.querySelectorAll('.addon-size-check').forEach(function (cb) { cb.checked = master.checked; });
-        });
-    });
-    // 個別尺寸取消時，同步 master 狀態
-    document.querySelectorAll('.addon-size-check').forEach(function (cb) {
-        cb.addEventListener('change', function () {
-            var tr = cb.closest('tr[data-addon-id]');
-            var master = tr.querySelector('.addon-master-check');
-            var all = Array.prototype.map.call(tr.querySelectorAll('.addon-size-check'), function (x) { return x.checked; });
-            master.checked = all.some(Boolean);
-        });
-    });
-});
-</script>
-}
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

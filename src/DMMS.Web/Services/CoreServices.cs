@@ -12,8 +12,6 @@ public sealed class ExternalDataCalculator
     }
     public string CalculateSweetness(SpecialOption option) => option.StandaloneExternalData ?? "";
     public string CalculateAddOn(AddOn addOn) => addOn.ExternalData.StartsWith('@') ? addOn.ExternalData : "@" + addOn.ExternalData;
-    /// <summary>以商品尺寸關聯的品號為準（支援不同尺寸不同品號，如醇香蜂蜜 中杯 @IT1812(20) / 大杯 @IT1836(40)）。</summary>
-    public string CalculateAddOn(ProductAddOn pa) => pa.ExternalData.StartsWith('@') ? pa.ExternalData : "@" + pa.ExternalData;
 }
 
 public sealed record ProductValidationError(string Code, string Message);

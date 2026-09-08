@@ -31,8 +31,15 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
                 rows.Add(new("ProductSize", product.Name, size.Name, "", size.ColdBaseCode ?? size.HotBaseCode ?? $"PRODUCT-{product.Id}-SIZE-{size.Id}", product.BasePrice + size.PriceAdjustment));
                 foreach (var option in product.SpecialOptions.Where(x => x.IsEnabled && x.SpecialOption.IsEnabled).Select(x => x.SpecialOption))
                     rows.Add(new("SpecialOption", product.Name, size.Name, option.Name, option.ExternalDataMode == ExternalDataMode.Standalone ? option.StandaloneExternalData ?? "" : option.Suffix ?? "", 0));
-                foreach (var addOn in product.AddOns.Where(x => x.IsEnabled && x.ProductSizeId == size.Id))
-                    rows.Add(new("ProductAddOn", product.Name, size.Name, addOn.AddOn.Name, addOn.ExternalData.StartsWith('@') ? addOn.ExternalData : "@" + addOn.ExternalData, addOn.Price));
+                // 加料：商品層級勾選 → 依尺寸查 AddOn 主檔的 AddOnSize（找不到 fallback 主檔預設品號/價格）
+                foreach (var pa in product.AddOns.Where(x => x.IsEnabled))
+                {
+                    var addOn = pa.AddOn;
+                    var sizeDef = addOn?.Sizes?.FirstOrDefault(s => s.IsEnabled && s.SizeName == size.Name);
+                    var code = !string.IsNullOrWhiteSpace(sizeDef?.ExternalData) ? sizeDef.ExternalData : addOn?.ExternalData ?? "";
+                    var price = !string.IsNullOrWhiteSpace(sizeDef?.ExternalData) ? sizeDef.Price : addOn?.Price ?? 0;
+                    rows.Add(new("ProductAddOn", product.Name, size.Name, addOn?.Name ?? $"加料#{pa.AddOnId}", code.StartsWith('@') ? code : "@" + code, price));
+                }
             }
         }
         return rows;

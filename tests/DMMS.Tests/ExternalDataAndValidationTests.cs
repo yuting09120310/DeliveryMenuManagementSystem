@@ -74,24 +74,25 @@ public class ExternalDataAndValidationTests
     }
 
     [Fact]
-    public void AddOn_external_data_can_differ_per_size()
+    public void AddOn_size_definitions_differ_per_size()
     {
-        // 醇香蜂蜜：中杯 @IT1812(20)、大杯 @IT1836(40)
-        var product = new Product { Name = "醇香蜂蜜飲" };
-        var medium = new ProductSize { Name = "中杯", ColdBaseCode = "IT0005-U" };
-        var large = new ProductSize { Name = "大杯", ColdBaseCode = "IT0006-U" };
-        product.Sizes.Add(medium);
-        product.Sizes.Add(large);
-        var addOn = new AddOn { Name = "醇香蜂蜜", ExternalData = "@IT1812(20)", Price = 10 };
-        product.AddOns.Add(new ProductAddOn { AddOn = addOn, ProductSize = medium, ExternalData = "@IT1812(20)", Price = 10 });
-        product.AddOns.Add(new ProductAddOn { AddOn = addOn, ProductSize = large, ExternalData = "@IT1836(40)", Price = 15 });
+        // 醇香蜂蜜主檔：中杯 @IT1812(20)/10、大杯 @IT1836(40)/15
+        var addOn = new AddOn
+        {
+            Name = "醇香蜂蜜", ExternalData = "@IT1812(20)", Price = 10,
+            Sizes =
+            {
+                new AddOnSize { SizeName = "中杯", ExternalData = "@IT1812(20)", Price = 10 },
+                new AddOnSize { SizeName = "大杯", ExternalData = "@IT1836(40)", Price = 15 }
+            }
+        };
+        var mediumDef = addOn.Sizes.Single(s => s.SizeName == "中杯");
+        var largeDef = addOn.Sizes.Single(s => s.SizeName == "大杯");
 
-        var calc = new ExternalDataCalculator();
-        var mediumOut = calc.CalculateAddOn(product.AddOns.Single(x => x.ProductSize == medium));
-        var largeOut = calc.CalculateAddOn(product.AddOns.Single(x => x.ProductSize == large));
-
-        Assert.Equal("@IT1812(20)", mediumOut);
-        Assert.Equal("@IT1836(40)", largeOut);
+        Assert.Equal("@IT1812(20)", mediumDef.ExternalData);
+        Assert.Equal(10, mediumDef.Price);
+        Assert.Equal("@IT1836(40)", largeDef.ExternalData);
+        Assert.Equal(15, largeDef.Price);
     }
 
     [Fact]

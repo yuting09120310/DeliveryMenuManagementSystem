@@ -83,57 +83,19 @@ public class ProductsController(DmmsDbContext db) : Controller
     {
         model.Categories = await db.Categories.AsNoTracking().OrderBy(x => x.Name).ToListAsync();
         model.GroupChoices = await LoadGroupChoicesAsync();
-        var addOns = await db.AddOns.AsNoTracking().Where(a => a.IsEnabled).OrderBy(a => a.Name).ToListAsync();
-        model.AvailableAddOns = addOns;
-
-        // 已存在商品 → 讀取已存關聯（addOnId,sizeName）→ link
-        var savedByKey = new Dictionary<(int AddOnId, string Size), ProductAddOn>();
-        if (model.Id > 0)
+        var addOns = await db.AddOns.AsNoTracking().Include(a => a.Sizes).Where(a => a.IsEnabled).OrderBy(a => a.Name).ToListAsync();
+        model.AvailableAddOns = addOns.Select(a => new AddOnChoiceItem
         {
-            var saved = await db.ProductAddOns.AsNoTracking()
-                .Include(x => x.ProductSize)
-                .Where(x => x.ProductId == model.Id)
-                .ToListAsync();
-            foreach (var s in saved)
-                savedByKey[(s.AddOnId, s.ProductSize?.Name ?? "")] = s;
-        }
+            Id = a.Id, Name = a.Name, EnglishName = a.EnglishName,
+            DefaultCode = a.ExternalData, DefaultPrice = a.Price,
+            IcedOnly = a.IcedOnly, FixedRatio = a.FixedRatio,
+            SizeSummary = string.Join("｜", a.Sizes.Where(s => s.IsEnabled).OrderBy(s => s.SortOrder).Select(s => $"{s.SizeName} {s.ExternalData} NT${s.Price:N0}"))
+        }).ToList();
 
-        // 用「model 已回傳的列」優先保留（POST 失敗重顯時不丟失使用者輸入）
-        var posted = model.AddOns.ToList();
-
-        model.AddOns = [];
-        var sizeNames = model.Sizes.Where(s => !string.IsNullOrWhiteSpace(s.Name)).Select(s => s.Name).Distinct().ToList();
-        foreach (var addOn in addOns)
+        if (model.Id > 0 && model.AddOnIds.Count == 0)
         {
-            foreach (var sn in sizeNames)
-            {
-                var postedRow = posted.FirstOrDefault(r => r.AddOnId == addOn.Id && r.SizeName == sn);
-                var savedRow = savedByKey.GetValueOrDefault((addOn.Id, sn));
-                var row = new ProductAddOnInputModel
-                {
-                    AddOnId = addOn.Id, AddOnName = addOn.Name, SizeName = sn,
-                    ProductSizeId = savedRow?.ProductSizeId ?? 0,
-                    DefaultExternalData = addOn.ExternalData,
-                    DefaultPrice = addOn.Price
-                };
-                if (postedRow is not null)
-                {
-                    row.Id = postedRow.Id; row.IsEnabled = postedRow.IsEnabled;
-                    row.ExternalData = postedRow.ExternalData; row.Price = postedRow.Price;
-                    if (row.Id == 0 && savedRow is not null) row.Id = savedRow.Id;
-                }
-                else if (savedRow is not null)
-                {
-                    row.Id = savedRow.Id; row.IsEnabled = savedRow.IsEnabled;
-                    row.ExternalData = savedRow.ExternalData; row.Price = savedRow.Price;
-                }
-                else
-                {
-                    row.IsEnabled = false;
-                    row.ExternalData = addOn.ExternalData; row.Price = addOn.Price;
-                }
-                model.AddOns.Add(row);
-            }
+            var saved = await db.ProductAddOns.AsNoTracking().Where(x => x.ProductId == model.Id && x.IsEnabled).Select(x => x.AddOnId).ToListAsync();
+            model.AddOnIds = saved;
         }
         return model;
     }
@@ -165,7 +127,8 @@ public class ProductsController(DmmsDbContext db) : Controller
             BasePrice = p.BasePrice, IsEnabled = p.IsEnabled, SortOrder = p.SortOrder, SourceExternalId = p.SourceExternalId, SourceUuid = p.SourceUuid,
             CategoryId = p.ProductCategories.Select(x => (int?)x.CategoryId).FirstOrDefault(),
             Sizes = p.Sizes.OrderBy(x => x.SortOrder).Select(s => new ProductSizeInputModel { Id = s.Id, Name = s.Name, PriceAdjustment = s.PriceAdjustment, ColdBaseCode = s.ColdBaseCode, HotBaseCode = s.HotBaseCode, IsEnabled = s.IsEnabled, SortOrder = s.SortOrder }).ToList(),
-            SpecialOptionIds = p.SpecialOptions.Where(x => x.IsEnabled).Select(x => x.SpecialOptionId).ToList()
+            SpecialOptionIds = p.SpecialOptions.Where(x => x.IsEnabled).Select(x => x.SpecialOptionId).ToList(),
+            AddOnIds = p.AddOns.Where(x => x.IsEnabled).Select(x => x.AddOnId).ToList()
         };
         return m;
     }
@@ -205,29 +168,8 @@ public class ProductsController(DmmsDbContext db) : Controller
         foreach (var oid in m.SpecialOptionIds.Distinct())
             p.SpecialOptions.Add(new ProductSpecialOption { Product = p, SpecialOptionId = oid, IsEnabled = true });
 
-        // 加料：依 (AddOnId, SizeName) 去重，啟用列才建立
-        var master = db.AddOns.AsNoTracking().ToDictionary(a => a.Id); // fallback 品號/價格
-        foreach (var group in m.AddOns.Where(x => x.IsEnabled && x.AddOnId > 0)
-                     .GroupBy(x => (x.AddOnId, x.SizeName)))
-        {
-            var row = group.First();
-            var size = p.Sizes.FirstOrDefault(s => s.Name == row.SizeName);
-            if (size is null) continue;
-            var masterCode = master.TryGetValue(row.AddOnId, out var ma) ? ma.ExternalData : "";
-            var code = string.IsNullOrWhiteSpace(row.ExternalData) ? masterCode : row.ExternalData.Trim();
-            var price = row.Price;
-            p.AddOns.Add(new ProductAddOn
-            {
-                Product = p, AddOnId = row.AddOnId, ProductSize = size,
-                ExternalData = NormalizeAt(code), Price = price, IsEnabled = true
-            });
-        }
-    }
-
-    private static string NormalizeAt(string raw)
-    {
-        var v = (raw ?? "").Trim();
-        if (v.Length == 0) return v;
-        return v.StartsWith('@') ? v : "@" + v;
+        // 加料：商品層級勾選（品號/價格由加料主檔依尺寸定義，商品不需填）
+        foreach (var aid in m.AddOnIds.Distinct())
+            p.AddOns.Add(new ProductAddOn { Product = p, AddOnId = aid, IsEnabled = true });
     }
 }

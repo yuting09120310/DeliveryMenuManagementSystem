@@ -1,4 +1,14 @@
 
+/* Add-on choice list on product form */
+.addon-choice-grid{display:flex;flex-wrap:wrap;gap:4px 10px}
+.addon-choice .badge{font-size:10px}
+.addon-size-hint{width:100%;font-size:12px;color:var(--muted);margin:-4px 0 6px;padding-left:4px}
+/* AddOn per-size rows (master data) */
+.asize-row{display:grid;grid-template-columns:140px 1fr 140px 90px 34px;gap:10px;align-items:end;border-top:1px solid var(--line);padding:12px 0}
+.asize-row label{font-size:12px;color:var(--muted);margin-bottom:4px;display:block}
+.asize-row .chk label{display:flex;align-items:center;gap:6px;color:var(--ink);font-weight:400}
+@media (max-width:700px){.asize-row{grid-template-columns:1fr 1fr}}
+
 /* Choice pills + addon matrix */
 .choice-group{margin-bottom:14px;border-top:1px solid var(--line);padding-top:12px}
 .choice-group-title{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--ink)}

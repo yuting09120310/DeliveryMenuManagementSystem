@@ -56,10 +56,22 @@ public sealed class ProductEditViewModel
     public List<int> SpecialOptionIds { get; set; } = [];
     /// <summary>依群組分類的特口選項，供表單群組化勾選。</summary>
     public List<SpecialOptionGroupChoice> GroupChoices { get; set; } = [];
-    /// <summary>商品加料關聯（每尺寸一列，含品號/價格覆寫）。</summary>
-    public List<ProductAddOnInputModel> AddOns { get; set; } = [];
-    public IReadOnlyList<AddOn> AvailableAddOns { get; set; } = [];
+    /// <summary>商品已勾選的加料（商品層級，品號由加料主檔依尺寸定義）。</summary>
+    public List<int> AddOnIds { get; set; } = [];
+    public IReadOnlyList<AddOnChoiceItem> AvailableAddOns { get; set; } = [];
     public string ExternalDataPreview => string.Join("、", Sizes.SelectMany(s => new[] { s.ColdBaseCode, s.HotBaseCode }).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct()) is var codes && !string.IsNullOrWhiteSpace(codes) ? codes : "尚未設定尺寸品號";
+}
+
+public sealed class AddOnChoiceItem
+{
+    public int Id { get; init; }
+    public string Name { get; init; } = "";
+    public string? EnglishName { get; init; }
+    public string DefaultCode { get; init; } = "";
+    public decimal DefaultPrice { get; init; }
+    public bool IcedOnly { get; init; }
+    public bool FixedRatio { get; init; }
+    public string SizeSummary { get; init; } = "";
 }
 
 public sealed class SpecialOptionGroupChoice
@@ -77,24 +89,6 @@ public sealed class SpecialOptionChoice
     public string Name { get; init; } = "";
     public string? EnglishName { get; init; }
     public string KindLabel { get; init; } = "";
-}
-
-public sealed class ProductAddOnInputModel
-{
-    public int Id { get; set; }
-    public int AddOnId { get; set; }
-    public string AddOnName { get; set; } = "";
-    public int ProductSizeId { get; set; }
-    public string SizeName { get; set; } = "";
-    /// <summary>主檔預設品號（顯示用，不含 @）。</summary>
-    public string DefaultExternalData { get; set; } = "";
-    /// <summary>此尺寸實際輸出品號（含 @）。</summary>
-    public string ExternalData { get; set; } = "";
-    /// <summary>此尺寸實際加購價。</summary>
-    public decimal Price { get; set; }
-    /// <summary>主檔預設價格（顯示用）。</summary>
-    public decimal DefaultPrice { get; set; }
-    public bool IsEnabled { get; set; }
 }
 
 public sealed class ProductSizeInputModel

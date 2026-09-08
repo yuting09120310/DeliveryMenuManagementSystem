@@ -68,6 +68,20 @@ public sealed class AddOnListItemViewModel
     public bool IcedOnly { get; init; }
     public bool FixedRatio { get; init; }
     public bool IsEnabled { get; init; }
+    /// <summary>各尺寸品號摘要，例如「中杯 @IT1812(20)｜大杯 @IT1836(40)」。</summary>
+    public string SizeSummary { get; init; } = "";
+    public bool IsUsedByProduct { get; init; }
+}
+
+public sealed class AddOnSizeInputModel
+{
+    public int Id { get; set; }
+    [Display(Name = "尺寸名稱")] public string SizeName { get; set; } = "";
+    [Display(Name = "品號 ExternalData")] public string ExternalData { get; set; } = "";
+    [Range(0, 999999, ErrorMessage = "價格不可小於 0")]
+    [Display(Name = "加購價格")] public decimal Price { get; set; }
+    [Display(Name = "啟用")] public bool IsEnabled { get; set; } = true;
+    public int SortOrder { get; set; }
 }
 
 public sealed class AddOnEditViewModel
@@ -77,10 +91,12 @@ public sealed class AddOnEditViewModel
     [Display(Name = "加料名稱")] public string Name { get; set; } = "";
     [Display(Name = "英文名稱")] public string? EnglishName { get; set; }
     [Range(0, 999999, ErrorMessage = "價格不可小於 0")]
-    [Display(Name = "加購價格")] public decimal Price { get; set; }
+    [Display(Name = "預設加購價格")] public decimal Price { get; set; }
     [Required(ErrorMessage = "請輸入 ExternalData")]
-    [Display(Name = "ExternalData")] public string ExternalData { get; set; } = "";
+    [Display(Name = "預設品號 ExternalData")] public string ExternalData { get; set; } = "";
     [Display(Name = "僅限冰飲")] public bool IcedOnly { get; set; }
     [Display(Name = "固定比例")] public bool FixedRatio { get; set; }
     [Display(Name = "啟用")] public bool IsEnabled { get; set; } = true;
+    /// <summary>依尺寸的品號／價格（例如醇香蜂蜜：中杯 @IT1812(20)/10、大杯 @IT1836(40)/15）。</summary>
+    public List<AddOnSizeInputModel> Sizes { get; set; } = [];
 }
