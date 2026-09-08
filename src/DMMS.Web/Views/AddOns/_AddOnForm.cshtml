@@ -9,7 +9,17 @@
 <div class="form-check"><input asp-for="FixedRatio" class="form-check-input" /><label asp-for="FixedRatio" class="form-check-label"></label></div>
 <div class="form-check"><input asp-for="IsEnabled" class="form-check-input" /><label asp-for="IsEnabled" class="form-check-label"></label></div>
 </div></section>
-<section class="panel"><div class="panel-heading"><div><div class="panel-title mb-0">依尺寸品號（選擇性）</div><p class="text-muted mb-0">當不同尺寸品號／價格不同時在此填寫。例如醇香蜂蜜：中杯 <code>@@IT1812(20)</code> NT$10、大杯 <code>@@IT1836(40)</code> NT$15。留空的尺寸會使用主檔預設品號。</p></div><button type="button" class="btn btn-outline-primary btn-sm" id="add-size-btn">＋ 新增尺寸</button></div>
+
+<section class="panel">
+<div class="panel-heading"><h2 class="mb-0">依尺寸品號 <span class="text-muted fs-6 fw-normal">（選擇性）</span></h2><button type="button" class="btn btn-outline-primary btn-sm" id="add-size-btn">＋ 新增尺寸</button></div>
+<div class="panel-hint">
+<p class="mb-1">當不同尺寸的品號或價格不同時，請在此填寫；同尺寸共用一組品號的加料可留空，匯出時自動使用上方「預設品號」。</p>
+<ul class="mb-0">
+<li>範例：醇香蜂蜜</li>
+<li>中杯：<code>@@IT1812(20)</code>，加購 NT$10</li>
+<li>大杯：<code>@@IT1836(40)</code>，加購 NT$15</li>
+</ul>
+</div>
 <div id="asize-wrap">
 @for (var i = 0; i < Model.Sizes.Count; i++) {
     <div class="asize-row">
@@ -21,9 +31,12 @@
         <button type="button" class="btn btn-sm btn-outline-danger remove-size-btn" title="移除">✕</button>
     </div>
 }
-</div></section>
+</div>
+</section>
+
 <div class="form-actions"><a class="btn btn-outline-secondary" asp-action="Index">取消</a><button class="btn btn-primary" type="submit">儲存加料</button></div>
 </form>
+
 <template id="asize-template">
     <div class="asize-row">
         <input type="hidden" data-field="Id" value="0" />
@@ -34,29 +47,3 @@
         <button type="button" class="btn btn-sm btn-outline-danger remove-size-btn" title="移除">✕</button>
     </div>
 </template>
-@section Scripts {
-<partial name="_ValidationScriptsPartial" />
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var wrap = document.getElementById('asize-wrap');
-    var tpl = document.getElementById('asize-template');
-    function wire(row) {
-        var btn = row.querySelector('.remove-size-btn');
-        if (btn) btn.addEventListener('click', function () { row.remove(); });
-    }
-    document.getElementById('add-size-btn').addEventListener('click', function () {
-        var count = wrap.querySelectorAll('.asize-row').length;
-        var clone = tpl.content.cloneNode(true);
-        var row = clone.querySelector('.asize-row');
-        Array.prototype.forEach.call(row.querySelectorAll('[data-field]'), function (el) {
-            var name = 'Sizes[' + count + '].' + el.getAttribute('data-field');
-            el.name = name;
-            if (el.id) el.id = name.replace(/[\[\].]/g, '_');
-        });
-        wire(row);
-        wrap.appendChild(row);
-    });
-    Array.prototype.forEach.call(wrap.querySelectorAll('.asize-row'), wire);
-});
-</script>
-}
