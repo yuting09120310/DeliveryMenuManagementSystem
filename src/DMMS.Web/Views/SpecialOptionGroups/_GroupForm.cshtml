@@ -2,55 +2,86 @@
 @using DMMS.Web.Models
 <form method="post" class="form-layout" id="group-form">@Html.AntiForgeryToken()<input asp-for="Id" type="hidden" /><div asp-validation-summary="ModelOnly" class="text-danger"></div>
 @if (Model.InUseByProducts) { <div class="alert alert-info">此群組已被商品使用。修改選項會同步影響已套用的商品。</div> }
-<section class="panel"><div class="panel-title">群組設定</div><div class="form-grid"><div><label asp-for="Name"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div><div><label asp-for="Min">最少選擇數 (Min)</label><input asp-for="Min" class="form-control" type="number" min="0" /></div><div><label asp-for="Max">最多選擇數 (Max)</label><input asp-for="Max" class="form-control" type="number" min="1" /></div></div></section>
-<section class="panel"><div class="panel-heading"><div><div class="panel-title mb-0">群組選項</div><p class="text-muted mb-0">冰度／溫度選項使用「基礎品號 + Suffix」，甜度選項使用「獨立 ExternalData」；「依尺寸品號」用於價格隨尺寸不同的選項（如醇香蜂蜜 中杯 @@IT1812(20)/$10、大杯 @@IT1836(40)/$15）。</p></div><button type="button" class="btn btn-outline-primary btn-sm" id="add-option-btn">＋ 新增選項</button></div>
-<div id="options-wrap">
+<section class="panel">
+    <div class="panel-title">群組設定</div>
+    <div class="form-grid">
+        <div class="fg-name"><label asp-for="Name"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+        <div class="fg-kind"><label asp-for="GroupKind"></label>
+            <select asp-for="GroupKind" class="form-select" id="group-kind">
+                <option value="@((int)SpecialOptionKind.Temperature)">冰度／溫度</option>
+                <option value="@((int)SpecialOptionKind.Sweetness)">甜度</option>
+            </select>
+            <div class="form-hint" id="kind-hint"></div>
+        </div>
+        <div><label asp-for="Min">最少選擇數 (Min)</label><input asp-for="Min" class="form-control" type="number" min="0" /></div>
+        <div><label asp-for="Max">最多選擇數 (Max)</label><input asp-for="Max" class="form-control" type="number" min="1" /></div>
+    </div>
+</section>
+<section class="panel">
+    <div class="panel-heading">
+        <div><div class="panel-title mb-0">群組選項</div><p class="text-muted mb-0">所有選項共用上方「選項類型」，新增時自動帶入。</p></div>
+        <button type="button" class="btn btn-outline-primary btn-sm" id="add-option-btn">＋ 新增選項</button>
+    </div>
+    <div id="options-wrap">
 @for (var i = 0; i < Model.Options.Count; i++) {
     <div class="option-row box-row">
-        <input asp-for="Options[i].Id" type="hidden" />
-        <div class="opt-field name"><label>選項名稱</label><input asp-for="Options[i].Name" class="form-control" placeholder="如：少冰、正常甜" /></div>
-        <div class="opt-field"><label>類型</label><select asp-for="Options[i].Kind" class="form-select kind-sel"><option value="@((int)SpecialOptionKind.Temperature)">冰度/溫度</option><option value="@((int)SpecialOptionKind.Sweetness)">甜度</option><option value="@((int)SpecialOptionKind.Other)">其他</option></select></div>
-        <div class="opt-field mode-wrap"><label>輸出模式</label><select asp-for="Options[i].ExternalDataMode" class="form-select mode-sel"><option value="@((int)ExternalDataMode.BaseCodeAndSuffix)">BaseCode+Suffix</option><option value="@((int)ExternalDataMode.Standalone)">獨立 ExternalData</option></select></div>
-        <div class="opt-field temp-wrap"><label>冷/熱</label><select asp-for="Options[i].BeverageTemperature" class="form-select temp-sel"><option value="">不限</option><option value="@((int)BeverageTemperature.Cold)">冷</option><option value="@((int)BeverageTemperature.Hot)">熱</option></select></div>
-        <div class="opt-field suffix-wrap"><label>Suffix</label><input asp-for="Options[i].Suffix" class="form-control" placeholder="(02)" /></div>
-        <div class="opt-field standalone-wrap"><label>獨立 ExternalData</label><input asp-for="Options[i].StandaloneExternalData" class="form-control" placeholder="(05)" /></div>
-        <div class="opt-field en"><label>英文名</label><input asp-for="Options[i].EnglishName" class="form-control" /></div>
-        <div class="opt-field chk"><label class="form-check-label"><input asp-for="Options[i].IsEnabled" class="form-check-input" /> 啟用</label></div>
-        <button type="button" class="btn btn-sm btn-outline-danger remove-option-btn" title="移除選項">✕</button>
-        <div class="opt-sizes opt-field full">
-            <div class="opt-sizes-head"><span class="small text-muted">依尺寸品號（選擇性；不同尺寸品號/價格不同時填寫）</span><button type="button" class="btn btn-outline-primary btn-sm add-size-btn">＋ 新增尺寸</button></div>
+        <input asp-for="Options[i].Id" type="hidden" data-field="Id" />
+        <div class="opt-main">
+            <div class="opt-field name"><label>選項名稱</label><input asp-for="Options[i].Name" class="form-control" placeholder="如：少冰、標準甜" data-field="Name" /><span asp-validation-for="Options[i].Name" class="text-danger"></span></div>
+            <div class="opt-field en"><label>英文名稱</label><input asp-for="Options[i].EnglishName" class="form-control" placeholder="如：Less Ice" data-field="EnglishName" /></div>
+            <div class="opt-field chk"><label class="form-check-label"><input asp-for="Options[i].IsEnabled" class="form-check-input" data-field="IsEnabled" /> 啟用</label></div>
+            <button type="button" class="btn btn-sm btn-outline-danger remove-option-btn" title="移除選項">✕</button>
+        </div>
+        <div class="opt-sub">
+            <div class="sub-fields sub-temp">
+                <div class="opt-field"><label>冷／熱</label><select asp-for="Options[i].BeverageTemperature" class="form-select temp-sel" data-field="BeverageTemperature"><option value="">不限</option><option value="@((int)BeverageTemperature.Cold)">冷</option><option value="@((int)BeverageTemperature.Hot)">熱</option></select></div>
+                <div class="opt-field suffix-wrap"><label>Suffix</label><input asp-for="Options[i].Suffix" class="form-control" placeholder="(02)" data-field="Suffix" /></div>
+            </div>
+            <div class="sub-fields sub-sweet">
+                <div class="opt-field standalone-wrap"><label>獨立品號 ExternalData</label><input asp-for="Options[i].StandaloneExternalData" class="form-control" placeholder="(05)" data-field="StandaloneExternalData" /></div>
+            </div>
+        </div>
+        <div class="opt-sizes">
+            <div class="opt-sizes-head"><span class="small text-muted">依尺寸特化品號／價格（選擇性；填了匯出優先依尺寸輸出，如 醇香蜂蜜：中杯 @@IT1812(20)/$10、大杯 @@IT1836(40)/$15）</span><button type="button" class="btn btn-outline-primary btn-sm add-size-btn">＋ 新增尺寸</button></div>
             @for (var j = 0; j < Model.Options[i].Sizes.Count; j++) {
                 <div class="osize-row">
-                    <input asp-for="Options[i].Sizes[j].Id" type="hidden" />
-                    <input asp-for="Options[i].Sizes[j].SortOrder" type="hidden" />
-                    <div><input asp-for="Options[i].Sizes[j].SizeName" class="form-control" placeholder="中杯" /></div>
-                    <div><input asp-for="Options[i].Sizes[j].ExternalData" class="form-control" placeholder="@@IT1812(20)" /></div>
-                    <div><input asp-for="Options[i].Sizes[j].Price" class="form-control" type="number" step="1" min="0" /></div>
-                    <div class="chk"><label class="form-check-label"><input asp-for="Options[i].Sizes[j].IsEnabled" class="form-check-input" /> 啟用</label></div>
+                    <input asp-for="Options[i].Sizes[j].Id" type="hidden" data-sfield="Id" />
+                    <input asp-for="Options[i].Sizes[j].SortOrder" type="hidden" data-sfield="SortOrder" />
+                    <div><label>尺寸</label><input asp-for="Options[i].Sizes[j].SizeName" class="form-control" placeholder="中杯" data-sfield="SizeName" /></div>
+                    <div><label>品號</label><input asp-for="Options[i].Sizes[j].ExternalData" class="form-control" placeholder="@@IT1812(20)" data-sfield="ExternalData" /></div>
+                    <div><label>價格</label><input asp-for="Options[i].Sizes[j].Price" class="form-control" type="number" step="1" min="0" data-sfield="Price" /></div>
+                    <div class="chk"><label class="form-check-label"><input asp-for="Options[i].Sizes[j].IsEnabled" class="form-check-input" data-sfield="IsEnabled" /> 啟用</label></div>
                     <button type="button" class="btn btn-sm btn-outline-danger remove-size-btn" title="移除">✕</button>
                 </div>
             }
         </div>
     </div>
 }
-</div></section>
+    </div>
+</section>
 <div class="form-actions"><a class="btn btn-outline-secondary" asp-action="Index">取消</a><button class="btn btn-primary" type="submit">儲存群組</button></div>
 </form>
 
 <template id="option-template">
     <div class="option-row box-row">
         <input type="hidden" data-field="Id" value="0" />
-        <div class="opt-field name"><label>選項名稱</label><input class="form-control" data-field="Name" placeholder="如：少冰、正常甜" /></div>
-        <div class="opt-field"><label>類型</label><select class="form-select kind-sel" data-field="Kind"><option value="0">冰度/溫度</option><option value="1">甜度</option><option value="2">其他</option></select></div>
-        <div class="opt-field mode-wrap"><label>輸出模式</label><select class="form-select mode-sel" data-field="ExternalDataMode"><option value="0">BaseCode+Suffix</option><option value="1">獨立 ExternalData</option></select></div>
-        <div class="opt-field temp-wrap"><label>冷/熱</label><select class="form-select temp-sel" data-field="BeverageTemperature"><option value="">不限</option><option value="0">冷</option><option value="1">熱</option></select></div>
-        <div class="opt-field suffix-wrap"><label>Suffix</label><input class="form-control" data-field="Suffix" placeholder="(02)" /></div>
-        <div class="opt-field standalone-wrap"><label>獨立 ExternalData</label><input class="form-control" data-field="StandaloneExternalData" placeholder="(05)" /></div>
-        <div class="opt-field en"><label>英文名</label><input class="form-control" data-field="EnglishName" /></div>
-        <div class="opt-field chk"><label class="form-check-label"><input class="form-check-input" type="checkbox" data-field="IsEnabled" checked /> 啟用</label></div>
-        <button type="button" class="btn btn-sm btn-outline-danger remove-option-btn" title="移除選項">✕</button>
-        <div class="opt-sizes opt-field full">
-            <div class="opt-sizes-head"><span class="small text-muted">依尺寸品號（選擇性；不同尺寸品號/價格不同時填寫）</span><button type="button" class="btn btn-outline-primary btn-sm add-size-btn">＋ 新增尺寸</button></div>
+        <div class="opt-main">
+            <div class="opt-field name"><label>選項名稱</label><input class="form-control" data-field="Name" placeholder="如：少冰、標準甜" /></div>
+            <div class="opt-field en"><label>英文名稱</label><input class="form-control" data-field="EnglishName" placeholder="如：Less Ice" /></div>
+            <div class="opt-field chk"><label class="form-check-label"><input class="form-check-input" type="checkbox" data-field="IsEnabled" checked /> 啟用</label></div>
+            <button type="button" class="btn btn-sm btn-outline-danger remove-option-btn" title="移除選項">✕</button>
+        </div>
+        <div class="opt-sub">
+            <div class="sub-fields sub-temp">
+                <div class="opt-field"><label>冷／熱</label><select class="form-select temp-sel" data-field="BeverageTemperature"><option value="">不限</option><option value="0">冷</option><option value="1">熱</option></select></div>
+                <div class="opt-field suffix-wrap"><label>Suffix</label><input class="form-control" data-field="Suffix" placeholder="(02)" /></div>
+            </div>
+            <div class="sub-fields sub-sweet">
+                <div class="opt-field standalone-wrap"><label>獨立品號 ExternalData</label><input class="form-control" data-field="StandaloneExternalData" placeholder="(05)" /></div>
+            </div>
+        </div>
+        <div class="opt-sizes">
+            <div class="opt-sizes-head"><span class="small text-muted">依尺寸特化品號／價格（選擇性；填了匯出優先依尺寸輸出）</span><button type="button" class="btn btn-outline-primary btn-sm add-size-btn">＋ 新增尺寸</button></div>
         </div>
     </div>
 </template>

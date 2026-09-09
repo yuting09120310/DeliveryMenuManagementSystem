@@ -26,6 +26,8 @@ public sealed class SpecialOptionGroupEditViewModel
     [Required(ErrorMessage = "請輸入群組名稱")]
     [Display(Name = "群組名稱")]
     public string Name { get; set; } = "";
+    [Display(Name = "選項類型（套用於此群組全部選項）")]
+    public SpecialOptionKind GroupKind { get; set; } = SpecialOptionKind.Temperature;
     [Display(Name = "最少選擇數 Min")]
     public int Min { get; set; } = 0;
     [Display(Name = "最多選擇數 Max")]

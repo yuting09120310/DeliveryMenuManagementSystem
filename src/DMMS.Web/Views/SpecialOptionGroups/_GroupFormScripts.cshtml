@@ -3,70 +3,76 @@
 document.addEventListener('DOMContentLoaded', function () {
     var wrap = document.getElementById('options-wrap');
     var tpl = document.getElementById('option-template');
-    function sizeFields(sizeRow) {
-        return Array.prototype.slice.call(sizeRow.querySelectorAll('[data-sfield]'));
-    }
-    function showHide(row) {
-        var kind = row.querySelector('.kind-sel').value;
-        var mode = row.querySelector('.mode-sel').value;
-        var isTemp = kind === '0';
-        var isBase = mode === '0';
-        row.querySelector('.temp-wrap').style.display = (isTemp && isBase) ? '' : 'none';
-        row.querySelector('.suffix-wrap').style.display = isBase ? '' : 'none';
-        row.querySelector('.standalone-wrap').style.display = (!isBase) ? '' : 'none';
-    }
-    function renameSizes(row, optionIdx) {
-        var sizeRows = row.querySelectorAll('.osize-row');
-        Array.prototype.forEach.call(sizeRows, function (sr, si) {
-            Array.prototype.forEach.call(sr.querySelectorAll('[data-sfield]'), function (el) {
-                var name = 'Options[' + optionIdx + '].Sizes[' + si + '].' + el.getAttribute('data-sfield');
-                el.name = name;
-                if (el.id) el.id = name.replace(/[\[\].]/g, '_');
+    var groupKind = document.getElementById('group-kind');
+    var kindHint = document.getElementById('kind-hint');
+    var HINTS = { 0: '冰度／溫度：選項依「基礎品號 + Suffix」輸出，搭配冷／熱區分（如 少冰 (02)、去冰 (03)、熱 (11)）', 1: '甜度：選項以獨立品號表示（如標準甜 (05)、5分甜 (06)…）；需隨尺寸加價的選項（如 醇香蜂蜜）用「依尺寸特化品號」填中杯/大杯品號與價格' };
+
+    function rows() { return Array.prototype.slice.call(wrap.querySelectorAll('.option-row')); }
+    // 依 DOM 順序重排 Options[i] / Options[i].Sizes[j] 的 name（刪除中間列後 index 不能有洞）
+    function reindex() {
+        rows().forEach(function (row, oi) {
+            row.querySelectorAll('[data-field]').forEach(function (el) {
+                var f = el.getAttribute('data-field');
+                el.name = 'Options[' + oi + '].' + f;
+                el.id = 'Options_' + oi + '__' + f;
+            });
+            row.querySelectorAll('[data-valmsg-for^="Options["]').forEach(function (el) {
+                var f = el.getAttribute('data-valmsg-for').split('.').pop();
+                el.setAttribute('data-valmsg-for', 'Options[' + oi + '].' + f);
+                el.id = 'Options_' + oi + '__' + f + '_validationMessage';
+            });
+            row.querySelectorAll('.osize-row').forEach(function (sr, si) {
+                sr.querySelectorAll('[data-sfield]').forEach(function (el) {
+                    el.name = 'Options[' + oi + '].Sizes[' + si + '].' + el.getAttribute('data-sfield');
+                    el.id = 'Options_' + oi + '__Sizes_' + si + '__' + el.getAttribute('data-sfield');
+                });
             });
         });
+    }
+    function applyKind(row) {
+        var sweet = groupKind.value === '1';
+        row.querySelectorAll('.sub-temp').forEach(function (el) { el.style.display = sweet ? 'none' : ''; });
+        row.querySelectorAll('.sub-sweet').forEach(function (el) { el.style.display = sweet ? '' : 'none'; });
+        row.querySelectorAll('.opt-sizes').forEach(function (el) { el.style.display = sweet ? '' : 'none'; });
+        // 甜度群組清掉冰度欄殘值、反之亦然，避免誤存
+        row.querySelectorAll('[data-field="Suffix"],[data-field="BeverageTemperature"]').forEach(function (el) { if (sweet) el.value = ''; });
+        row.querySelectorAll('[data-field="StandaloneExternalData"]').forEach(function (el) { if (!sweet) el.value = ''; });
     }
     function addSizeRow(row) {
         var host = row.querySelector('.opt-sizes');
         var sr = document.createElement('div');
         sr.className = 'osize-row';
-        sr.innerHTML = '<input type="hidden" data-sfield="Id" value="0" />' +
-            '<input type="hidden" data-sfield="SortOrder" value="0" />' +
-            '<div><input class="form-control" data-sfield="SizeName" placeholder="中杯" /></div>' +
-            '<div><input class="form-control" data-sfield="ExternalData" placeholder="@@IT1812(20)" /></div>' +
-            '<div><input class="form-control" data-sfield="Price" type="number" step="1" min="0" value="0" /></div>' +
+        sr.innerHTML = '<div><label>尺寸</label><input class="form-control" data-sfield="SizeName" placeholder="中杯" /></div>' +
+            '<div><label>品號</label><input class="form-control" data-sfield="ExternalData" placeholder="@@IT1812(20)" /></div>' +
+            '<div><label>價格</label><input class="form-control" data-sfield="Price" type="number" step="1" min="0" value="0" /></div>' +
             '<div class="chk"><label class="form-check-label"><input class="form-check-input" type="checkbox" data-sfield="IsEnabled" checked /> 啟用</label></div>' +
             '<button type="button" class="btn btn-sm btn-outline-danger remove-size-btn" title="移除">✕</button>';
         host.appendChild(sr);
-        sr.querySelector('.remove-size-btn').addEventListener('click', function () { sr.remove(); renameSizes(row, optionIndex(row)); });
-        renameSizes(row, optionIndex(row));
-    }
-    function optionIndex(row) {
-        return Array.prototype.indexOf.call(wrap.querySelectorAll('.option-row'), row);
+        sr.querySelector('.remove-size-btn').addEventListener('click', function () { sr.remove(); reindex(); });
+        reindex();
     }
     function wire(row) {
-        var removeBtn = row.querySelector('.remove-option-btn');
-        if (removeBtn) removeBtn.addEventListener('click', function () { row.remove(); });
-        Array.prototype.forEach.call(row.querySelectorAll('.kind-sel,.mode-sel'), function (sel) { sel.addEventListener('change', function () { showHide(row); }); });
+        var rm = row.querySelector('.remove-option-btn');
+        if (rm) rm.addEventListener('click', function () { row.remove(); reindex(); });
         var addSize = row.querySelector('.add-size-btn');
         if (addSize) addSize.addEventListener('click', function () { addSizeRow(row); });
-        Array.prototype.forEach.call(row.querySelectorAll('.remove-size-btn'), function (b) {
-            b.addEventListener('click', function () { b.closest('.osize-row').remove(); renameSizes(row, optionIndex(row)); });
+        row.querySelectorAll('.remove-size-btn').forEach(function (b) {
+            b.addEventListener('click', function () { b.closest('.osize-row').remove(); reindex(); });
         });
-        showHide(row);
+        applyKind(row);
     }
+    groupKind.addEventListener('change', function () {
+        kindHint.textContent = HINTS[groupKind.value] || '';
+        rows().forEach(applyKind);
+    });
     document.getElementById('add-option-btn').addEventListener('click', function () {
-        var count = wrap.querySelectorAll('.option-row').length;
-        var clone = tpl.content.cloneNode(true);
-        var row = clone.querySelector('.option-row');
-        Array.prototype.forEach.call(row.querySelectorAll('[data-field]'), function (el) {
-            var name = 'Options[' + count + '].' + el.getAttribute('data-field');
-            el.name = name;
-            if (el.id) el.id = name.replace(/[\[\].]/g, '_');
-        });
+        var row = tpl.content.cloneNode(true).querySelector('.option-row');
         wire(row);
         wrap.appendChild(row);
+        reindex();
     });
-    // 重新命名既有列（含 server-rendered sizes，其名稱由 asp-for 產生已是 Options[i].Sizes[j].*，不需改）
-    Array.prototype.forEach.call(wrap.querySelectorAll('.option-row'), wire);
+    rows().forEach(wire);
+    reindex();
+    if (groupKind) groupKind.dispatchEvent(new Event('change'));
 });
 </script>
