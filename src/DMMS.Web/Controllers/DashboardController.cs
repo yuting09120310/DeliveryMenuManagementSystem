@@ -1,4 +1,5 @@
 using DMMS.Web.Data;
+using DMMS.Web.Models;
 using DMMS.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,14 +14,19 @@ public class DashboardController(DmmsDbContext db) : Controller
         try
         {
             var products = await db.Products.Include(p => p.Sizes).AsNoTracking().ToListAsync();
+            var missing = products.Where(p => p.Sizes.Count == 0 || p.Sizes.Any(s => s.IsEnabled && string.IsNullOrWhiteSpace(s.ColdBaseCode) && string.IsNullOrWhiteSpace(s.HotBaseCode))).ToList();
             model = new DashboardViewModel
             {
                 ProductCount = products.Count,
                 EnabledProductCount = products.Count(p => p.IsEnabled),
                 CategoryCount = await db.Categories.CountAsync(),
-                SpecialOptionGroupCount = await db.SpecialOptionGroups.CountAsync(),
                 AddOnCount = await db.AddOns.CountAsync(),
-                MissingCodeProductCount = products.Count(p => p.Sizes.Count == 0 || p.Sizes.Any(s => s.IsEnabled && string.IsNullOrWhiteSpace(s.ColdBaseCode) && string.IsNullOrWhiteSpace(s.HotBaseCode)))
+                SpecialOptionCount = await db.SpecialOptions.CountAsync(o => o.IsEnabled),
+                IceOptionCount = await db.SpecialOptions.CountAsync(o => o.IsEnabled && o.Kind == SpecialOptionKind.Temperature),
+                SweetOptionCount = await db.SpecialOptions.CountAsync(o => o.IsEnabled && o.Kind == SpecialOptionKind.Sweetness),
+                MissingCodeProductCount = missing.Count,
+                MissingCodeProductNames = missing.Select(p => p.Name).ToList(),
+                RecentVersions = await db.MenuVersions.Include(v => v.Products).AsNoTracking().OrderByDescending(v => v.CreatedAt).Take(5).ToListAsync()
             };
         }
         catch (Exception ex) when (ex is DbUpdateException or InvalidOperationException or System.Data.Common.DbException)
