@@ -131,9 +131,9 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         cells.Set(s, r, "Item", Display(p.Name, p.EnglishName));
         cells.Set(s, r, "Delivery Price", (double)p.BasePrice);
         cells.Set(s, r, "Description", p.Description);
-        cells.Set(s, r, "IsEntree", "False");
-        cells.Set(s, r, "AlcoholicItemCount", "0");
-        cells.Set(s, r, "HasAlcoholicItems", "False");
+        cells.Set(s, r, "IsEntree", false);
+        cells.Set(s, r, "AlcoholicItemCount", 0);
+        cells.Set(s, r, "HasAlcoholicItems", false);
         cells.Set(s, r, "ImageURL", p.ImageUrl);
         cells.Set(s, r, "UUID", StableUuid($"product|{p.Id}"));
         cells.Set(s, r, "uber_product_traits", "[]");
@@ -166,11 +166,14 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         cells.Set(s, r, "Min", 1); cells.Set(s, r, "Max", 1);
         cells.Set(s, r, "UUID", sizeGroupUuid);
         r++;
-        // 尺寸選項
+        // 尺寸選項（原版中杯/大杯列固定帶 IsEntree/AlcoholicItemCount/HasAlcoholicItems）
         cells.Set(s, r, "ExternalID", ExtId(size.Name, SizeEnglish(size.Name), null));
         cells.Set(s, r, "Modifier Option", Display(size.Name, SizeEnglish(size.Name)));
         cells.Set(s, r, "Delivery Price", (double)size.PriceAdjustment);
         cells.Set(s, r, "Max", 1);
+        cells.Set(s, r, "IsEntree", false);
+        cells.Set(s, r, "AlcoholicItemCount", 0);
+        cells.Set(s, r, "HasAlcoholicItems", false);
         cells.Set(s, r, "UUID", StableUuid($"sizeoption|{p.Id}|{size.Id}"));
         r++;
         WriteSpecialGroups(s, cells, ref r, p, size, options, addOns, nestLevel: 2);
@@ -294,6 +297,10 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
             if (_map.TryGetValue(header, out var c)) s.Cell(row, c).Value = value;
         }
         public void Set(IXLWorksheet s, int row, string header, int value)
+        {
+            if (_map.TryGetValue(header, out var c)) s.Cell(row, c).Value = value;
+        }
+        public void Set(IXLWorksheet s, int row, string header, bool value)
         {
             if (_map.TryGetValue(header, out var c)) s.Cell(row, c).Value = value;
         }
