@@ -124,7 +124,7 @@ public class ProductsController(DmmsDbContext db) : Controller
         var m = new ProductEditViewModel
         {
             Id = p.Id, Name = p.Name, EnglishName = p.EnglishName, Description = p.Description, ImageUrl = p.ImageUrl,
-            BasePrice = p.BasePrice, IsEnabled = p.IsEnabled, SortOrder = p.SortOrder, SourceExternalId = p.SourceExternalId, SourceUuid = p.SourceUuid,
+            BasePrice = p.BasePrice, IsEnabled = p.IsEnabled, SortOrder = p.SortOrder,
             CategoryId = p.ProductCategories.Select(x => (int?)x.CategoryId).FirstOrDefault(),
             Sizes = p.Sizes.OrderBy(x => x.SortOrder).Select(s => new ProductSizeInputModel { Id = s.Id, Name = s.Name, PriceAdjustment = s.PriceAdjustment, ColdBaseCode = s.ColdBaseCode, HotBaseCode = s.HotBaseCode, IsEnabled = s.IsEnabled, SortOrder = s.SortOrder }).ToList(),
             SpecialOptionIds = p.SpecialOptions.Where(x => x.IsEnabled).Select(x => x.SpecialOptionId).ToList(),
@@ -139,7 +139,6 @@ public class ProductsController(DmmsDbContext db) : Controller
     {
         p.Name = m.Name; p.EnglishName = m.EnglishName; p.Description = m.Description; p.ImageUrl = m.ImageUrl;
         p.BasePrice = m.BasePrice; p.IsEnabled = m.IsEnabled; p.SortOrder = m.SortOrder;
-        p.SourceExternalId = m.SourceExternalId; p.SourceUuid = m.SourceUuid;
 
         // 分類：清空重建
         p.ProductCategories.Clear();

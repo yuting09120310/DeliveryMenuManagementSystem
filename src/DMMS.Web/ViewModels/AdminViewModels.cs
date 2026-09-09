@@ -47,8 +47,6 @@ public sealed class ProductEditViewModel
     [Display(Name = "基礎價格")] public decimal BasePrice { get; set; }
     [Display(Name = "啟用商品")] public bool IsEnabled { get; set; } = true;
     [Display(Name = "排序")] public int SortOrder { get; set; }
-    [Display(Name = "來源 External ID")] public string? SourceExternalId { get; set; }
-    [Display(Name = "來源 UUID")] public string? SourceUuid { get; set; }
     public int? CategoryId { get; set; }
     public List<ProductSizeInputModel> Sizes { get; set; } = [];
     public IReadOnlyList<Category> Categories { get; set; } = [];
