@@ -16,6 +16,13 @@
 .asize-row .chk label{display:flex;align-items:center;gap:6px;color:var(--ink);font-weight:400}
 @media (max-width:700px){.asize-row{grid-template-columns:1fr 1fr}}
 
+/* SpecialOption per-size rows (e.g. 醇香蜂蜜) */
+.opt-sizes{width:100%;padding:10px 0 2px;border-top:1px dashed var(--line);margin-top:4px}
+.opt-sizes-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.osize-row{display:grid;grid-template-columns:140px 1fr 140px 90px 34px;gap:10px;align-items:center;border-top:1px solid var(--line);padding:10px 0}
+.osize-row .chk label{display:flex;align-items:center;gap:6px;color:var(--ink);font-weight:400;font-size:12px;margin:0}
+@media (max-width:700px){.osize-row{grid-template-columns:1fr 1fr}}
+
 /* Choice pills + addon matrix */
 .choice-group{margin-bottom:14px;border-top:1px solid var(--line);padding-top:12px}
 .choice-group-title{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--ink)}

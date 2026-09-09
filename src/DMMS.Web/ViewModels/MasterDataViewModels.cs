@@ -49,6 +49,20 @@ public sealed class SpecialOptionInputModel
     [Display(Name = "後綴 Suffix")] public string? Suffix { get; set; }
     [Display(Name = "獨立 ExternalData")] public string? StandaloneExternalData { get; set; }
     [Display(Name = "啟用")] public bool IsEnabled { get; set; } = true;
+    /// <summary>依尺寸特化的品號／價格（如甜度群組的醇香蜂蜜：中杯 @IT1812(20)/10、大杯 @IT1836(40)/15）。有填寫時匯出優先依尺寸輸出。</summary>
+    [Display(Name = "依尺寸品號（選擇性）")]
+    public List<SpecialOptionSizeInputModel> Sizes { get; set; } = [];
+}
+
+public sealed class SpecialOptionSizeInputModel
+{
+    public int Id { get; set; }
+    [Display(Name = "尺寸名稱")] public string SizeName { get; set; } = "";
+    [Display(Name = "品號 ExternalData")] public string ExternalData { get; set; } = "";
+    [Range(0, 999999, ErrorMessage = "價格不可小於 0")]
+    [Display(Name = "價格")] public decimal Price { get; set; }
+    [Display(Name = "啟用")] public bool IsEnabled { get; set; } = true;
+    public int SortOrder { get; set; }
 }
 
 public sealed class AddOnListViewModel

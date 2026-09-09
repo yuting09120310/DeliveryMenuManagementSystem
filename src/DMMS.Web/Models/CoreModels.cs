@@ -71,6 +71,20 @@ public class SpecialOption
     public string? StandaloneExternalData { get; set; }
     public BeverageTemperature? BeverageTemperature { get; set; }
     public bool IsEnabled { get; set; } = true;
+    /// <summary>依尺寸特化的品號／價格（如甜度群組的醇香蜂蜜：中杯 @IT1812(20)/10、大杯 @IT1836(40)/15）。有此定義時匯出優先依尺寸輸出，ExternalDataMode/Suffix 僅供無尺寸特化時使用。</summary>
+    public ICollection<SpecialOptionSize> Sizes { get; set; } = new List<SpecialOptionSize>();
+}
+/// <summary>特口選項依尺寸的品號／價格定義（例如醇香蜂蜜：中杯 @IT1812(20) NT$10、大杯 @IT1836(40) NT$15）。</summary>
+public class SpecialOptionSize
+{
+    public int Id { get; set; }
+    public int SpecialOptionId { get; set; }
+    public SpecialOption? SpecialOption { get; set; }
+    public string SizeName { get; set; } = "";
+    public string ExternalData { get; set; } = "";
+    public decimal Price { get; set; }
+    public bool IsEnabled { get; set; } = true;
+    public int SortOrder { get; set; }
 }
 public class ProductSpecialOption
 {

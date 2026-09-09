@@ -70,11 +70,11 @@ public class MenuExportTests
         var ice = new SpecialOption { Id = 1, Kind = SpecialOptionKind.Temperature, Name = "標準冰", EnglishName = "Regular Ice", BeverageTemperature = BeverageTemperature.Cold, Group = tempGroup, SpecialOptionGroupId = 1 };
         var hot = new SpecialOption { Id = 2, Kind = SpecialOptionKind.Temperature, Name = "熱", EnglishName = "Hot", BeverageTemperature = BeverageTemperature.Hot, Suffix = "(11)", Group = tempGroup, SpecialOptionGroupId = 1 };
         var noSugar = new SpecialOption { Id = 3, Kind = SpecialOptionKind.Sweetness, Name = "無糖", EnglishName = "Sugar Free", ExternalDataMode = ExternalDataMode.Standalone, StandaloneExternalData = "(08)", Group = sugarGroup, SpecialOptionGroupId = 2 };
-        foreach (var o in new[] { ice, hot, noSugar }) p.SpecialOptions.Add(new ProductSpecialOption { Product = p, SpecialOption = o, IsEnabled = true });
-        var honey = new AddOn { Id = 1, Name = "醇香蜂蜜", EnglishName = "Honey", FixedRatio = true, ExternalData = "@IT1812(20)", Price = 10 };
-        honey.Sizes.Add(new AddOnSize { Id = 1, SizeName = "大杯", ExternalData = "@IT1836(40)", Price = 15 });
+        var honey = new SpecialOption { Id = 4, Kind = SpecialOptionKind.Sweetness, Name = "醇香蜂蜜", EnglishName = "Honey", Group = sugarGroup, SpecialOptionGroupId = 2 };
+        honey.Sizes.Add(new SpecialOptionSize { SizeName = "中杯", ExternalData = "@IT1812(20)", Price = 10, SortOrder = 0 });
+        honey.Sizes.Add(new SpecialOptionSize { SizeName = "大杯", ExternalData = "@IT1836(40)", Price = 15, SortOrder = 1 });
+        foreach (var o in new[] { ice, hot, noSugar, honey }) p.SpecialOptions.Add(new ProductSpecialOption { Product = p, SpecialOption = o, IsEnabled = true });
         var boba = new AddOn { Id = 2, Name = "珍珠", EnglishName = "Tapioca", ExternalData = "@IT1810(19)", Price = 10 };
-        p.AddOns.Add(new ProductAddOn { Product = p, AddOn = honey, IsEnabled = true });
         p.AddOns.Add(new ProductAddOn { Product = p, AddOn = boba, IsEnabled = true });
 
         var r = Service().Build([p], Version());

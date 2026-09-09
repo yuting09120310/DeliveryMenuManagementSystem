@@ -3,6 +3,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     var wrap = document.getElementById('options-wrap');
     var tpl = document.getElementById('option-template');
+    function sizeFields(sizeRow) {
+        return Array.prototype.slice.call(sizeRow.querySelectorAll('[data-sfield]'));
+    }
     function showHide(row) {
         var kind = row.querySelector('.kind-sel').value;
         var mode = row.querySelector('.mode-sel').value;
@@ -12,10 +15,43 @@ document.addEventListener('DOMContentLoaded', function () {
         row.querySelector('.suffix-wrap').style.display = isBase ? '' : 'none';
         row.querySelector('.standalone-wrap').style.display = (!isBase) ? '' : 'none';
     }
+    function renameSizes(row, optionIdx) {
+        var sizeRows = row.querySelectorAll('.osize-row');
+        Array.prototype.forEach.call(sizeRows, function (sr, si) {
+            Array.prototype.forEach.call(sr.querySelectorAll('[data-sfield]'), function (el) {
+                var name = 'Options[' + optionIdx + '].Sizes[' + si + '].' + el.getAttribute('data-sfield');
+                el.name = name;
+                if (el.id) el.id = name.replace(/[\[\].]/g, '_');
+            });
+        });
+    }
+    function addSizeRow(row) {
+        var host = row.querySelector('.opt-sizes');
+        var sr = document.createElement('div');
+        sr.className = 'osize-row';
+        sr.innerHTML = '<input type="hidden" data-sfield="Id" value="0" />' +
+            '<input type="hidden" data-sfield="SortOrder" value="0" />' +
+            '<div><input class="form-control" data-sfield="SizeName" placeholder="中杯" /></div>' +
+            '<div><input class="form-control" data-sfield="ExternalData" placeholder="@@IT1812(20)" /></div>' +
+            '<div><input class="form-control" data-sfield="Price" type="number" step="1" min="0" value="0" /></div>' +
+            '<div class="chk"><label class="form-check-label"><input class="form-check-input" type="checkbox" data-sfield="IsEnabled" checked /> 啟用</label></div>' +
+            '<button type="button" class="btn btn-sm btn-outline-danger remove-size-btn" title="移除">✕</button>';
+        host.appendChild(sr);
+        sr.querySelector('.remove-size-btn').addEventListener('click', function () { sr.remove(); renameSizes(row, optionIndex(row)); });
+        renameSizes(row, optionIndex(row));
+    }
+    function optionIndex(row) {
+        return Array.prototype.indexOf.call(wrap.querySelectorAll('.option-row'), row);
+    }
     function wire(row) {
         var removeBtn = row.querySelector('.remove-option-btn');
         if (removeBtn) removeBtn.addEventListener('click', function () { row.remove(); });
         Array.prototype.forEach.call(row.querySelectorAll('.kind-sel,.mode-sel'), function (sel) { sel.addEventListener('change', function () { showHide(row); }); });
+        var addSize = row.querySelector('.add-size-btn');
+        if (addSize) addSize.addEventListener('click', function () { addSizeRow(row); });
+        Array.prototype.forEach.call(row.querySelectorAll('.remove-size-btn'), function (b) {
+            b.addEventListener('click', function () { b.closest('.osize-row').remove(); renameSizes(row, optionIndex(row)); });
+        });
         showHide(row);
     }
     document.getElementById('add-option-btn').addEventListener('click', function () {
@@ -30,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         wire(row);
         wrap.appendChild(row);
     });
+    // 重新命名既有列（含 server-rendered sizes，其名稱由 asp-for 產生已是 Options[i].Sizes[j].*，不需改）
     Array.prototype.forEach.call(wrap.querySelectorAll('.option-row'), wire);
 });
 </script>

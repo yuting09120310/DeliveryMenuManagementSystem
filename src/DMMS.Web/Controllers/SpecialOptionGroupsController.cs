@@ -62,7 +62,7 @@ public class SpecialOptionGroupsController(DmmsDbContext db) : Controller
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        var g = await db.SpecialOptionGroups.Include(x => x.Options).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        var g = await db.SpecialOptionGroups.Include(x => x.Options).ThenInclude(o => o.Sizes).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         if (g is null) return NotFound();
         var inUse = await db.ProductSpecialOptions.AsNoTracking().AnyAsync(x => g.Options.Select(o => o.Id).Contains(x.SpecialOptionId));
         return View(new SpecialOptionGroupEditViewModel
@@ -72,7 +72,11 @@ public class SpecialOptionGroupsController(DmmsDbContext db) : Controller
             Options = g.Options.OrderBy(o => o.Id).Select(o => new SpecialOptionInputModel
             {
                 Id = o.Id, Name = o.Name, EnglishName = o.EnglishName, Kind = o.Kind, ExternalDataMode = o.ExternalDataMode,
-                BeverageTemperature = o.BeverageTemperature, Suffix = o.Suffix, StandaloneExternalData = o.StandaloneExternalData, IsEnabled = o.IsEnabled
+                BeverageTemperature = o.BeverageTemperature, Suffix = o.Suffix, StandaloneExternalData = o.StandaloneExternalData, IsEnabled = o.IsEnabled,
+                Sizes = o.Sizes.OrderBy(s => s.SortOrder).Select(s => new SpecialOptionSizeInputModel
+                {
+                    Id = s.Id, SizeName = s.SizeName, ExternalData = s.ExternalData, Price = s.Price, IsEnabled = s.IsEnabled, SortOrder = s.SortOrder
+                }).ToList()
             }).ToList()
         });
     }
@@ -88,7 +92,7 @@ public class SpecialOptionGroupsController(DmmsDbContext db) : Controller
             model.Options = clean;
             return View(model);
         }
-        var group = await db.SpecialOptionGroups.Include(x => x.Options).FirstOrDefaultAsync(x => x.Id == id);
+        var group = await db.SpecialOptionGroups.Include(x => x.Options).ThenInclude(o => o.Sizes).FirstOrDefaultAsync(x => x.Id == id);
         if (group is null) return NotFound();
 
         group.Name = model.Name.Trim(); group.Min = model.Min; group.Max = model.Max;
@@ -100,6 +104,7 @@ public class SpecialOptionGroupsController(DmmsDbContext db) : Controller
                 target.Name = incoming.Name; target.EnglishName = incoming.EnglishName; target.Kind = incoming.Kind;
                 target.ExternalDataMode = incoming.ExternalDataMode; target.BeverageTemperature = incoming.BeverageTemperature;
                 target.Suffix = incoming.Suffix; target.StandaloneExternalData = incoming.StandaloneExternalData; target.IsEnabled = incoming.IsEnabled;
+                ApplySizes(target, incoming);
                 existing.Remove(incoming.Id);
             }
             else group.Options.Add(ToOption(incoming));
@@ -141,9 +146,44 @@ public class SpecialOptionGroupsController(DmmsDbContext db) : Controller
         return cleaned;
     }
 
-    private static SpecialOption ToOption(SpecialOptionInputModel o) => new()
+    private static void ApplySizes(SpecialOption target, SpecialOptionInputModel incoming)
     {
-        Name = o.Name, EnglishName = o.EnglishName, Kind = o.Kind, ExternalDataMode = o.ExternalDataMode,
-        BeverageTemperature = o.BeverageTemperature, Suffix = o.Suffix, StandaloneExternalData = o.StandaloneExternalData, IsEnabled = o.IsEnabled
-    };
+        var keep = new List<SpecialOptionSize>();
+        foreach (var row in incoming.Sizes.Where(s => !string.IsNullOrWhiteSpace(s.SizeName) && !string.IsNullOrWhiteSpace(s.ExternalData)))
+        {
+            var size = target.Sizes.FirstOrDefault(s => s.Id == row.Id);
+            if (size is null)
+            {
+                size = new SpecialOptionSize();
+                target.Sizes.Add(size);
+            }
+            size.SizeName = row.SizeName.Trim();
+            size.ExternalData = row.ExternalData.Trim().StartsWith('@') ? row.ExternalData.Trim() : "@" + row.ExternalData.Trim();
+            size.Price = row.Price;
+            size.IsEnabled = row.IsEnabled;
+            size.SortOrder = row.SortOrder;
+            keep.Add(size);
+        }
+        foreach (var orphan in target.Sizes.Where(s => !keep.Contains(s)).ToList())
+            target.Sizes.Remove(orphan);
+    }
+
+    private static SpecialOption ToOption(SpecialOptionInputModel o)
+    {
+        var opt = new SpecialOption
+        {
+            Name = o.Name, EnglishName = o.EnglishName, Kind = o.Kind, ExternalDataMode = o.ExternalDataMode,
+            BeverageTemperature = o.BeverageTemperature, Suffix = o.Suffix, StandaloneExternalData = o.StandaloneExternalData, IsEnabled = o.IsEnabled
+        };
+        foreach (var row in o.Sizes.Where(s => !string.IsNullOrWhiteSpace(s.SizeName) && !string.IsNullOrWhiteSpace(s.ExternalData)))
+        {
+            opt.Sizes.Add(new SpecialOptionSize
+            {
+                SizeName = row.SizeName.Trim(),
+                ExternalData = row.ExternalData.Trim().StartsWith('@') ? row.ExternalData.Trim() : "@" + row.ExternalData.Trim(),
+                Price = row.Price, IsEnabled = row.IsEnabled, SortOrder = row.SortOrder
+            });
+        }
+        return opt;
+    }
 }

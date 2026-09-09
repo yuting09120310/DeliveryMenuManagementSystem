@@ -74,7 +74,7 @@ public class MenuImportService
 
         // ---------- 主檔快取 ----------
         var tempOptions = await _db.SpecialOptions.Where(o => o.Kind == SpecialOptionKind.Temperature).ToListAsync(ct);
-        var sweetOptions = await _db.SpecialOptions.Where(o => o.Kind == SpecialOptionKind.Sweetness).ToListAsync(ct);
+        var sweetOptions = await _db.SpecialOptions.Include(o => o.Sizes).Where(o => o.Kind == SpecialOptionKind.Sweetness).ToListAsync(ct);
         var sweetGroups = await _db.SpecialOptionGroups.Where(g => g.Options.Any(o => o.Kind == SpecialOptionKind.Sweetness)).ToListAsync(ct);
         var addons = await _db.AddOns.ToListAsync(ct);
         var categories = await _db.Categories.ToListAsync(ct);
@@ -163,6 +163,14 @@ public class MenuImportService
                 if (opt is null) { result.Messages.Add($"缺少甜度特殊選項主檔：{se.Zh}"); continue; }
                 product.SpecialOptions.Add(new ProductSpecialOption { SpecialOptionId = opt.Id });
             }
+            // 醇香蜂蜜：甜度群組選項（依尺寸品號/價格定義於 SpecialOptionSize；商品層勾選即可，匯出依尺寸自動帶品號）
+            if (!string.IsNullOrWhiteSpace(pi.HoneySize))
+            {
+                var honeyOpt = sweetOptions.FirstOrDefault(x => x.Name == "醇香蜂蜜" && (x.Sizes ?? []).Any(s => s.IsEnabled));
+                if (honeyOpt is null) result.Messages.Add("缺少甜度群組「醇香蜂蜜」選項主檔（含依尺寸品號定義）");
+                else if (!product.SpecialOptions.Any(x => x.SpecialOptionId == honeyOpt.Id))
+                    product.SpecialOptions.Add(new ProductSpecialOption { SpecialOptionId = honeyOpt.Id });
+            }
 
             // 加料勾選：清空重建
             product.AddOns.Clear();
@@ -171,14 +179,6 @@ public class MenuImportService
                 var a = addons.FirstOrDefault(x => x.ExternalData == ed);
                 if (a is null) { result.Messages.Add($"缺少加料主檔：{ed}"); continue; }
                 product.AddOns.Add(new ProductAddOn { AddOnId = a.Id });
-            }
-            if (!string.IsNullOrWhiteSpace(pi.HoneySize))
-            {
-                var honey = addons.FirstOrDefault(x => x.ExternalData == "@IT1812(20)" && x.FixedRatio)
-                         ?? addons.FirstOrDefault(x => x.FixedRatio);
-                if (honey is null) result.Messages.Add("缺少醇香蜂蜜加料主檔");
-                else if (!product.AddOns.Any(x => x.AddOnId == honey.Id))
-                    product.AddOns.Add(new ProductAddOn { AddOnId = honey.Id });
             }
 
             // 分類關聯：清空重建

@@ -11,6 +11,7 @@ public class DmmsDbContext(DbContextOptions<DmmsDbContext> options) : DbContext(
     public DbSet<ProductSize> ProductSizes => Set<ProductSize>();
     public DbSet<SpecialOptionGroup> SpecialOptionGroups => Set<SpecialOptionGroup>();
     public DbSet<SpecialOption> SpecialOptions => Set<SpecialOption>();
+    public DbSet<SpecialOptionSize> SpecialOptionSizes => Set<SpecialOptionSize>();
     public DbSet<ProductSpecialOption> ProductSpecialOptions => Set<ProductSpecialOption>();
     public DbSet<AddOn> AddOns => Set<AddOn>();
     public DbSet<AddOnSize> AddOnSizes => Set<AddOnSize>();
@@ -35,8 +36,11 @@ public class DmmsDbContext(DbContextOptions<DmmsDbContext> options) : DbContext(
         b.Entity<ProductAddOn>().HasOne(x => x.AddOn).WithMany().HasForeignKey(x => x.AddOnId).OnDelete(DeleteBehavior.Cascade);
         b.Entity<AddOnSize>().HasKey(x => x.Id);
         b.Entity<AddOnSize>().HasOne(x => x.AddOn).WithMany(x => x.Sizes).HasForeignKey(x => x.AddOnId).OnDelete(DeleteBehavior.Cascade);
+        b.Entity<SpecialOptionSize>().HasKey(x => x.Id);
+        b.Entity<SpecialOptionSize>().HasOne(x => x.SpecialOption).WithMany(x => x.Sizes).HasForeignKey(x => x.SpecialOptionId).OnDelete(DeleteBehavior.Cascade);
         b.Entity<AddOn>().Property(x => x.Price).HasPrecision(18, 2);
         b.Entity<AddOnSize>().Property(x => x.Price).HasPrecision(18, 2);
+        b.Entity<SpecialOptionSize>().Property(x => x.Price).HasPrecision(18, 2);
         b.Entity<Product>().Property(x => x.BasePrice).HasPrecision(18, 2);
         b.Entity<ProductSize>().Property(x => x.PriceAdjustment).HasPrecision(18, 2);
         b.Entity<MenuVersionProduct>().HasKey(x => new { x.MenuVersionId, x.ProductId });

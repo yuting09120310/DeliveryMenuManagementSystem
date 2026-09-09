@@ -171,7 +171,7 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
                 WriteSizeSegment(s, cells, ref r, p, size, sizeOpts, addOns);
             }
             if (p.SweetnessAtProductLevel)
-                WriteProductLevelSweetness(s, cells, ref r, p, specialOptions, addOns);
+                WriteProductLevelSweetness(s, cells, ref r, p, specialOptions);
             WriteAddOnsGroup(s, cells, ref r, p, addOns);
         }
     }
@@ -217,6 +217,22 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
             var isSweetness = grp.First().Kind == SpecialOptionKind.Sweetness;
             foreach (var o in grp.OrderBy(o => o.Id))
             {
+                // 依尺寸特化選項（如甜度群組的醇香蜂蜜：中杯 @IT1812(20)/10、大杯 @IT1836(40)/15）：
+                // ExternalData/價格取自 SpecialOptionSize；名稱同主檔；UUID 含尺寸維度（跨商品共用、中杯/大杯各自穩定）
+                var sizeDef = (o.Sizes ?? []).FirstOrDefault(x => x.IsEnabled && x.SizeName == size.Name);
+                if (sizeDef is not null)
+                {
+                    var optUuid = StableUuid($"option|{o.Id}|{size.Name}");
+                    var code = sizeDef.ExternalData.StartsWith('@') ? sizeDef.ExternalData : "@" + sizeDef.ExternalData;
+                    cells.Set(s, r, "ExternalID", ExtId(o.Name, o.EnglishName, Code5(optUuid)));
+                    cells.Set(s, r, "Modifier Option", Display(o.Name, o.EnglishName));
+                    cells.Set(s, r, "Delivery Price", (double)sizeDef.Price);
+                    cells.Set(s, r, "Max", 1);
+                    cells.Set(s, r, "ExternalData", code);
+                    cells.Set(s, r, "UUID", optUuid);
+                    r++;
+                    continue;
+                }
                 // Standalone（甜度）ExternalData 不隨尺寸/商品變 → 全檔共用同一 ExternalID/UUID
                 // （附件：標準甜_Regular_Sugar 跨尺寸同 UUID 3f7a4d32、無數字後綴）；
                 // BaseCodeAndSuffix（冰度）品號隨尺寸 base code 變 → 每 (商品,尺寸) 獨立 UUID + 後綴。
@@ -242,31 +258,13 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
                 }
                 r++;
             }
-            // FixedRatio 加料（如醇香蜂蜜）併入甜度群組尾端，依該尺寸 AddOnSize 品號/價格
-            if (isSweetness)
-            {
-                foreach (var a in addOns.Where(x => x.FixedRatio))
-                {
-                    var def = (a.Sizes ?? []).FirstOrDefault(x => x.IsEnabled && x.SizeName == size.Name);
-                    var code = !string.IsNullOrWhiteSpace(def?.ExternalData) ? def.ExternalData : a.ExternalData;
-                    var price = !string.IsNullOrWhiteSpace(def?.ExternalData) ? def.Price : a.Price;
-                    var uuid = StableUuid($"fixedaddon|{p.Id}|{size.Id}|{a.Id}");
-                    cells.Set(s, r, "ExternalID", ExtId(a.Name, a.EnglishName, Code5(uuid)));
-                    cells.Set(s, r, "Modifier Option", Display(a.Name, a.EnglishName));
-                    cells.Set(s, r, "Delivery Price", (double)price);
-                    cells.Set(s, r, "Max", 1);
-                    cells.Set(s, r, "ExternalData", code.StartsWith('@') ? code : "@" + code);
-                    cells.Set(s, r, "UUID", uuid);
-                    r++;
-                }
-            }
         }
     }
 
-    /// <summary>B 型商品：甜度群組在商品層輸出一次（附件 Nesting=1、UUID 不隨尺寸變）。選項 Standalone 跨商品共用 UUID；FixedRatio 加料用主檔預設品號。</summary>
-    private void WriteProductLevelSweetness(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<SpecialOption> options, List<AddOn> addOns)
+    /// <summary>B 型商品：甜度群組在商品層輸出一次（附件 Nesting=1、UUID 不隨尺寸變）。選項 Standalone 跨商品共用 UUID；依尺寸特化選項（醇香蜂蜜）於此型商品不存在，忽略。</summary>
+    private void WriteProductLevelSweetness(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<SpecialOption> options)
     {
-        foreach (var grp in options.Where(o => o.Kind == SpecialOptionKind.Sweetness)
+        foreach (var grp in options.Where(o => o.Kind == SpecialOptionKind.Sweetness && !(o.Sizes ?? []).Any(x => x.IsEnabled))
                      .GroupBy(o => o.SpecialOptionGroupId ?? 0).OrderBy(g => g.Key))
         {
             var group = grp.First().Group;
@@ -288,18 +286,6 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
                 cells.Set(s, r, "Max", 1);
                 cells.Set(s, r, "ExternalData", o.StandaloneExternalData ?? "");
                 cells.Set(s, r, "UUID", optUuid);
-                r++;
-            }
-            // 商品層甜度群組尾端的 FixedRatio 加料（此型商品多數無蜂蜜；有則用主檔預設品號）
-            foreach (var a in addOns.Where(x => x.FixedRatio))
-            {
-                var uuid = StableUuid($"fixedaddon|{p.Id}|0|{a.Id}");
-                cells.Set(s, r, "ExternalID", ExtId(a.Name, a.EnglishName, Code5(uuid)));
-                cells.Set(s, r, "Modifier Option", Display(a.Name, a.EnglishName));
-                cells.Set(s, r, "Delivery Price", (double)a.Price);
-                cells.Set(s, r, "Max", 1);
-                cells.Set(s, r, "ExternalData", a.ExternalData.StartsWith('@') ? a.ExternalData : "@" + a.ExternalData);
-                cells.Set(s, r, "UUID", uuid);
                 r++;
             }
         }
