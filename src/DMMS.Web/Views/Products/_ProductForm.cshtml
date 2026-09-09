@@ -13,7 +13,7 @@
     <div class="choice-group"><div class="choice-group-title">@grp.GroupName</div>
     @foreach (var opt in grp.Options) {
         var checkedAttr = Model.SpecialOptionIds.Contains(opt.Id);
-        <label class="choice-pill"><input type="checkbox" name="SpecialOptionIds" value="@opt.Id" @(checkedAttr ? "checked" : "") /> <span>@opt.Name</span><small>@opt.KindLabel</small></label>
+        <label class="choice-pill"><input type="checkbox" name="SpecialOptionIds" value="@opt.Id" @(checkedAttr ? "checked" : "") /> <span>@opt.Name</span></label>
     }
     </div>
 }
@@ -28,10 +28,8 @@
 @foreach (var ao in Model.AvailableAddOns) {
     var checkedAttr = Model.AddOnIds.Contains(ao.Id);
     <label class="choice-pill addon-choice"><input type="checkbox" name="AddOnIds" value="@ao.Id" @(checkedAttr ? "checked" : "") /> <span>@ao.Name</span>@if (ao.IcedOnly) { <span class="badge text-bg-info">僅冰</span> }@if (ao.FixedRatio) { <span class="badge text-bg-secondary">固定比例</span> }</label>
-    if (!string.IsNullOrWhiteSpace(ao.SizeSummary)) { <div class="addon-size-hint">@ao.SizeSummary</div> }
 }
 </div>
-<p class="text-muted small mt-2">未列出的尺寸會使用加料主檔的預設品號與價格。</p>
 }
 </section>
 
