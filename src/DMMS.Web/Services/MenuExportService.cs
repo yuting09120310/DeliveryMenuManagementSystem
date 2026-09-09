@@ -82,6 +82,7 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         // ---- Categories&Items&Modifiers ----
         var s = workbook.Worksheets.Add("Categories&Items&Modifiers");
         for (var i = 0; i < headers.Count; i++) s.Cell(1, i + 1).Value = headers[i];
+        ApplyReferenceColumnVisibility(s); // 比照原版隱藏 ExternalID/Other Price/DefaultQuantity 等欄
         var r = 2;
         // Menu 層列
         cells.Set(s, r, "ExternalID", menuExtId);
@@ -103,6 +104,18 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         var stream = new MemoryStream();
         workbook.SaveAs(stream);
         return new(stream.ToArray(), errors, warnings, new Dictionary<string, int> { ["GlobalSettings"] = 4, ["Menus"] = 1, ["Categories&Items&Modifiers"] = rowTotal }, ["GlobalSettings", "Menus", "Categories&Items&Modifiers"]);
+    }
+
+    /// <summary>
+    /// 比照原版校稿檔：Categories&Items&Modifiers 隱藏 UE 匯入不需人工檢視的欄位
+    /// （col1 ExternalID、col9-13 Other Price~VatRate、col17-26 DefaultQuantity~IsGlutenFree）。
+    /// 欄位值仍在檔案中（廠商匯入讀取不受影響），僅 Excel 顯示時隱藏，外觀與原版一致。
+    /// </summary>
+    public static void ApplyReferenceColumnVisibility(IXLWorksheet sheet)
+    {
+        sheet.Column(1).Hide();
+        sheet.Columns(9, 13).Hide();
+        sheet.Columns(17, 26).Hide();
     }
 
     private static List<(Category Category, List<Product> Items)> GroupByCategory(Product[] products, List<string> warnings)
