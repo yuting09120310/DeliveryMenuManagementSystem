@@ -27,11 +27,10 @@
 @if (Model.RecentVersions.Count == 0) {
     <p class="text-muted mb-0">尚未建立菜單版本，點右上「＋ 建立 UE 菜單」開始。</p>
 } else {
-    <table class="table align-middle"><thead><tr><th>版本</th><th>商品數</th><th>建立時間</th><th>最近匯出</th><th></th></tr></thead><tbody>
+    <table class="table align-middle"><thead><tr><th>版本</th><th>商品數</th><th>建立時間</th><th></th></tr></thead><tbody>
     @foreach (var v in Model.RecentVersions) {
         <tr><td>@v.Name</td><td>@v.Products.Count</td><td>@Fmt(v.CreatedAt)</td>
-        <td>@(v.ExportedAt is null ? "尚未匯出" : Fmt(v.ExportedAt.Value))</td>
-        <td><a asp-controller="UberEatsMenuVersions" asp-action="Preview" asp-route-id="@v.Id">預覽</a>　<a asp-controller="UberEatsMenuVersions" asp-action="Build" asp-route-id="@v.Id">編輯</a></td></tr>
+        <td><a asp-controller="UberEatsMenuVersions" asp-action="Preview" asp-route-id="@v.Id">預覽</a>　<a asp-controller="UberEatsMenuVersions" asp-action="Build" asp-route-id="@v.Id">編輯</a>　<form asp-controller="UberEatsMenuVersions" asp-action="Copy" asp-route-id="@v.Id" method="post" class="d-inline" onsubmit="return confirm('複製此菜單為新版本？');"><button type="submit" class="btn btn-link btn-sm p-0 align-baseline">複製</button></form></td></tr>
     }</tbody></table>
 }
 </section>

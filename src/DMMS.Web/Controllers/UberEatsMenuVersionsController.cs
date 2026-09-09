@@ -36,6 +36,28 @@ public class UberEatsMenuVersionsController(DmmsDbContext db, MenuExportService 
         version.Status = "Exported"; version.ExportedAt = DateTime.UtcNow; await db.SaveChangesAsync();
         return File(result.File, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"DMMS-UE-菜單-V1-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
     }
+    /// <summary>複製菜單版本：名稱＝原名_yyyyMMddHHmmss，商品選取原封不動複製（草稿狀態），不需重新勾選。</summary>
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Copy(int id)
+    {
+        var src = await db.MenuVersions.Include(x => x.Products).SingleOrDefaultAsync(x => x.Id == id);
+        if (src is null) return NotFound();
+        var copy = new MenuVersion
+        {
+            Name = $"{src.Name}_{DateTime.Now:yyyyMMddHHmmss}",
+            Platform = Platform,
+            StoreUuid = StoreUuid,
+            MenuExternalId = MenuExternalId,
+            MenuDisplayName = MenuDisplayName,
+            OpenHours = OpenHours,
+            Status = "Draft"
+        };
+        db.MenuVersions.Add(copy);
+        await db.SaveChangesAsync();
+        foreach (var p in src.Products) copy.Products.Add(new MenuVersionProduct { MenuVersionId = copy.Id, ProductId = p.ProductId });
+        await db.SaveChangesAsync();
+        return RedirectToAction(nameof(Build), new { id = copy.Id });
+    }
     private async Task<MenuVersion?> Load(int id) => await db.MenuVersions.Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.ProductCategories).ThenInclude(x => x.Category).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.Sizes).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.SpecialOptions).ThenInclude(x => x.SpecialOption).ThenInclude(x => x.Group).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.SpecialOptions).ThenInclude(x => x.SpecialOption).ThenInclude(x => x.Sizes).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.AddOns).ThenInclude(x => x.AddOn).ThenInclude(x => x.Sizes).SingleOrDefaultAsync(x => x.Id == id);
     private async Task<MenuVersionEditViewModel> Form(MenuVersion? v) => new() { Id = v?.Id ?? 0, Name = v?.Name ?? "UE 菜單", SelectedProductIds = v?.Products.Select(x => x.ProductId).ToList() ?? [], Products = await db.Products.Where(x => x.IsEnabled).Include(x => x.Sizes).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).ToListAsync() };
     private async Task<IActionResult> Save(MenuVersionEditViewModel input, int? id)
