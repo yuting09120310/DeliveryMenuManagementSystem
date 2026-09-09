@@ -1,0 +1,6 @@
+@model DMMS.Web.ViewModels.CategoryListViewModel
+@{ ViewData["Title"] = "分類管理"; }
+@if (TempData["Error"] is not null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+@if (Model.DataError is not null) { <div class="alert alert-warning">@Model.DataError</div> }
+<div class="panel"><div class="panel-heading"><div><h2>分類列表</h2><p class="text-muted mb-0">管理菜單分類（對應 UE 的 Category 層），商品建立時可選擇分類</p></div><a class="btn btn-primary" asp-action="Create">＋ 新增分類</a></div>
+@if (!Model.Categories.Any()) { <div class="empty-state">尚無分類資料。請先建立分類（如：原茶系列、鮮奶茶），再將商品歸類。</div> } else { <div class="table-responsive"><table class="table align-middle"><thead><tr><th>排序</th><th>分類名稱</th><th>英文名稱</th><th>商品數</th><th></th></tr></thead><tbody>@foreach (var c in Model.Categories) { <tr><td>@c.SortOrder</td><td><a class="fw-semibold" asp-action="Edit" asp-route-id="@c.Id">@c.Name</a></td><td class="text-muted">@c.EnglishName</td><td>@c.ProductCount</td><td class="text-nowrap"><a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@c.Id">編輯</a> <form method="post" asp-action="Delete" asp-route-id="@c.Id" class="d-inline" onsubmit="return confirm('確定刪除分類「@c.Name」？');">@Html.AntiForgeryToken()<button type="submit" class="btn btn-sm btn-outline-danger">刪除</button></form></td></tr> }</tbody></table></div> }</div>

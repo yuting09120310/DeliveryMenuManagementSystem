@@ -8,6 +8,9 @@ public class Category
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
+    public string? EnglishName { get; set; }
+    public int SortOrder { get; set; }
+    public string? SourceExternalId { get; set; }
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 }
 

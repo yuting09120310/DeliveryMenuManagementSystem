@@ -4,6 +4,7 @@ using DMMS.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DMMS.Web.Data.Migrations
 {
     [DbContext(typeof(DmmsDbContext))]
-    partial class DmmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260909015604_CategoryEnglishName")]
+    partial class CategoryEnglishName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,19 +162,7 @@ namespace DMMS.Web.Data.Migrations
                     b.Property<DateTime?>("ExportedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("MenuDisplayName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MenuExternalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OpenHours")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -181,9 +172,6 @@ namespace DMMS.Web.Data.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StoreUuid")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

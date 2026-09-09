@@ -4,64 +4,342 @@ using DMMS.Web.Models;
 namespace DMMS.Web.Services;
 
 public sealed record MenuExportResult(byte[]? File, IReadOnlyList<string> Errors, IReadOnlyList<string> Warnings, IReadOnlyDictionary<string, int> RowCounts, IReadOnlyList<string> SheetNames);
-public sealed record MenuExportRow(string Kind, string ProductName, string SizeName, string ModifierName, string ExternalData, decimal Price);
 
+/// <summary>
+/// Uber Eats 菜單匯出。格式基準＝天仁 UE 校稿檔 Categories&amp;Items&amp;Modifiers（新莊-6/高雄）。
+/// 規則（逐列對照附件）：
+///  - Row1 = 88 欄 header（讀自模板；寫入時以 header 名稱找欄位，不寫死欄號）
+///  - Row2 = Menu 列：ExternalID / Menu / UUID
+///  - 每分類一列 Category（ExternalID / Category / UUID），其下接該分類商品
+///  - Item 列：ExternalID / Item(中文 English) / Delivery Price(基礎價) / Description / IsEntree=False /
+///    AlcoholicItemCount=0 / HasAlcoholicItems=False / ImageURL / UUID / uber_product_traits=[]
+///  - 多尺寸商品：每個尺寸一段子樹 →「份量 Size」群組列(Nesting=1, 全尺寸同 ExternalID/UUID) +
+///    尺寸選項列 + 特口群組(Nesting=2)：
+///      飲料溫度群組 → 冰度選項（ExternalData = Cold/HotBaseCode + Suffix）
+///      甜度群組 → 甜度選項（Standalone ExternalData）+ FixedRatio 加料併入尾端（依尺寸品號）
+///    所有尺寸段結束後輸出「加點 Add-Ons」群組(Nesting=1, Max=1) + 一般加料(非 FixedRatio)。
+///  - 單尺寸商品：不加 Size 群組，特口群組直接 Nesting=1。
+///  - GlobalSettings：A1=StoreUUID B1=店家UUID、A2=DisableItemInstructions B2=True、A3=Tax(%)、A4=VatRate
+///  - Menus：ExternalID/Menu/Monday..Sunday(營業時間)/ExternalNotes
+///  - UUID 以實體 key 產生確定性 UUIDv5（同一商品重複匯出 UUID 不變，UE 才不會重複新增）。
+/// </summary>
 public sealed class MenuExportService(IWebHostEnvironment environment)
 {
-    private static readonly string[] FallbackHeaders = ["ExternalID", "Menu", "Category", "Item", "Modifier Group", "Modifier Option", "Nesting Level", "Delivery Price", "Other Price", "Offered Delivery (blank / null = TRUE)"];
+    private static readonly string[] FallbackHeaders =
+    [
+        "ExternalID","Menu","Category","Item","Modifier Group","Modifier Option","Nesting Level","Delivery Price","Other Price",
+        "Offered Delivery (blank / null = TRUE)","Offered Other","Tax(%)","VatRate","Description","Min","Max","DefaultQuantity",
+        "Calories","Joules","HasSide","IsEntree","AlcoholicItemCount","HasAlcoholicItems","IsVegetarian","IsVegan","IsGlutenFree",
+        "ExternalData","ImageURL","ExternalNotes","Notes","GroupExternalID","EndorsementIcon","EndorsementText","SuspensionInterval",
+        "SuspendUntil","StartDate","EndDate","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday","UUID",
+        "uber_product_traits","uber_product_type"
+    ];
+
     private string SourcePath => Path.Combine(environment.ContentRootPath, "Templates", "ue-source.xlsx");
-    private string AttachmentPath => "/home/alexvm/.hermes/attachments/天仁釀茶所 新莊店校稿20260723-5.xlsx";
 
     public IReadOnlyList<string> ReadHeaders()
     {
-        var path = File.Exists(SourcePath) ? SourcePath : AttachmentPath;
-        if (!File.Exists(path)) return FallbackHeaders;
-        using var workbook = new XLWorkbook(path);
-        var sheet = workbook.Worksheets.FirstOrDefault(x => x.Name == "Categories&Items&Modifiers") ?? workbook.Worksheets.Last();
-        return sheet.Row(1).CellsUsed().Select(x => x.GetString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
-    }
-
-    public IReadOnlyList<MenuExportRow> BuildRows(IEnumerable<Product> products)
-    {
-        var rows = new List<MenuExportRow>();
-        foreach (var product in products.OrderBy(x => x.SortOrder).ThenBy(x => x.Id))
+        if (!File.Exists(SourcePath)) return FallbackHeaders;
+        try
         {
-            foreach (var size in product.Sizes.Where(x => x.IsEnabled).OrderBy(x => x.SortOrder))
-            {
-                rows.Add(new("ProductSize", product.Name, size.Name, "", size.ColdBaseCode ?? size.HotBaseCode ?? $"PRODUCT-{product.Id}-SIZE-{size.Id}", product.BasePrice + size.PriceAdjustment));
-                foreach (var option in product.SpecialOptions.Where(x => x.IsEnabled && x.SpecialOption.IsEnabled).Select(x => x.SpecialOption))
-                    rows.Add(new("SpecialOption", product.Name, size.Name, option.Name, option.ExternalDataMode == ExternalDataMode.Standalone ? option.StandaloneExternalData ?? "" : option.Suffix ?? "", 0));
-                // 加料：商品層級勾選 → 依尺寸查 AddOn 主檔的 AddOnSize（找不到 fallback 主檔預設品號/價格）
-                foreach (var pa in product.AddOns.Where(x => x.IsEnabled))
-                {
-                    var addOn = pa.AddOn;
-                    var sizeDef = addOn?.Sizes?.FirstOrDefault(s => s.IsEnabled && s.SizeName == size.Name);
-                    var code = !string.IsNullOrWhiteSpace(sizeDef?.ExternalData) ? sizeDef.ExternalData : addOn?.ExternalData ?? "";
-                    var price = !string.IsNullOrWhiteSpace(sizeDef?.ExternalData) ? sizeDef.Price : addOn?.Price ?? 0;
-                    rows.Add(new("ProductAddOn", product.Name, size.Name, addOn?.Name ?? $"加料#{pa.AddOnId}", code.StartsWith('@') ? code : "@" + code, price));
-                }
-            }
+            using var workbook = new XLWorkbook(SourcePath);
+            var sheet = workbook.Worksheets.FirstOrDefault(x => x.Name == "Categories&Items&Modifiers") ?? workbook.Worksheets.Last();
+            return sheet.Row(1).CellsUsed().Select(x => x.GetString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
         }
-        return rows;
+        catch { return FallbackHeaders; }
     }
 
-    public MenuExportResult Build(Product[] products)
+    public MenuExportResult Build(Product[] products, MenuVersion? version = null)
     {
         var errors = new List<string>();
         var warnings = new List<string>();
+        var storeUuid = version?.StoreUuid;
+        var menuDisplay = string.IsNullOrWhiteSpace(version?.MenuDisplayName) ? "全日菜單 Menu" : version!.MenuDisplayName!;
+        var menuExtId = string.IsNullOrWhiteSpace(version?.MenuExternalId) ? "全日菜單_Menu" : version!.MenuExternalId!;
+        var openHours = string.IsNullOrWhiteSpace(version?.OpenHours) ? "10:30--20:00" : version!.OpenHours!;
         if (products.Length == 0) errors.Add("至少選擇一項商品才能匯出。");
+        if (string.IsNullOrWhiteSpace(storeUuid)) warnings.Add("尚未設定 StoreUUID（GlobalSettings 欄位），請在「菜單建置」編輯頁填入 Uber Eats 店家 UUID。");
         var headers = ReadHeaders();
-        if (headers.Count != 88) warnings.Add($"Categories&Items&Modifiers 來源標題實際讀到 {headers.Count} 欄，未可靠映射的欄位留空；請確認來源模板。");
-        var rows = BuildRows(products);
-        if (rows.Count == 0 && products.Length > 0) warnings.Add("選取商品沒有啟用尺寸，因此沒有可展開的商品列。");
-        var counts = new Dictionary<string, int> { ["GlobalSettings"] = 2, ["Menus"] = 1, ["Categories&Items&Modifiers"] = rows.Count };
-        if (errors.Count > 0) return new(null, errors, warnings, counts, ["GlobalSettings", "Menus", "Categories&Items&Modifiers"]);
+        if (headers.Count < 45) warnings.Add($"Categories&Items&Modifiers 來源標題讀到 {headers.Count} 欄（預期 88），未對應欄位將留空。");
+        if (errors.Count > 0) return new(null, errors, warnings, new Dictionary<string, int>(), []);
 
+        var cells = new CellWriter(headers.ToArray());
         using var workbook = new XLWorkbook();
-        var global = workbook.Worksheets.Add("GlobalSettings"); global.Cell(1, 1).Value = "Key"; global.Cell(1, 2).Value = "Value"; global.Cell(2, 1).Value = "DisableItemInstructions"; global.Cell(2, 2).Value = "TRUE";
-        var menus = workbook.Worksheets.Add("Menus"); var menuHeaders = new[] { "ExternalID", "Menu", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "ExternalNotes" }; for (var i = 0; i < menuHeaders.Length; i++) menus.Cell(1, i + 1).Value = menuHeaders[i]; menus.Cell(2, 1).Value = "UE菜單V1_Menu"; menus.Cell(2, 2).Value = "UE菜單V1";
-        var items = workbook.Worksheets.Add("Categories&Items&Modifiers"); for (var i = 0; i < headers.Count; i++) items.Cell(1, i + 1).Value = headers[i];
-        for (var r = 0; r < rows.Count; r++) { var row = rows[r]; items.Cell(r + 2, 1).Value = $"PRODUCT-{products.First(x => x.Name == row.ProductName).Id}-{row.Kind}-{r + 1}"; items.Cell(r + 2, 2).Value = "UE菜單V1"; items.Cell(r + 2, 4).Value = row.ProductName; items.Cell(r + 2, 5).Value = row.Kind; items.Cell(r + 2, 6).Value = row.ModifierName; items.Cell(r + 2, 7).Value = row.SizeName; items.Cell(r + 2, 8).Value = row.Price; items.Cell(r + 2, 28).Value = row.ExternalData; }
-        using var stream = new MemoryStream(); workbook.SaveAs(stream); return new(stream.ToArray(), errors, warnings, counts, workbook.Worksheets.Select(x => x.Name).ToArray());
+        // ---- GlobalSettings（附件：無標題列，A1=StoreUUID 起，共 4 列 key/value）----
+        var g = workbook.Worksheets.Add("GlobalSettings");
+        g.Cell(1, 1).Value = "StoreUUID"; g.Cell(1, 2).Value = storeUuid ?? "";
+        g.Cell(2, 1).Value = "DisableItemInstructions"; g.Cell(2, 2).Value = "True";
+        g.Cell(3, 1).Value = "Tax(%)";
+        g.Cell(4, 1).Value = "VatRate";
+
+        // ---- Menus ----
+        var m = workbook.Worksheets.Add("Menus");
+        var menuCols = new[] { "ExternalID", "Menu", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "ExternalNotes" };
+        for (var i = 0; i < menuCols.Length; i++) m.Cell(1, i + 1).Value = menuCols[i];
+        m.Cell(2, 1).Value = menuExtId; m.Cell(2, 2).Value = menuDisplay;
+        for (var d = 3; d <= 9; d++) m.Cell(2, d).Value = openHours;
+
+        // ---- Categories&Items&Modifiers ----
+        var s = workbook.Worksheets.Add("Categories&Items&Modifiers");
+        for (var i = 0; i < headers.Count; i++) s.Cell(1, i + 1).Value = headers[i];
+        var r = 2;
+        // Menu 層列
+        cells.Set(s, r, "ExternalID", menuExtId);
+        cells.Set(s, r, "Menu", menuDisplay);
+        cells.Set(s, r, "UUID", StableUuid($"menu|{menuExtId}"));
+        r++;
+
+        var grouped = GroupByCategory(products, warnings);
+        foreach (var (category, items) in grouped)
+        {
+            cells.Set(s, r, "ExternalID", ExtId(category.Name, category.EnglishName, null));
+            cells.Set(s, r, "Category", Display(category.Name, category.EnglishName));
+            cells.Set(s, r, "UUID", StableUuid($"category|{category.Id}"));
+            r++;
+            foreach (var p in items) WriteProduct(s, cells, ref r, p, warnings);
+        }
+
+        var rowTotal = r - 1;
+        var stream = new MemoryStream();
+        workbook.SaveAs(stream);
+        return new(stream.ToArray(), errors, warnings, new Dictionary<string, int> { ["GlobalSettings"] = 4, ["Menus"] = 1, ["Categories&Items&Modifiers"] = rowTotal }, ["GlobalSettings", "Menus", "Categories&Items&Modifiers"]);
+    }
+
+    private static List<(Category Category, List<Product> Items)> GroupByCategory(Product[] products, List<string> warnings)
+    {
+        var groups = new List<(Category, List<Product>)>();
+        foreach (var p in products.OrderBy(x => x.SortOrder).ThenBy(x => x.Id))
+        {
+            var cats = p.ProductCategories?.Select(x => x.Category).Where(c => c is not null).ToList() ?? [];
+            if (cats.Count == 0) { warnings.Add($"商品「{p.Name}」尚未設定分類，不會輸出 Category/Item 列。"); continue; }
+            foreach (var c in cats.OrderBy(c => c.SortOrder).ThenBy(c => c.Name))
+            {
+                var g = groups.FirstOrDefault(x => x.Item1.Id == c.Id);
+                if (g.Item1 is null) { g = (c, []); groups.Add(g); }
+                g.Item2.Add(p);
+            }
+        }
+        return groups;
+    }
+
+    private void WriteProduct(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<string> warnings)
+    {
+        var sizes = (p.Sizes ?? []).Where(x => x.IsEnabled).OrderBy(x => x.SortOrder).ThenBy(x => x.Id).ToList();
+        if (sizes.Count == 0) { warnings.Add($"商品「{p.Name}」沒有啟用尺寸，已略過。"); return; }
+        // Item 層
+        cells.Set(s, r, "ExternalID", ExtId(p.Name, p.EnglishName, null));
+        cells.Set(s, r, "Item", Display(p.Name, p.EnglishName));
+        cells.Set(s, r, "Delivery Price", (double)p.BasePrice);
+        cells.Set(s, r, "Description", p.Description);
+        cells.Set(s, r, "IsEntree", "False");
+        cells.Set(s, r, "AlcoholicItemCount", "0");
+        cells.Set(s, r, "HasAlcoholicItems", "False");
+        cells.Set(s, r, "ImageURL", p.ImageUrl);
+        cells.Set(s, r, "UUID", StableUuid($"product|{p.Id}"));
+        cells.Set(s, r, "uber_product_traits", "[]");
+        r++;
+
+        var specialOptions = (p.SpecialOptions ?? []).Where(x => x.IsEnabled && x.SpecialOption is { IsEnabled: true }).Select(x => x.SpecialOption!).ToList();
+        var addOns = (p.AddOns ?? []).Where(x => x.IsEnabled && x.AddOn is not null).Select(x => x.AddOn!).ToList();
+
+        if (sizes.Count == 1)
+        {
+            WriteSpecialGroups(s, cells, ref r, p, sizes[0], specialOptions, addOns, nestLevel: 1);
+            WriteAddOnsGroup(s, cells, ref r, p, addOns);
+        }
+        else
+        {
+            foreach (var size in sizes)
+                WriteSizeSegment(s, cells, ref r, p, size, specialOptions, addOns);
+            WriteAddOnsGroup(s, cells, ref r, p, addOns);
+        }
+    }
+
+    /// <summary>尺寸段：份量 Size 群組列(Nesting=1) → 尺寸選項 → 特口群組(Nesting=2)。</summary>
+    private void WriteSizeSegment(IXLWorksheet s, CellWriter cells, ref int r, Product p, ProductSize size, List<SpecialOption> options, List<AddOn> addOns)
+    {
+        // 份量 Size 群組：同商品所有尺寸共用同一 ExternalID/UUID（附件 份量_Size_89304 於各尺寸段重複）
+        var sizeGroupUuid = StableUuid($"sizegroup|{p.Id}");
+        cells.Set(s, r, "ExternalID", $"份量_Size_{Code5(sizeGroupUuid)}");
+        cells.Set(s, r, "Modifier Group", "份量 Size");
+        cells.Set(s, r, "Nesting Level", 1);
+        cells.Set(s, r, "Min", 1); cells.Set(s, r, "Max", 1);
+        cells.Set(s, r, "UUID", sizeGroupUuid);
+        r++;
+        // 尺寸選項
+        cells.Set(s, r, "ExternalID", ExtId(size.Name, SizeEnglish(size.Name), null));
+        cells.Set(s, r, "Modifier Option", Display(size.Name, SizeEnglish(size.Name)));
+        cells.Set(s, r, "Delivery Price", (double)size.PriceAdjustment);
+        cells.Set(s, r, "Max", 1);
+        cells.Set(s, r, "UUID", StableUuid($"sizeoption|{p.Id}|{size.Id}"));
+        r++;
+        WriteSpecialGroups(s, cells, ref r, p, size, options, addOns, nestLevel: 2);
+    }
+
+    private void WriteSpecialGroups(IXLWorksheet s, CellWriter cells, ref int r, Product p, ProductSize size, List<SpecialOption> options, List<AddOn> addOns, int nestLevel)
+    {
+        foreach (var grp in options.GroupBy(o => o.SpecialOptionGroupId ?? 0).OrderBy(g => g.First().Kind).ThenBy(g => g.Key))
+        {
+            var group = grp.First().Group;
+            var groupUuid = StableUuid($"group|{p.Id}|{size.Id}|{group?.Id ?? 0}");
+            var groupName = group?.Name ?? "選項";
+            cells.Set(s, r, "ExternalID", ExtId(groupName, null, Code5(groupUuid)));
+            cells.Set(s, r, "Modifier Group", groupName);
+            cells.Set(s, r, "Nesting Level", nestLevel);
+            if (group is { Min: > 0 }) cells.Set(s, r, "Min", group.Min);
+            if (group is { Max: > 0 }) cells.Set(s, r, "Max", group.Max);
+            cells.Set(s, r, "UUID", groupUuid);
+            r++;
+            var isSweetness = grp.First().Kind == SpecialOptionKind.Sweetness;
+            foreach (var o in grp.OrderBy(o => o.Id))
+            {
+                // Standalone（甜度）ExternalData 不隨尺寸/商品變 → 全檔共用同一 ExternalID/UUID
+                // （附件：標準甜_Regular_Sugar 跨尺寸同 UUID 3f7a4d32、無數字後綴）；
+                // BaseCodeAndSuffix（冰度）品號隨尺寸 base code 變 → 每 (商品,尺寸) 獨立 UUID + 後綴。
+                if (o.ExternalDataMode == ExternalDataMode.Standalone)
+                {
+                    var optUuid = StableUuid($"option|{o.Id}");
+                    cells.Set(s, r, "ExternalID", ExtId(o.Name, o.EnglishName, null));
+                    cells.Set(s, r, "Modifier Option", Display(o.Name, o.EnglishName));
+                    cells.Set(s, r, "Delivery Price", 0d);
+                    cells.Set(s, r, "Max", 1);
+                    cells.Set(s, r, "ExternalData", o.StandaloneExternalData ?? "");
+                    cells.Set(s, r, "UUID", optUuid);
+                }
+                else
+                {
+                    var optUuid = StableUuid($"option|{p.Id}|{size.Id}|{o.Id}");
+                    cells.Set(s, r, "ExternalID", ExtId(o.Name, o.EnglishName, Code5(optUuid)));
+                    cells.Set(s, r, "Modifier Option", Display(o.Name, o.EnglishName));
+                    cells.Set(s, r, "Delivery Price", 0d);
+                    cells.Set(s, r, "Max", 1);
+                    cells.Set(s, r, "ExternalData", ResolveExternalData(size, o));
+                    cells.Set(s, r, "UUID", optUuid);
+                }
+                r++;
+            }
+            // FixedRatio 加料（如醇香蜂蜜）併入甜度群組尾端，依該尺寸 AddOnSize 品號/價格
+            if (isSweetness)
+            {
+                foreach (var a in addOns.Where(x => x.FixedRatio))
+                {
+                    var def = (a.Sizes ?? []).FirstOrDefault(x => x.IsEnabled && x.SizeName == size.Name);
+                    var code = !string.IsNullOrWhiteSpace(def?.ExternalData) ? def.ExternalData : a.ExternalData;
+                    var price = !string.IsNullOrWhiteSpace(def?.ExternalData) ? def.Price : a.Price;
+                    var uuid = StableUuid($"fixedaddon|{p.Id}|{size.Id}|{a.Id}");
+                    cells.Set(s, r, "ExternalID", ExtId(a.Name, a.EnglishName, Code5(uuid)));
+                    cells.Set(s, r, "Modifier Option", Display(a.Name, a.EnglishName));
+                    cells.Set(s, r, "Delivery Price", (double)price);
+                    cells.Set(s, r, "Max", 1);
+                    cells.Set(s, r, "ExternalData", code.StartsWith('@') ? code : "@" + code);
+                    cells.Set(s, r, "UUID", uuid);
+                    r++;
+                }
+            }
+        }
+    }
+
+    /// <summary>加點 Add-Ons 群組（附件：Nesting=1、只有 Max=1 沒有 Min）＋一般加料（非 FixedRatio）。</summary>
+    private void WriteAddOnsGroup(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<AddOn> addOns)
+    {
+        var normal = addOns.Where(x => !x.FixedRatio).ToList();
+        if (normal.Count == 0) return;
+        var grpUuid = StableUuid($"addongroup|{p.Id}");
+        cells.Set(s, r, "ExternalID", $"加點_Add-Ons_{Code5(grpUuid)}");
+        cells.Set(s, r, "Modifier Group", "加點 Add-Ons");
+        cells.Set(s, r, "Nesting Level", 1);
+        cells.Set(s, r, "Max", 1);
+        cells.Set(s, r, "UUID", grpUuid);
+        r++;
+        foreach (var a in normal)
+        {
+            var uuid = StableUuid($"addon|{p.Id}|{a.Id}");
+            cells.Set(s, r, "ExternalID", ExtId(a.Name, a.EnglishName, Code5(uuid)));
+            cells.Set(s, r, "Modifier Option", Display(a.Name, a.EnglishName));
+            cells.Set(s, r, "Delivery Price", (double)a.Price);
+            cells.Set(s, r, "Max", 1);
+            cells.Set(s, r, "ExternalData", a.ExternalData.StartsWith('@') ? a.ExternalData : "@" + a.ExternalData);
+            cells.Set(s, r, "UUID", uuid);
+            r++;
+        }
+    }
+
+    private static string ResolveExternalData(ProductSize size, SpecialOption o)
+    {
+        if (o.ExternalDataMode == ExternalDataMode.Standalone) return o.StandaloneExternalData ?? "";
+        var cold = o.BeverageTemperature != BeverageTemperature.Hot;
+        var baseCode = cold ? size.ColdBaseCode : size.HotBaseCode;
+        if (string.IsNullOrWhiteSpace(baseCode)) return "";
+        return string.IsNullOrWhiteSpace(o.Suffix) ? baseCode : baseCode + o.Suffix;
+    }
+
+    // ---------- helpers ----------
+
+    private sealed class CellWriter(string[] headers)
+    {
+        private readonly Dictionary<string, int> _map = BuildMap(headers);
+        private static Dictionary<string, int> BuildMap(string[] headers)
+        {
+            var map = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            for (var i = 0; i < headers.Length; i++) map.TryAdd(headers[i], i + 1);
+            return map;
+        }
+        public void Set(IXLWorksheet s, int row, string header, string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return;
+            if (_map.TryGetValue(header, out var c)) s.Cell(row, c).Value = value;
+        }
+        public void Set(IXLWorksheet s, int row, string header, double value)
+        {
+            if (_map.TryGetValue(header, out var c)) s.Cell(row, c).Value = value;
+        }
+        public void Set(IXLWorksheet s, int row, string header, int value)
+        {
+            if (_map.TryGetValue(header, out var c)) s.Cell(row, c).Value = value;
+        }
+    }
+
+    private static string Display(string zh, string? en) => string.IsNullOrWhiteSpace(en) ? zh : $"{zh} {en}".Trim();
+    private static string ExtId(string? zh, string? en, string? suffix)
+    {
+        var raw = Slug($"{zh}_{en}".Trim('_'));
+        if (suffix is null) return raw;
+        var cap = raw.Length > 34 ? raw[..34].TrimEnd('_') : raw;
+        return $"{cap}_{suffix}";
+    }
+
+    private static string Slug(string s)
+    {
+        if (string.IsNullOrWhiteSpace(s)) return "";
+        var sb = new System.Text.StringBuilder();
+        var prevSpace = false;
+        foreach (var ch in s.Trim())
+        {
+            if (char.IsWhiteSpace(ch)) { if (!prevSpace && sb.Length > 0) sb.Append('_'); prevSpace = true; continue; }
+            if (char.IsLetterOrDigit(ch) || ch is '_' or '-' or '(' or ')' or '%' or '／' or '/') { sb.Append(ch); prevSpace = false; }
+        }
+        return sb.ToString().Trim('_');
+    }
+
+    private static string SizeEnglish(string zh)
+    {
+        return zh switch { "中杯" => "Medium", "大杯" => "Large", "小杯" => "Small", _ => "" };
+    }
+
+    /// <summary>確定性 UUIDv5：同一 key 永遠得到同一 UUID（UE 靠 UUID 判斷同一實體，避免每次匯出被視為新增）。</summary>
+    internal static string StableUuid(string key)
+    {
+        var ns = System.Security.Cryptography.MD5.HashData("dmms.ue.menu"u8);
+        var bytes = System.Security.Cryptography.MD5.HashData([.. ns, .. System.Text.Encoding.UTF8.GetBytes(key)]);
+        bytes[6] = (byte)((bytes[6] & 0x0F) | 0x50);
+        bytes[8] = (byte)((bytes[8] & 0x3F) | 0x80);
+        return new Guid(bytes).ToString();
+    }
+
+    private static string Code5(string uuid)
+    {
+        var hex = uuid.Replace("-", "");
+        long n = 0; foreach (var ch in hex) n = (n * 31 + ch) % 90000;
+        return (n + 10000).ToString();
     }
 }

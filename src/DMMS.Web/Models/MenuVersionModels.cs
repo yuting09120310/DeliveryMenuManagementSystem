@@ -8,6 +8,14 @@ public class MenuVersion
     public string Status { get; set; } = "Draft";
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? ExportedAt { get; set; }
+    /// <summary>Uber Eats 店家 StoreUUID（GlobalSettings 用，首次匯出時從 UE 後台取得）。</summary>
+    public string? StoreUuid { get; set; }
+    /// <summary>UE 菜單外部 ID（Menus sheet 用，預設 全日菜單_Menu）。</summary>
+    public string MenuExternalId { get; set; } = "全日菜單_Menu";
+    /// <summary>UE 菜單顯示名稱（Menus sheet 用，預設 全日菜單 Menu）。</summary>
+    public string MenuDisplayName { get; set; } = "全日菜單 Menu";
+    /// <summary>每日營業時間（格式如 10:30--20:00，套用一～日）。</summary>
+    public string OpenHours { get; set; } = "10:30--20:00";
     public ICollection<MenuVersionProduct> Products { get; set; } = new List<MenuVersionProduct>();
 }
 
