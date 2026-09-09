@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<DMMS.Web.Services.MenuExportService>();
+builder.Services.AddScoped<DMMS.Web.Services.MenuImportService>();
 builder.Services.AddDbContext<DmmsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), sql => sql.EnableRetryOnFailure()));
 

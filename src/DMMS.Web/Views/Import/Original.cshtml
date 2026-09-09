@@ -1,0 +1,13 @@
+@model DMMS.Web.Services.MenuImportService.ImportResult
+@{
+    ViewData["Title"] = "原版菜單匯入結果";
+}
+<h1>原版菜單匯入結果</h1>
+<ul>
+    @foreach (var m in Model.Messages)
+    {
+        <li>@m</li>
+    }
+</ul>
+<p><a asp-controller="Products" asp-action="Index">前往商品管理</a> ｜
+   <a asp-controller="Categories" asp-action="Index">前往分類管理</a></p>

@@ -124,8 +124,9 @@ public class ProductsController(DmmsDbContext db) : Controller
         var m = new ProductEditViewModel
         {
             Id = p.Id, Name = p.Name, EnglishName = p.EnglishName, Description = p.Description, ImageUrl = p.ImageUrl,
-            BasePrice = p.BasePrice, IsEnabled = p.IsEnabled, SortOrder = p.SortOrder,
-            CategoryId = p.ProductCategories.Select(x => (int?)x.CategoryId).FirstOrDefault(),
+            BasePrice = p.BasePrice, IsEnabled = p.IsEnabled, SortOrder = p.SortOrder, HasSizeGroup = p.HasSizeGroup,
+            SweetnessAtProductLevel = p.SweetnessAtProductLevel,
+            CategoryIds = p.ProductCategories.Select(x => x.CategoryId).ToList(),
             Sizes = p.Sizes.OrderBy(x => x.SortOrder).Select(s => new ProductSizeInputModel { Id = s.Id, Name = s.Name, PriceAdjustment = s.PriceAdjustment, ColdBaseCode = s.ColdBaseCode, HotBaseCode = s.HotBaseCode, IsEnabled = s.IsEnabled, SortOrder = s.SortOrder }).ToList(),
             SpecialOptionIds = p.SpecialOptions.Where(x => x.IsEnabled).Select(x => x.SpecialOptionId).ToList(),
             AddOnIds = p.AddOns.Where(x => x.IsEnabled).Select(x => x.AddOnId).ToList()
@@ -138,11 +139,13 @@ public class ProductsController(DmmsDbContext db) : Controller
     private void Apply(ProductEditViewModel m, Product p)
     {
         p.Name = m.Name; p.EnglishName = m.EnglishName; p.Description = m.Description; p.ImageUrl = m.ImageUrl;
-        p.BasePrice = m.BasePrice; p.IsEnabled = m.IsEnabled; p.SortOrder = m.SortOrder;
+        p.BasePrice = m.BasePrice; p.IsEnabled = m.IsEnabled; p.SortOrder = m.SortOrder; p.HasSizeGroup = m.HasSizeGroup;
+        p.SweetnessAtProductLevel = m.SweetnessAtProductLevel;
 
-        // 分類：清空重建
+        // 分類：清空重建（可多選；同一商品可掛多個分類）
         p.ProductCategories.Clear();
-        if (m.CategoryId.HasValue) p.ProductCategories.Add(new ProductCategory { Product = p, CategoryId = m.CategoryId.Value });
+        foreach (var cid in m.CategoryIds.Distinct())
+            p.ProductCategories.Add(new ProductCategory { Product = p, CategoryId = cid });
 
         // 編輯既有商品 → 先明確刪除舊關聯與舊尺寸
         if (p.Id != 0)

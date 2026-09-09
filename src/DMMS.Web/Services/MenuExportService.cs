@@ -155,7 +155,7 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         var specialOptions = (p.SpecialOptions ?? []).Where(x => x.IsEnabled && x.SpecialOption is { IsEnabled: true }).Select(x => x.SpecialOption!).ToList();
         var addOns = (p.AddOns ?? []).Where(x => x.IsEnabled && x.AddOn is not null).Select(x => x.AddOn!).ToList();
 
-        if (sizes.Count == 1)
+        if (sizes.Count == 1 && !p.HasSizeGroup)
         {
             WriteSpecialGroups(s, cells, ref r, p, sizes[0], specialOptions, addOns, nestLevel: 1);
             WriteAddOnsGroup(s, cells, ref r, p, addOns);
@@ -163,7 +163,15 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         else
         {
             foreach (var size in sizes)
-                WriteSizeSegment(s, cells, ref r, p, size, specialOptions, addOns);
+            {
+                // B 型商品（甜度與尺寸無關）：尺寸段只輸出溫度特口，甜度群組商品層最後一次輸出
+                var sizeOpts = p.SweetnessAtProductLevel
+                    ? specialOptions.Where(o => o.Kind != SpecialOptionKind.Sweetness).ToList()
+                    : specialOptions;
+                WriteSizeSegment(s, cells, ref r, p, size, sizeOpts, addOns);
+            }
+            if (p.SweetnessAtProductLevel)
+                WriteProductLevelSweetness(s, cells, ref r, p, specialOptions, addOns);
             WriteAddOnsGroup(s, cells, ref r, p, addOns);
         }
     }
@@ -251,6 +259,48 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
                     cells.Set(s, r, "UUID", uuid);
                     r++;
                 }
+            }
+        }
+    }
+
+    /// <summary>B 型商品：甜度群組在商品層輸出一次（附件 Nesting=1、UUID 不隨尺寸變）。選項 Standalone 跨商品共用 UUID；FixedRatio 加料用主檔預設品號。</summary>
+    private void WriteProductLevelSweetness(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<SpecialOption> options, List<AddOn> addOns)
+    {
+        foreach (var grp in options.Where(o => o.Kind == SpecialOptionKind.Sweetness)
+                     .GroupBy(o => o.SpecialOptionGroupId ?? 0).OrderBy(g => g.Key))
+        {
+            var group = grp.First().Group;
+            var groupUuid = StableUuid($"group|{p.Id}|0|{group?.Id ?? 0}");
+            var groupName = group?.Name ?? "選項";
+            cells.Set(s, r, "ExternalID", ExtId(groupName, null, Code5(groupUuid)));
+            cells.Set(s, r, "Modifier Group", groupName);
+            cells.Set(s, r, "Nesting Level", 1);
+            if (group is { Min: > 0 }) cells.Set(s, r, "Min", group.Min);
+            if (group is { Max: > 0 }) cells.Set(s, r, "Max", group.Max);
+            cells.Set(s, r, "UUID", groupUuid);
+            r++;
+            foreach (var o in grp.OrderBy(o => o.Id))
+            {
+                var optUuid = StableUuid($"option|{o.Id}");
+                cells.Set(s, r, "ExternalID", ExtId(o.Name, o.EnglishName, null));
+                cells.Set(s, r, "Modifier Option", Display(o.Name, o.EnglishName));
+                cells.Set(s, r, "Delivery Price", 0d);
+                cells.Set(s, r, "Max", 1);
+                cells.Set(s, r, "ExternalData", o.StandaloneExternalData ?? "");
+                cells.Set(s, r, "UUID", optUuid);
+                r++;
+            }
+            // 商品層甜度群組尾端的 FixedRatio 加料（此型商品多數無蜂蜜；有則用主檔預設品號）
+            foreach (var a in addOns.Where(x => x.FixedRatio))
+            {
+                var uuid = StableUuid($"fixedaddon|{p.Id}|0|{a.Id}");
+                cells.Set(s, r, "ExternalID", ExtId(a.Name, a.EnglishName, Code5(uuid)));
+                cells.Set(s, r, "Modifier Option", Display(a.Name, a.EnglishName));
+                cells.Set(s, r, "Delivery Price", (double)a.Price);
+                cells.Set(s, r, "Max", 1);
+                cells.Set(s, r, "ExternalData", a.ExternalData.StartsWith('@') ? a.ExternalData : "@" + a.ExternalData);
+                cells.Set(s, r, "UUID", uuid);
+                r++;
             }
         }
     }

@@ -1,0 +1,3469 @@
+{
+ "cats": [
+  {
+   "zh": "人氣精選",
+   "en": "Popular Items"
+  },
+  {
+   "zh": "經典原茶",
+   "en": "Classic Tea"
+  },
+  {
+   "zh": "香醇奶茶",
+   "en": "Milk Tea"
+  },
+  {
+   "zh": "醇蜜系列",
+   "en": "Honey Beverage"
+  },
+  {
+   "zh": "純鮮奶茶",
+   "en": "Fresh Milk Tea"
+  },
+  {
+   "zh": "新鮮果茶",
+   "en": "Fruit Tea"
+  },
+  {
+   "zh": "無咖啡因",
+   "en": "Tea without Caffeine"
+  }
+ ],
+ "items": [
+  {
+   "zh": "913 茶王",
+   "en": "913 Tea",
+   "price": 70,
+   "desc": "天仁招牌茶, 採用高山烏龍茶薰製美國花旗蔘, 自然回甘, 請您細細品嘗。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 121 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 156 毫克。原產地: 台灣。",
+   "img": "https://tb-static.uber.com/prod/image-proc/processed_images/f90bc63e464b26f4b8519c1929a56924/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg",
+   "cats": [
+    "人氣精選"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0005-U",
+     "hot": "IT6005-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0903-U",
+     "hot": "IT6903-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "茶王",
+   "en": "1953 King's Oolong 1953",
+   "price": 65,
+   "desc": "源自天仁茗茶 1953 年創立的初心, 承襲七十餘年製茶工藝。茶湯厚實飽滿, 韻味深長, 盡顯品牌底蘊與情感價值, 因此命名為「茶王1953」, 象徵傳承與經典。大杯總糖量: 54 公克。大杯總熱量: 232 大卡。大杯咖啡因: 140 毫克。茶產地: 台灣。",
+   "img": "https://tb-static.uber.com/prod/image-proc/processed_images/447c173a2d505d1bc7440215775fe117/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg",
+   "cats": [
+    "人氣精選",
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "大杯",
+     "adj": 0,
+     "cold": "IT0953-U",
+     "hot": "IT6935-U",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "茶王 1953 奶茶",
+   "en": "King's Oolong 1953 Milk Tea",
+   "price": 75,
+   "desc": "採用天仁限定烏龍茶調製而成的奶茶, 自然濃郁甘醇。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 448 大卡。大杯冰飲咖啡因: 140 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "人氣精選",
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "大杯",
+     "adj": 0,
+     "cold": "IT1932-U",
+     "hot": "IT7925-U",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "茶王 1953 鮮奶茶",
+   "en": "King's Oolong 1953 Tea Latte",
+   "price": 110,
+   "desc": "天仁限店烏龍茶與香濃鮮奶的新組合, 為你帶來濃郁又甘醇的滋味。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 356 大卡。大杯冰飲咖啡因: 145 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "人氣精選",
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "大杯",
+     "adj": 0,
+     "cold": "IT2961-U",
+     "hot": "IT8936-U",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "多多綠茶",
+   "en": "Probiotic Green Tea",
+   "price": 75,
+   "desc": "經典天仁綠茶, 搭配多多飲品, 熟悉滋味與綠茶的清爽相融, 入口清新解渴。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 416 大卡。大杯冰飲咖啡因: 113 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "人氣精選"
+   ],
+   "hasSize": false,
+   "sizes": [
+    {
+     "name": "大杯",
+     "adj": 0,
+     "cold": "IT0955-U",
+     "hot": "",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "多多洛神冰茶",
+   "en": "Probiotic Roselle Green Tea",
+   "price": 80,
+   "desc": "每日新鮮熬煮洛神原汁, 釋放洛神的酸甜風味與鮮紅色澤, 搭配天仁優質綠茶與優多飲品, 洛神果韻酸甜有層次。大杯冰飲總糖量: 90 公克。大杯冰飲總熱量: 414 大卡。大杯冰飲咖啡因: 57 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "人氣精選"
+   ],
+   "hasSize": false,
+   "sizes": [
+    {
+     "name": "大杯",
+     "adj": 0,
+     "cold": "IT0956-U",
+     "hot": "",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1845(302)",
+    "@IT1839(45)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "913 桑葚果釀",
+   "en": "913 King's Oolong Mulberry Vinegar Tea",
+   "price": 105,
+   "desc": "以 913 茶王基底, 醇厚茶韻, 搭配台灣在地桑椹果釀, 經過長時間靜置手工發酵釀造熟成, 無添加糖, 時間淬鍊下散發極致自然原味, 天然全新風味。中杯冰飲總糖量: 76 公克。中杯冰飲總熱量: 328 大卡。咖啡因含量: 87 毫克。大杯冰飲總糖量: 109 公克。大杯冰飲總熱量: 475 大卡。咖啡因含量: 87 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "人氣精選",
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3084-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 20,
+     "cold": "IT3973-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1839(45)",
+    "@IT1815(27)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "多多檸檬綠茶",
+   "en": "Probiotic Lemon Green Tea",
+   "price": 115,
+   "desc": "以清新綠茶為基底, 加入 HPP 台灣檸檬汁, 完整保留檸檬的鮮香與營養, 搭配多多飲品, 酸甜熟悉的滋味在口中綻放。大杯冰飲總糖量: 107 公克。大杯冰飲總熱量: 491 大卡。大杯冰飲咖啡因: 28 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "人氣精選"
+   ],
+   "hasSize": false,
+   "sizes": [
+    {
+     "name": "大杯",
+     "adj": 0,
+     "cold": "IT3974-U",
+     "hot": "",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "一茉綠",
+   "en": "Jasmine Green Tea",
+   "price": 45,
+   "desc": "以綠茶的清新為底, 揉捻茉莉花的芬芳, 茶香與花香交織出淡雅時光。中杯冰飲總糖量: 143 公克。中杯冰飲總熱量: 32 大卡。中杯冰飲咖啡因: 207 毫克。大杯冰飲總糖量: 237 公克。大杯冰飲總熱量: 54 大卡。大杯冰飲咖啡因: 266 毫克。茶產地：越南。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0059-U",
+     "hot": "IT6050-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0954-U",
+     "hot": "IT6937-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1845(302)",
+    "@IT1839(45)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "經典綠茶",
+   "en": "Classic Green Tea",
+   "price": 50,
+   "desc": "新鮮, 甘醇的綠茶是一年四季皆可品飲的最優茶。中杯總糖量: 32 公克。中杯總熱量: 143 大卡。中杯咖啡因: 158 毫克。大杯總糖量: 54 公克。大杯總熱量: 237 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0001-U",
+     "hot": "IT6001-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0901-U",
+     "hot": "IT6901-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "經典紅茶",
+   "en": "Classic Black Tea",
+   "price": 50,
+   "desc": "阿薩姆紅茶醇厚紮實的風味, 飲用時順入口喉, 立即回甘。中杯總糖量: 32 公克。中杯總熱量: 138 大卡。中杯咖啡因: 178 毫克。大杯總糖量: 54 公克。大杯總熱量: 230 大卡。大杯咖啡因: 229 毫克。原產地: 印度。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0002-U",
+     "hot": "IT6002-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0902-U",
+     "hot": "IT6902-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "桂花金萱冰茶",
+   "en": "Jinxuan Iced Tea with Osmanthus",
+   "price": 80,
+   "desc": "金萱的牛奶香味薰以秋天桂花的香氣, 茶湯透澈, 滋味清雅。中杯冰飲總糖量: 32  公克, 中杯冰飲總熱量: 141 大卡。大杯冰飲總糖量: 54 公克, 大杯冰飲總熱量: 235 大卡。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0011-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 20,
+     "cold": "IT0919-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "菊花普洱茶",
+   "en": "Pu-Er Tea with Chrysanthemum",
+   "price": 70,
+   "desc": "普洱湯色栗紅, 滋味醇厚圓滑, 加上菊花香氣, 獨特的風韻是茶中極品。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 327 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 421 毫克。原產地: 中國。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0016-U",
+     "hot": "IT6015-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0914-U",
+     "hot": "IT6907-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "炟客烏龍茶",
+   "en": "Roasted Oolong",
+   "price": 70,
+   "desc": "限店茶飲。透過烘焙技巧, 使茶葉及茶湯色澤加深, 口感濃厚, 喉韻濃洌甘醇。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 271 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 349 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0021-U",
+     "hot": "IT6023-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0921-U",
+     "hot": "IT6909-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "四季烏龍",
+   "en": "Sihji Oolong Tea",
+   "price": 60,
+   "desc": "以當季的上等烏龍茶所調製, 喉韻甘醇濃郁。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 159 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0034-U",
+     "hot": "IT6030-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0928-U",
+     "hot": "IT6916-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "洛神冰茶",
+   "en": "Roselle Iced Tea",
+   "price": 60,
+   "desc": "洛神加上甘醇的綠茶, 酸澀又帶點香甜的滋味。中杯總糖量: 65 公克。中杯總熱量: 291 大卡。中杯咖啡因: 57 毫克。大杯總糖量: 93 公克。大杯總熱量: 419 大卡。大杯咖啡因: 74 毫克。原產地: 台灣。",
+   "img": "https://tb-static.uber.com/prod/image-proc/processed_images/ee17f9e4e00b86e229d151c66744aa8c/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0007-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0911-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "紅烏龍",
+   "en": "Red Oolong",
+   "price": 45,
+   "desc": "嚴選紅烏龍茶葉沖泡, 兼具紅茶的甘甜與烏龍茶的醇厚, 茶湯帶有天然熟果香與蜜香, 入口溫潤順口, 尾韻回甘, 是一款層次豐富, 耐人回味的特色茶飲。中杯冰飲總糖量: 32 公克。中杯冰飲總熱量: 138 大卡。咖啡因含量: 69 毫克。大杯冰飲總糖量: 47 公克。大杯冰飲總熱量: 199 大卡。咖啡因含量: 91 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "經典原茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0060-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT0961-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "茉香奶綠",
+   "en": "Jasmine Milk Green Tea",
+   "price": 55,
+   "desc": "以嚴選茉莉綠茶為基底, 融合細緻奶香, 茶湯中帶有淡雅花香與濃郁滑順口感。入口柔和順口, 甜而不膩, 是經典不敗的奶茶選擇, 適合喜愛香濃風味的族群。中杯冰飲總糖量: 288 公克。中杯冰飲總熱量: 37 大卡。中杯冰飲咖啡因: 207 毫克。大杯冰飲總糖量: 453 公克。大杯冰飲總熱量: 61 大卡。大杯冰飲咖啡因: 266 毫克。茶產地：越南。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1048-U",
+     "hot": "IT7041-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT1934-U",
+     "hot": "IT7928-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1845(302)",
+    "@IT1839(45)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "茶香奶綠",
+   "en": "Jasmine Milk Green Tea",
+   "price": 60,
+   "desc": "天仁的濃郁奶綠, 包含著清新與濃醇的好滋味。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 288 大卡。中杯冰飲咖啡因: 158 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 453 大卡。大杯冰飲咖啡因: 204 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 432 大卡。中杯熱飲咖啡因: 158 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 597 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1001-U",
+     "hot": "IT7001-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1910-U",
+     "hot": "IT7901-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "金香奶茶",
+   "en": "Assam Black Tea with Milk",
+   "price": 60,
+   "desc": "阿薩姆紅茶搭配濃厚的奶香, 香醇濃郁美味可口。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 282 大卡。中杯冰飲咖啡因: 178 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 446 大卡。大杯冰飲咖啡因: 229 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 426 大卡。中杯熱飲咖啡因: 178 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 590 大卡。大杯熱飲咖啡因: 229 毫克。原產地: 印度。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1002-U",
+     "hot": "IT7002-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1909-U",
+     "hot": "IT7902-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "珍珠奶綠",
+   "en": "Milk Green Tea with Tapioca",
+   "price": 60,
+   "desc": "特調綠茶調製而成的奶綠, 加上香 Q 的珍珠, 清香自然又濃郁。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 410 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 592 大卡。大杯冰飲咖啡因: 141 毫克。中杯熱飲總糖量: 48 公克。中杯熱飲總熱量: 555 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 66 公克。大杯熱飲總熱量: 736 大卡。大杯熱飲咖啡因: 141 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1003-U",
+     "hot": "IT7003-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1901-U",
+     "hot": "IT7903-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "913 奶茶",
+   "en": "913 Milk Tea",
+   "price": 80,
+   "desc": "採用天仁的招牌烏龍茶調製而成的奶茶, 自然濃郁甘醇。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。中杯冰飲咖啡因: 121 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。大杯冰飲咖啡因: 156 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。中杯熱飲咖啡因: 121 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。大杯熱飲咖啡因: 156 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1005-U",
+     "hot": "IT7005-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1911-U",
+     "hot": "IT7905-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "抹茶冰淇淋奶綠",
+   "en": "Milk Green Tea with Matcha Ice Cream",
+   "price": 100,
+   "desc": "限店茶飲。抹茶冰淇淋加上香濃滑順的奶綠, 搭配出豐富口感。中杯冰飲總糖量: 48 公克。中杯冰飲總熱量: 464 大卡。咖啡因: 125 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": false,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1014-U",
+     "hot": "",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "中杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "普洱奶茶",
+   "en": "Pu-Er Milk Tea",
+   "price": 80,
+   "desc": "醇厚回甘的菊花普洱茶調製而成的奶茶, 獨特風味, 值得一嚐再嚐。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。中杯咖啡因: 327 毫克、大杯咖啡因: 421 毫克。原產地: 中國。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1020-U",
+     "hot": "IT7017-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1912-U",
+     "hot": "IT7906-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "炟客奶茶",
+   "en": "Roasted Milk Tea",
+   "price": 80,
+   "desc": "限店茶飲。以重焙火的烏龍喉韻製成的醇厚奶茶, 濃郁口感, 是夏日裡的沁涼茶飲。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。中杯咖啡因: 271 毫克、大杯咖啡因: 349 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1021-U",
+     "hot": "IT7018-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1913-U",
+     "hot": "IT7907-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "四季烏龍奶茶",
+   "en": "Sihji Oolong Milk Tea",
+   "price": 70,
+   "desc": "以四季春烏龍茶所調製的烏龍奶茶, 口感濃郁清香。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。中杯冰飲咖啡因: 159 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。大杯冰飲咖啡因: 204 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。中杯熱飲咖啡因: 159 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。大杯熱飲咖啡因: 204 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1030-U",
+     "hot": "IT7025-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1918-U",
+     "hot": "IT7909-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "香芋奶綠",
+   "en": "Milk Green Tea with Taro",
+   "price": 85,
+   "desc": "每日新鮮現煮芋頭讓您每一口都品嘗到濃濃的芋香。中杯冰飲總糖量: 52 公克。中杯冰飲總熱量: 379 大卡。大杯冰飲總糖量: 65 公克。大杯冰飲總熱量: 500 大卡。中杯熱飲總糖量: 57 公克。中杯熱飲總熱量: 523 大卡。大杯熱飲總糖量: 70 公克。大杯熱飲總熱量: 645 大卡。中杯咖啡因: 113 毫克、大杯咖啡因: 141 毫克。原產地: 台灣。",
+   "img": "https://tb-static.uber.com/prod/image-proc/processed_images/21e38be5ddc38d4a84bdb8d04ffb4f39/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1010-U",
+     "hot": "IT7010-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 20,
+     "cold": "IT1903-U",
+     "hot": "IT7908-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "珍珠奶茶",
+   "en": "Milk Tea with Tapioca",
+   "price": 60,
+   "desc": "嚴選阿薩姆紅茶調製而成的奶茶, 加上香 Q 的珍珠, 香醇濃郁超好喝。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 406 大卡。中杯冰飲咖啡因: 127 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 587 大卡。大杯咖啡因: 159 毫克。中杯熱飲總糖量: 48 公克。中杯熱飲總熱量: 551 大卡。中杯熱飲咖啡因: 127 毫克。大杯熱飲總糖量: 66 公克。大杯熱飲總熱量: 731 大卡。大杯熱飲咖啡因: 159 毫克。原產地: 印度。",
+   "img": "https://tb-static.uber.com/prod/image-proc/processed_images/23a74d002b096d55da63e743b1bec4a0/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1004-U",
+     "hot": "IT7004-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1902-U",
+     "hot": "IT7904-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "甜漾紅烏龍奶茶",
+   "en": "Red Ooloong Milk Tea",
+   "price": 55,
+   "desc": "以香醇紅烏龍為基底, 搭配濃郁奶香調製, 茶香與奶香完美融合, 口感滑順細緻, 保留紅烏龍獨特的焙香與甘甜, 每一口都香濃不膩。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 282 大卡。咖啡因含量: 55 毫克。大杯冰飲總糖量: 53 公克。大杯冰飲總熱量: 415 大卡。咖啡因含量: 73 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1049-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1935-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "甜漾奶綠",
+   "en": "Green Milk Tea",
+   "price": 55,
+   "desc": "以茉香綠茶為茶底, 融合香濃奶香, 散發淡雅茉莉花香與清新茶韻。入口滑順, 茶香清雅, 奶香柔和, 清爽不甜膩, 是經典耐喝的奶茶選擇。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 284 大卡。咖啡因含量: 89 毫克。大杯冰飲總糖量: 53 公克。大杯冰飲總熱量: 418 大卡。咖啡因含量: 118 毫克。原產地: 越南。",
+   "img": "",
+   "cats": [
+    "香醇奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1050-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT1936-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜綠茶",
+   "en": "Green Tea with Honey",
+   "price": 60,
+   "desc": "甜度固定。嚴選真蜂蜜，綿延的甜蜜與綠茶香完美結合。\n中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：109大卡。咖啡因含量：113毫克。\n大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：168大卡。咖啡因含量：159毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0003-U",
+     "hot": "IT6040-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT0904-U",
+     "hot": "IT6927-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜紅茶",
+   "en": "Black Tea with Honey",
+   "price": 60,
+   "desc": "甜度固定。嚴選真蜂蜜，綿延的甜蜜與紅茶香完美結合。\n中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：105大卡。咖啡因含量：127毫克。\n大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：168大卡。咖啡因含量：159毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0004-U",
+     "hot": "IT6041-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT0905-U",
+     "hot": "IT6928-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜菊普茶",
+   "en": "Chrysanthemum and Pu-er Tea with Honey",
+   "price": 80,
+   "desc": "甜度固定。嚴選真蜂蜜，綿延的甜蜜與菊普茶香完美結合。\n中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：107大卡。咖啡因含量：234毫克。\n大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：171大卡。咖啡因含量：292毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0018-U",
+     "hot": "IT6042-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT0915-U",
+     "hot": "IT6929-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜四季烏龍",
+   "en": "Sihji Oolong with Honey",
+   "price": 70,
+   "desc": "甜度固定。嚴選真蜂蜜，綿延的甜蜜與四季烏龍茶香完美結合。\n中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：107大卡。咖啡因含量：113毫克。\n大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：171大卡。咖啡因含量：142毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT0047-U",
+     "hot": "IT6043-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT0942-U",
+     "hot": "IT6930-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜奶綠",
+   "en": "Milk Green Tea with Honey",
+   "price": 70,
+   "desc": "甜度固定。",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1007-U",
+     "hot": "IT7032-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT1915-U",
+     "hot": "IT7916-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜奶茶",
+   "en": "Milk Tea with Honey",
+   "price": 70,
+   "desc": "甜度固定。",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1008-U",
+     "hot": "IT7033-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT1914-U",
+     "hot": "IT7917-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜珍珠奶茶",
+   "en": "Tapioca Milk Tea with Honey",
+   "price": 70,
+   "desc": "甜度固定。",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1023-U",
+     "hot": "IT7034-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT1916-U",
+     "hot": "IT7920-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜珍珠奶綠",
+   "en": "Tapioca Milk Green Tea with Honey",
+   "price": 70,
+   "desc": "甜度固定。",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT1024-U",
+     "hot": "IT7035-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT1917-U",
+     "hot": "IT7921-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜鮮奶茶",
+   "en": "Fresh Milk Tea with Hoeny",
+   "price": 95,
+   "desc": "甜度固定。濃醇蜜香搭配香濃的鮮奶茶，入口滑順，完美調和。\n中杯冰/熱飲總糖量：29公克。中杯冰/熱飲總熱量：193大卡。咖啡因含量：96毫克。\n大杯冰/熱飲總糖量：47公克。大杯冰/熱飲總熱量：303大卡。咖啡因含量：142毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2020-U",
+     "hot": "IT8041-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT2915-U",
+     "hot": "IT8928-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜鮮奶綠",
+   "en": "Fresh Milk Green Tea with Honey",
+   "price": 95,
+   "desc": "甜度固定。濃醇蜜香搭配香濃的鮮奶綠，入口滑順，完美調和。\n中杯冰/熱飲總糖量：29公克。中杯冰/熱飲總熱量：193大卡。咖啡因含量：96毫克。\n大杯冰/熱飲總糖量：47公克。大杯冰/熱飲總熱量：303大卡。咖啡因含量：142毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2021-U",
+     "hot": "IT8040-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT2916-U",
+     "hot": "IT8927-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜珍珠鮮奶茶",
+   "en": "Tapioca Fresh Milk Tea with Honey",
+   "price": 95,
+   "desc": "甜度固定。",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2022-U",
+     "hot": "IT8042-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT2917-U",
+     "hot": "IT8932-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜珍珠鮮奶綠",
+   "en": "Tapioca Fresh Milk Green Tea with Honey",
+   "price": 95,
+   "desc": "甜度固定。",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2023-U",
+     "hot": "IT8043-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT2918-U",
+     "hot": "IT8931-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜四季鮮奶茶",
+   "en": "Sihji Fresh Milk Tea with Honey",
+   "price": 105,
+   "desc": "甜度固定。濃醇蜜香搭配香濃的四季烏龍鮮奶茶，入口滑順，完美調和。\n中杯冰/熱飲總糖量：29公克。中杯冰飲總熱量：193大卡。咖啡因含量：96毫克。\n大杯冰飲總糖量：47公克。大杯冰飲總熱量：303大卡。咖啡因含量：142毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2063-U",
+     "hot": "IT8039-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT2950-U",
+     "hot": "IT8926-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜檸檬綠茶",
+   "en": "Green Tea with Hoeny and Lemon",
+   "price": 95,
+   "desc": "甜度固定。蜂蜜與檸檬的相遇，再搭配綠茶，帶給您清爽的酸甜好滋味。\n中杯冰飲總糖量：37公克。中杯冰飲總熱量：177大卡。咖啡因含量：102毫克。\n大杯冰飲總糖量：45公克。大杯冰飲總熱量：218大卡。咖啡因含量：136毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3003-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT3910-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜檸檬紅茶",
+   "en": "Black Tea with Hoeny and Lemon",
+   "price": 95,
+   "desc": "甜度固定。蜂蜜與檸檬的相遇，再搭配紅茶，帶給您清爽的酸甜好滋味。\n中杯冰飲總糖量：37公克。中杯冰飲總熱量：174大卡。咖啡因含量：114毫克。\n大杯冰飲總糖量：45公克。大杯冰飲總熱量：213大卡。咖啡因含量：152毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3004-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT3911-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "醇蜜檸檬四季烏龍",
+   "en": "Sihji Oolong with Honey and Lemon",
+   "price": 105,
+   "desc": "甜度固定。蜂蜜與檸檬的相遇，帶給您清爽的酸甜好滋味。\n中杯冰飲總糖量：37公克。中杯冰飲總熱量：175大卡。咖啡因含量：102毫克。\n大杯冰飲總糖量：45公克。大杯冰飲總熱量：216大卡。咖啡因含量：136毫克。\n原產地：台灣",
+   "img": "",
+   "cats": [
+    "醇蜜系列"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3077-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 30,
+     "cold": "IT3924-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "茉香鮮奶綠",
+   "en": "Jasmine  Green Tea Latte",
+   "price": 80,
+   "desc": "選用清香茉莉綠茶, 搭配新鮮牛奶調製而成, 保留茶葉本身的自然花香, 同時增添溫潤奶香。整體口感清爽不厚重, 風味純淨, 是追求清新口感的理想選擇。中杯冰飲總糖量: 219 公克。中杯冰飲總熱量: 38 大卡。中杯冰飲咖啡因: 133 毫克。大杯冰飲總糖量: 358 公克。大杯冰飲總熱量: 63 大卡。大杯冰飲咖啡因: 192 毫克。茶產地：越南。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2074-U",
+     "hot": "IT8050-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 20,
+     "cold": "IT2967-U",
+     "hot": "IT8938-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1845(302)",
+    "@IT1839(45)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "鮮奶綠",
+   "en": "Fresh Milk Green Tea",
+   "price": 85,
+   "desc": "香濃的鮮奶加上糖香濃郁的優等綠茶, 香濃綿密的鮮奶泡中不失鮮採綠茶的茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 227 大卡。中杯冰飲咖啡因: 96 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 367 大卡。大杯冰飲咖啡因: 141 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 241 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 381 大卡。大杯熱飲咖啡因: 158 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2001-U",
+     "hot": "IT8001-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2902-U",
+     "hot": "IT8904-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "鮮奶茶",
+   "en": "Fresh Milk Tea",
+   "price": 85,
+   "desc": "香濃的鮮奶加上糖香濃郁的優等紅茶, 香濃綿密的鮮奶泡中不失鮮採茶的茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 224 大卡。中杯冰飲咖啡因: 108 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 362 大卡。大杯冰飲咖啡因: 159 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 237 大卡。中杯熱飲咖啡因: 127 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 375 大卡。大杯熱飲咖啡因: 178 毫克。原產地: 印度。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2002-U",
+     "hot": "IT8002-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2901-U",
+     "hot": "IT8903-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "珍珠鮮奶茶",
+   "en": "Fresh Milk Tea with Tapioca",
+   "price": 85,
+   "desc": "香濃鮮奶與紅茶調製成新鮮奶茶, 搭配香 Q 的珍珠, 是您更加健康的新選擇, 享受美味也能輕鬆無負擔。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 335 大卡。中杯冰飲咖啡因: 102 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 470 大卡。大杯冰飲咖啡因: 127 毫克。中杯熱飲總糖量: 45 公克。中杯熱飲總熱量: 349 大卡。中杯熱飲咖啡因: 114 毫克。大杯熱飲總糖量: 63 公克。大杯熱飲總熱量: 491 大卡。大杯熱飲咖啡因: 140 毫克。原產地: 印度。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2003-U",
+     "hot": "IT8003-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2903-U",
+     "hot": "IT8907-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "珍珠鮮奶綠",
+   "en": "Fresh Milk Green Tea with Tapioca",
+   "price": 85,
+   "desc": "香濃鮮奶與綠茶調製成新鮮奶綠, 搭配香 Q 的珍珠, 是您更加健康的新選擇, 享受美味也能輕鬆無負擔。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 338 大卡。中杯冰飲咖啡因: 91 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 474 大卡。大杯冰飲咖啡因: 113 毫克。中杯熱飲總糖量: 45 公克。中杯熱飲總熱量: 352 大卡。中杯熱飲咖啡因: 102 毫克。大杯熱飲總糖量: 63 公克。大杯熱飲總熱量: 494 大卡。大杯熱飲咖啡因: 124 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2004-U",
+     "hot": "IT8004-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2904-U",
+     "hot": "IT8906-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "香芋鮮奶綠",
+   "en": "Fresh Milk Green Tea with Taro",
+   "price": 110,
+   "desc": "使用現煮新鮮芋頭和頂級鮮奶調配而成, 有濃濃的芋頭香, 奶香, 絕對讓你念念不忘。中杯冰飲總糖量: 53 公克。中杯冰飲總熱量: 307 大卡。中杯冰飲咖啡因: 91 毫克。大杯冰飲總糖量: 65 公克。大杯冰飲總熱量: 382 大卡。大杯冰飲咖啡因: 113 毫克。中杯熱飲總糖量: 54 公克。中杯熱飲總熱量: 320 大卡。中杯冰飲咖啡因: 102 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 391 大卡。大杯熱飲咖啡因: 124 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2006-U",
+     "hot": "IT8006-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2923-U",
+     "hot": "IT8910-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "913 鮮奶茶",
+   "en": "913 Fresh Milk Tea",
+   "price": 105,
+   "desc": "天仁的招牌烏龍茶與香濃鮮奶的新組合, 為你帶來濃郁又甘醇的滋味。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 74 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 108 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 87 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 121 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2008-U",
+     "hot": "IT8009-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2911-U",
+     "hot": "IT8912-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "四季烏龍鮮奶茶",
+   "en": "Sihji Oolong Fresh Milk Tea",
+   "price": 95,
+   "desc": "以四季春烏龍結合鮮乳所調製, 入口濃醇奶香中透出了清新茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 96 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 142 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 159 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2044-U",
+     "hot": "IT8027-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2928-U",
+     "hot": "IT8914-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "普洱拿鐵",
+   "en": "Pu-Er Latte",
+   "price": 105,
+   "desc": "香濃鮮奶加上醇厚回甘的菊花普洱茶, 是您嚐鮮的最佳選擇。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 199 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 292 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 234 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 327 毫克。原產地: 中國。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2012-U",
+     "hot": "IT8012-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2909-U",
+     "hot": "IT8908-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "炟客拿鐵",
+   "en": "Roasted Latte",
+   "price": 105,
+   "desc": "限店茶飲。香濃鮮奶加上重焙火的烏龍喉韻, 茶香奶香一飲而下, 絕對齒頰留香。中杯冰飲總糖量 : 38  公克。中杯冰飲總熱量 : 231  大卡。大杯冰飲總糖量 : 53  公克。大杯冰飲總熱量 : 323  大卡。原產地 : 台灣。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2013-U",
+     "hot": "IT8013-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2913-U",
+     "hot": "IT8909-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "仙草鮮奶茶",
+   "en": "Fresh Milk Tea",
+   "price": 90,
+   "desc": "限店茶飲。古早味的仙草滑順又 Q 彈, 搭配濃香鮮奶茶是最懷舊的新茶飲。中杯冰飲總糖量: 42 公克。中杯冰飲總熱量: 235 大卡。中杯冰飲咖啡因: 108 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量:317 大卡。大杯冰飲咖啡因: 133 毫克。中杯熱飲總糖量: 43 公克。中杯熱飲總熱量:248 大卡。中杯熱飲咖啡因: 121 毫克。大杯熱飲總糖量: 54 公克。大杯熱飲總熱量: 317 大卡。大杯熱飲咖啡因: 146 毫克。原產地: 印度。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2030-U",
+     "hot": "IT8021-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT2922-U",
+     "hot": "IT8913-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "甜漾紅烏龍鮮奶茶",
+   "en": "Red Oolong Fresh Milk Tea",
+   "price": 70,
+   "desc": "選用紅烏龍茶搭配新鮮鮮奶, 呈現自然純粹的風味。鮮奶的濃醇襯托出紅烏龍的蜜香與回甘, 口感更加清爽柔順, 享受茶與鮮奶最純粹的比例。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 196 大卡。咖啡因含量: 46 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量: 277 大卡。咖啡因含量: 64 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2075-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT2968-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "甜漾鮮奶綠",
+   "en": "Green Fresh Milk Tea",
+   "price": 70,
+   "desc": "選用茉香綠茶搭配新鮮鮮奶調製, 茉莉花香自然淡雅, 茶感清新, 鮮奶香醇順口, 層次細膩且口感輕盈, 呈現清爽又富有質感的鮮奶茶風味。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 198 大卡。咖啡因含量: 74 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量: 280 大卡。咖啡因含量: 103 毫克。原產地: 越南。",
+   "img": "",
+   "cats": [
+    "純鮮奶茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT2076-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 15,
+     "cold": "IT2969-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "茉莉百香果釀",
+   "en": "Jasmine Passionfruit Vinegar Green Tea",
+   "price": 105,
+   "desc": "以茉莉綠茶為底, 加入香氣濃郁的百香果醋, 交織出清新花香與酸甜果韻。口感輕盈爽口, 層次豐富, 特別適合炎熱天氣飲用, 帶來沁涼解渴的享受。中杯冰飲總糖量: 286 公克。中杯冰飲總熱量: 66 大卡。中杯冰飲咖啡因: 148 毫克。大杯冰飲總糖量: 412 公克。大杯冰飲總熱量: 95 大卡。大杯冰飲咖啡因: 199 毫克。茶產地：越南。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3085-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 20,
+     "cold": "IT3976-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1845(302)",
+    "@IT1839(45)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "檸檬綠茶",
+   "en": "Lemon Green Tea",
+   "price": 85,
+   "desc": "新鮮現榨檸檬汁加上綠茶, 酸酸甜甜天然好滋味。中杯冰飲總糖量: 65 公克。中杯冰飲總熱量: 288 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 412 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3001-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3901-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "檸檬紅茶",
+   "en": "Lemon Black Tea",
+   "price": 85,
+   "desc": "新鮮現榨檸檬汁加上紅茶, 酸酸甜甜天然好滋味。中杯冰飲總糖量: 65 公克。中杯冰飲總熱量: 284 大卡。中杯冰飲咖啡因: 127 毫克。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 407 大卡。大杯冰飲咖啡因: 178 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3002-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3902-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "香橙綠茶",
+   "en": "Orange Green Tea",
+   "price": 85,
+   "desc": "使用 HPP 台灣鮮榨柳丁汁搭配綠茶, 保有新鮮柳丁風味的果茶。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 219 大卡。中杯冰飲咖啡因: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 354 大卡。大杯冰飲咖啡因: 91 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3006-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3903-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "香橙四季烏龍",
+   "en": "Sihji Oolong with Orange",
+   "price": 95,
+   "desc": "使用 HPP 台灣鮮榨柳丁汁搭配四季烏龍茶, 保有新鮮柳丁風味的果茶。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 218 大卡。中杯冰飲咖啡因: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 353 大卡。大杯冰飲咖啡因: 91 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3074-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3960-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "金桔綠茶",
+   "en": "Kumquat Green Tea",
+   "price": 85,
+   "desc": "飲品含有蜂蜜。清新的綠茶加上新鮮的金桔, 檸檬, 茶味清新, 口感解膩。中杯冰飲總糖量: 56 公克。中杯冰飲總熱量: 257 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 92 公克。大杯冰飲總熱量: 422 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3007-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3904-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": true
+  },
+  {
+   "zh": "梅子綠茶",
+   "en": "Plum Green Tea",
+   "price": 85,
+   "desc": "特別調製的酸梅原汁消暑祕方, 絕對讚不絕口。中杯冰飲總糖量: 50 公克。中杯冰飲總熱量: 239 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 90 公克。大杯冰飲總熱量: 430 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3008-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3912-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "金橙綠果茶",
+   "en": "Kumquat Green Tea with Orange",
+   "price": 110,
+   "desc": "結合金桔的清酸, 柳橙的果香甜韻, 加上綠茶的清爽底味, 呈現酸甜層次, 完美平衡。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 222 大卡。咖啡因含量: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 360 大卡。咖啡因含量: 91 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3080-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3967-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "西西里冰茶",
+   "en": "Sicilian Iced Tea",
+   "price": 110,
+   "desc": "不含咖啡, 以火味十足的炟客烏龍取代咖啡基底, 透過與檸檬酸甜結合完美比例, 還原西西里的特色, 在炙熱夏日上市, 急速解熱! 中杯冰飲總糖量: 94 公克。中杯冰飲總熱量: 412 大卡。咖啡因含量: 194 毫克。大杯冰飲總糖量: 112 公克。大杯冰飲總熱量: 495 大卡。咖啡因含量: 271 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3081-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3970-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "西西里凍飲",
+   "en": "Sicilian Iced Drink",
+   "price": 110,
+   "desc": "不含咖啡, 以火味十足的炟客烏龍取代咖啡基底, 與檸檬酸甜結合完美比例, 再加上麥茶凍增加豐富層次, 在炙熱夏日上市, 急速解熱。中杯冰飲總糖量: 76 公克。中杯冰飲總熱量: 328 大卡。咖啡因含量：136 毫克。大杯冰飲總糖量: 109 公克。大杯冰飲總熱量: 475 大卡。咖啡因含量: 194 毫克。茶產地: 台灣。",
+   "img": "",
+   "cats": [
+    "新鮮果茶"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT3083-U",
+     "hot": "",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT3972-U",
+     "hot": "",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "六条麥茶",
+   "en": "Signature Wheat Tea",
+   "price": 60,
+   "desc": "無咖啡因日本六条麥茶, 焙香適口恰到好處, 清爽無負擔。中杯冰及熱飲總糖量: 32 公克。中杯冰及熱飲總熱量: 138 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 54 公克。大杯冰及熱飲總熱量: 230 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。",
+   "img": "",
+   "cats": [
+    "無咖啡因"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT9104-U",
+     "hot": "IT9016-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 10,
+     "cold": "IT9107-U",
+     "hot": "IT9019-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "六条麥桔茶",
+   "en": "Signature Kumquat Wheat Tea",
+   "price": 85,
+   "desc": "無咖啡因日本六条麥茶結合酸香金桔汁, 絕妙新品超乎想像好喝。中杯冰及熱飲總糖量: 47 公克。中杯冰及熱飲總熱量: 202 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 65 公克。大杯冰及熱飲總熱量: 281 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。",
+   "img": "",
+   "cats": [
+    "無咖啡因"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT9105-U",
+     "hot": "IT9017-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT9109-U",
+     "hot": "IT9021-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "六条麥茶鮮奶",
+   "en": "Signature Fresh Milk Wheat Tea",
+   "price": 95,
+   "desc": "無咖啡因日本六条麥茶搭配小農鮮乳, 濃醇奶味散發煎焙麥香 中杯冰及熱飲總糖量: 37 公克。中杯冰及熱飲總熱量: 204 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 54 公克。大杯冰及熱飲總熱量: 298 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。",
+   "img": "",
+   "cats": [
+    "無咖啡因"
+   ],
+   "hasSize": true,
+   "sizes": [
+    {
+     "name": "中杯",
+     "adj": 0,
+     "cold": "IT9106-U",
+     "hot": "IT9018-U",
+     "sort": 0
+    },
+    {
+     "name": "大杯",
+     "adj": 25,
+     "cold": "IT9110-U",
+     "hot": "IT9022-U",
+     "sort": 1
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜",
+    "7 分甜",
+    "5 分甜",
+    "3 分甜",
+    "無糖"
+   ],
+   "honeySize": "大杯",
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [],
+   "sweetAtProductLevel": false
+  },
+  {
+   "zh": "六条麥茶冬露",
+   "en": "Signature Wheat Tea with White Gourd Drink",
+   "price": 80,
+   "desc": "限大杯。無咖啡因日本六条麥茶加入冬瓜茶, 香甜好喝是夏日最佳選擇。大杯冰及熱飲總糖量: 55 公克。大杯冰及熱飲總熱量: 235 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。",
+   "img": "",
+   "cats": [
+    "無咖啡因"
+   ],
+   "hasSize": false,
+   "sizes": [
+    {
+     "name": "大杯",
+     "adj": 0,
+     "cold": "IT9108-U",
+     "hot": "IT9020-U",
+     "sort": 0
+    }
+   ],
+   "tempSem": [
+    "標準冰",
+    "少冰",
+    "去冰",
+    "溫",
+    "熱"
+   ],
+   "sweetSem": [
+    "標準甜"
+   ],
+   "honeySize": null,
+   "addonEds": [
+    "@IT1810(19)",
+    "@IT1815(27)",
+    "@IT1839(45)",
+    "@IT1845(302)"
+   ],
+   "sweetExtra": [
+    {
+     "zh": "減冬瓜",
+     "ed": "(39)",
+     "price": 0
+    }
+   ],
+   "sweetAtProductLevel": false
+  }
+ ]
+}
