@@ -3,6 +3,25 @@
 <form method="post" class="form-layout">@Html.AntiForgeryToken()<input asp-for="Id" type="hidden" /><div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <section class="panel"><div class="panel-title">基本資料</div><div class="form-grid"><div><label asp-for="Name"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div><div><label asp-for="EnglishName"></label><input asp-for="EnglishName" class="form-control" /></div><div><label asp-for="BasePrice"></label><input asp-for="BasePrice" class="form-control" step="1" /><span asp-validation-for="BasePrice" class="text-danger"></span></div><div class="full"><label asp-for="CategoryIds">商品分類（可多選）</label><div class="cat-checkbox-grid">@foreach (var c in Model.Categories) { var catChecked = Model.CategoryIds.Contains(c.Id); <label class="choice-pill"><input type="checkbox" name="CategoryIds" value="@c.Id" @(catChecked ? "checked" : "") /> <span>@c.Name</span></label> }</div></div><div class="full"><label asp-for="Description"></label><textarea asp-for="Description" class="form-control" rows="3"></textarea></div><div class="form-check full"><input asp-for="IsEnabled" class="form-check-input" /><label asp-for="IsEnabled" class="form-check-label"></label></div></div></section>
 
+<section class="panel"><div class="panel-title">地區定價</div>
+<p class="text-muted small mb-3">填入各地區的基礎價（<strong>中杯價</strong>）；大杯＝本價 + 尺寸加價（加價全區共用）。<strong>留空＝回退上方「預設基礎價」</strong>。</p>
+@if (!Model.RegionPrices.Any()) { <p class="text-muted mb-0">尚未建立任何地區，請先到「地區管理」新增。</p> } else {
+<div class="region-price-grid">
+@for (var i = 0; i < Model.RegionPrices.Count; i++) {
+    <div class="region-price-row">
+        <input asp-for="RegionPrices[i].RegionId" type="hidden" />
+        <input asp-for="RegionPrices[i].ModifiedAt" type="hidden" class="region-modified" />
+        <div class="region-name">@Model.RegionPrices[i].RegionName</div>
+        <input asp-for="RegionPrices[i].Price" class="form-control region-price-input" step="1" data-default="@Model.BasePrice.ToString("0.##")" placeholder="預設 @Model.BasePrice.ToString("N0")" />
+        <button type="button" class="btn btn-sm btn-outline-secondary reset-price-btn">用預設價</button>
+        <span class="region-price-info small text-muted"></span>
+        <span asp-validation-for="RegionPrices[i].Price" class="text-danger"></span>
+    </div>
+}
+</div>
+}
+</section>
+
 <section class="panel"><div class="panel-heading"><div><div class="panel-title mb-0">尺寸與品號</div><p class="text-muted mb-0">設定中杯／大杯、冷熱基礎品號與價格加價。若商品沒有多尺寸，保留一列即可。</p></div></div>@for (var i = 0; i < Model.Sizes.Count; i++) { <div class="size-row"><input asp-for="Sizes[i].Id" type="hidden" /><input asp-for="Sizes[i].SortOrder" type="hidden" /><div><label>尺寸</label><input asp-for="Sizes[i].Name" class="form-control" /></div><div><label>價格加價</label><input asp-for="Sizes[i].PriceAdjustment" class="form-control" step="1" /></div><div><label>ColdBaseCode</label><input asp-for="Sizes[i].ColdBaseCode" class="form-control" placeholder="冷飲品號" /></div><div><label>HotBaseCode</label><input asp-for="Sizes[i].HotBaseCode" class="form-control" placeholder="熱飲品號" /></div><div class="form-check size-enabled"><input asp-for="Sizes[i].IsEnabled" class="form-check-input" /><label class="form-check-label">啟用</label></div></div> }
 <div class="form-check mt-2"><input asp-for="HasSizeGroup" class="form-check-input" /><label asp-for="HasSizeGroup" class="form-check-label"></label><p class="text-muted small mb-0 ms-1 d-inline">（勾選＝即使只有單一尺寸，匯出時仍輸出「份量 Size」群組段，如原版茶王$65；不勾＝單一尺寸直接展開特口，如多多綠茶）</p></div>
 <div class="form-check mt-1"><input asp-for="SweetnessAtProductLevel" class="form-check-input" /><label asp-for="SweetnessAtProductLevel" class="form-check-label"></label><p class="text-muted small mb-0 ms-1 d-inline">（勾選＝甜度群組與尺寸無關，只在所有尺寸之後輸出一次（Nesting=1），如原版經典綠茶／珍珠奶茶；不勾＝每個尺寸段內各輸出一次甜度群組，如 913茶王）</p></div></section>
@@ -34,4 +53,28 @@
 </section>
 
 <div class="form-actions"><a class="btn btn-outline-secondary" asp-action="Index">取消</a><button class="btn btn-primary" type="submit">儲存商品</button></div></form>
+<script>
+(function () {
+    function fmt(n) { return 'NT$' + Number(n).toLocaleString('zh-TW'); }
+    function sync(row) {
+        var input = row.querySelector('.region-price-input');
+        var info = row.querySelector('.region-price-info');
+        if (!input || !info) return;
+        var def = parseFloat(input.getAttribute('data-default') || '0');
+        var raw = (input.value || '').trim();
+        var mod = row.querySelector('.region-modified');
+        var modTxt = mod && mod.value ? '（最後修改：' + new Date(mod.value).toLocaleString('zh-TW') + '）' : '';
+        if (raw === '') { info.textContent = '目前套用 ' + fmt(def) + '（預設）' + modTxt; }
+        else { var v = parseFloat(raw); info.textContent = isNaN(v) ? '請輸入數字' : '目前套用 ' + fmt(v) + modTxt; }
+    }
+    document.querySelectorAll('.region-price-row').forEach(function (row) {
+        var input = row.querySelector('.region-price-input');
+        var btn = row.querySelector('.reset-price-btn');
+        if (input) { input.addEventListener('input', function () { sync(row); }); }
+        if (btn) { btn.addEventListener('click', function () { input.value = ''; sync(row); }); }
+        sync(row);
+    });
+})();
+</script>
+
 @section Scripts { <partial name="_ValidationScriptsPartial" /> }

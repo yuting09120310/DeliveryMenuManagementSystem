@@ -16,6 +16,9 @@ public class MenuVersion
     public string MenuDisplayName { get; set; } = "全日菜單 Menu";
     /// <summary>每日營業時間（格式如 10:30--20:00，套用一～日）。</summary>
     public string OpenHours { get; set; } = "10:30--20:00";
+    /// <summary>此菜單版本所屬價格區（北區／南區…）。匯出時以該區地區價為 Item 基礎價。</summary>
+    public int? RegionId { get; set; }
+    public Region? Region { get; set; }
     public ICollection<MenuVersionProduct> Products { get; set; } = new List<MenuVersionProduct>();
 }
 

@@ -3,7 +3,7 @@ using DMMS.Web.Models;
 
 namespace DMMS.Web.Services;
 
-public sealed record MenuExportResult(byte[]? File, IReadOnlyList<string> Errors, IReadOnlyList<string> Warnings, IReadOnlyDictionary<string, int> RowCounts, IReadOnlyList<string> SheetNames);
+public sealed record MenuExportResult(byte[]? File, IReadOnlyList<string> Errors, IReadOnlyList<string> Warnings, IReadOnlyDictionary<string, int> RowCounts, IReadOnlyList<string> SheetNames, MenuPriceStats PriceStats);
 
 /// <summary>
 /// Uber Eats 菜單匯出。格式基準＝天仁 UE 校稿檔 Categories&amp;Items&amp;Modifiers（新莊-6/高雄）。
@@ -59,9 +59,11 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         var openHours = string.IsNullOrWhiteSpace(version?.OpenHours) ? "10:30--20:00" : version!.OpenHours!;
         if (products.Length == 0) errors.Add("至少選擇一項商品才能匯出。");
         if (string.IsNullOrWhiteSpace(storeUuid)) warnings.Add("尚未設定 StoreUUID（GlobalSettings 欄位），請在「菜單建置」編輯頁填入 Uber Eats 店家 UUID。");
+        if (version?.RegionId is null) warnings.Add("此菜單版本未指定地區，將以商品「預設基礎價」匯出。");
         var headers = ReadHeaders();
         if (headers.Count < 45) warnings.Add($"Categories&Items&Modifiers 來源標題讀到 {headers.Count} 欄（預期 88），未對應欄位將留空。");
-        if (errors.Count > 0) return new(null, errors, warnings, new Dictionary<string, int>(), []);
+        if (errors.Count > 0) return new(null, errors, warnings, new Dictionary<string, int>(), [], new MenuPriceStats(0, 0, 0));
+        var priceCtx = new PriceContext(version?.RegionId);
 
         var cells = new CellWriter(headers.ToArray());
         using var workbook = new XLWorkbook();
@@ -97,13 +99,33 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
             cells.Set(s, r, "Category", Display(category.Name, category.EnglishName));
             cells.Set(s, r, "UUID", StableUuid($"category|{category.Id}"));
             r++;
-            foreach (var p in items) WriteProduct(s, cells, ref r, p, warnings);
+            foreach (var p in items) WriteProduct(s, cells, ref r, p, warnings, errors, priceCtx);
         }
+
+        if (errors.Count > 0) return new(null, errors, warnings, new Dictionary<string, int>(), [], priceCtx.Stats);
 
         var rowTotal = r - 1;
         var stream = new MemoryStream();
         workbook.SaveAs(stream);
-        return new(stream.ToArray(), errors, warnings, new Dictionary<string, int> { ["GlobalSettings"] = 4, ["Menus"] = 1, ["Categories&Items&Modifiers"] = rowTotal }, ["GlobalSettings", "Menus", "Categories&Items&Modifiers"]);
+        return new(stream.ToArray(), errors, warnings, new Dictionary<string, int> { ["GlobalSettings"] = 4, ["Menus"] = 1, ["Categories&Items&Modifiers"] = rowTotal }, ["GlobalSettings", "Menus", "Categories&Items&Modifiers"], priceCtx.Stats);
+    }
+
+    /// <summary>地區價解析：以版本所屬地區的地區價為 Item 基礎價；未設定/留空 → 回退 BasePrice（計入 Defaulted）。負數視為錯誤阻止匯出。</summary>
+    private sealed class PriceContext(int? regionId)
+    {
+        private int _total, _defaulted, _zero;
+        public MenuPriceStats Stats => new(_total, _defaulted, _zero);
+        public decimal Resolve(Product p, List<string> errors)
+        {
+            var row = regionId is null ? null : p.RegionPrices?.FirstOrDefault(x => x.RegionId == regionId);
+            decimal price;
+            if (row?.Price is decimal v) price = v;
+            else { price = p.BasePrice; _defaulted++; }
+            if (price < 0) errors.Add($"商品「{p.Name}」在該地區的基礎價為負數（{price:0.##}），請修正後再匯出。");
+            if (price == 0) _zero++;
+            _total++;
+            return price;
+        }
     }
 
     /// <summary>
@@ -135,14 +157,15 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         return groups;
     }
 
-    private void WriteProduct(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<string> warnings)
+    private void WriteProduct(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<string> warnings, List<string> errors, PriceContext priceCtx)
     {
         var sizes = (p.Sizes ?? []).Where(x => x.IsEnabled).OrderBy(x => x.SortOrder).ThenBy(x => x.Id).ToList();
         if (sizes.Count == 0) { warnings.Add($"商品「{p.Name}」沒有啟用尺寸，已略過。"); return; }
-        // Item 層
+        // Item 層（Delivery Price＝該版本所屬地區的地區價，未設定則回退 BasePrice）
+        var itemPrice = priceCtx.Resolve(p, errors);
         cells.Set(s, r, "ExternalID", ExtId(p.Name, p.EnglishName, null));
         cells.Set(s, r, "Item", Display(p.Name, p.EnglishName));
-        cells.Set(s, r, "Delivery Price", (double)p.BasePrice);
+        cells.Set(s, r, "Delivery Price", (double)itemPrice);
         cells.Set(s, r, "Description", p.Description);
         cells.Set(s, r, "IsEntree", false);
         cells.Set(s, r, "AlcoholicItemCount", 0);

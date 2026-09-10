@@ -30,6 +30,8 @@ public sealed class ProductListItemViewModel
     public bool MissingCode { get; init; }
     public int SpecialOptionCount { get; init; }
     public int AddOnCount { get; init; }
+    /// <summary>各地區定價摘要（如「北區 NT$70、南區 NT$75」）。</summary>
+    public string RegionPrices { get; init; } = "";
 }
 
 public sealed class ProductListViewModel
@@ -48,7 +50,7 @@ public sealed class ProductEditViewModel
     [Display(Name = "商品描述")] public string? Description { get; set; }
     [Display(Name = "圖片網址")] public string? ImageUrl { get; set; }
     [Range(0, 999999, ErrorMessage = "基礎價格不可小於 0")]
-    [Display(Name = "基礎價格")] public decimal BasePrice { get; set; }
+    [Display(Name = "預設基礎價（僅用於新地區預填，不參與匯出）")] public decimal BasePrice { get; set; }
     [Display(Name = "啟用商品")] public bool IsEnabled { get; set; } = true;
     [Display(Name = "排序")] public int SortOrder { get; set; }
     /// <summary>單一尺寸商品是否仍輸出「份量 Size」群組段（原版茶王$65 等單尺寸商品亦宣告 Size group；多多綠茶等則無）。</summary>
@@ -67,7 +69,20 @@ public sealed class ProductEditViewModel
     /// <summary>商品已勾選的加料（商品層級，品號由加料主檔依尺寸定義）。</summary>
     public List<int> AddOnIds { get; set; } = [];
     public IReadOnlyList<AddOnChoiceItem> AvailableAddOns { get; set; } = [];
+    /// <summary>各地區基礎價（＝中杯價）。留空＝匯出時回退 BasePrice。</summary>
+    public List<ProductRegionPriceInputModel> RegionPrices { get; set; } = [];
     public string ExternalDataPreview => string.Join("、", Sizes.SelectMany(s => new[] { s.ColdBaseCode, s.HotBaseCode }).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct()) is var codes && !string.IsNullOrWhiteSpace(codes) ? codes : "尚未設定尺寸品號";
+}
+
+public sealed class ProductRegionPriceInputModel
+{
+    public int RegionId { get; set; }
+    public string RegionName { get; set; } = "";
+    /// <summary>該區基礎價（中杯）。null＝留空，匯出行回退 BasePrice。</summary>
+    [Range(0, 999999, ErrorMessage = "地區價格不可小於 0")]
+    public decimal? Price { get; set; }
+    /// <summary>最後手動修改時間（未改過為 null）。</summary>
+    public DateTime? ModifiedAt { get; set; }
 }
 
 public sealed class AddOnChoiceItem
@@ -108,4 +123,34 @@ public sealed class ProductSizeInputModel
     public string? HotBaseCode { get; set; }
     public bool IsEnabled { get; set; } = true;
     public int SortOrder { get; set; }
+}
+
+// ---------- 價格區（地區） ----------
+
+public sealed class RegionListItemViewModel
+{
+    public int Id { get; init; }
+    public string Name { get; init; } = "";
+    public int SortOrder { get; init; }
+    public bool IsEnabled { get; init; }
+    /// <summary>已建立地區價的商品數。</summary>
+    public int PriceCount { get; init; }
+    /// <summary>綁定此區的菜單版本數。</summary>
+    public int MenuVersionCount { get; init; }
+}
+
+public sealed class RegionEditViewModel
+{
+    public int Id { get; set; }
+    [Required(ErrorMessage = "請輸入地區名稱")]
+    [Display(Name = "地區名稱")]
+    public string Name { get; set; } = "";
+    [Display(Name = "排序")]
+    public int SortOrder { get; set; }
+    [Display(Name = "啟用")]
+    public bool IsEnabled { get; set; } = true;
+    /// <summary>編輯時顯示：已建立地區價的商品數。</summary>
+    public int PriceCount { get; set; }
+    /// <summary>編輯時顯示：綁定此區的菜單版本數。</summary>
+    public int MenuVersionCount { get; set; }
 }

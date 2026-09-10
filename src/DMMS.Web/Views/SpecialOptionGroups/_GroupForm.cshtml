@@ -34,7 +34,7 @@
         </div>
         <div class="opt-sub">
             <div class="sub-fields sub-temp">
-                <div class="opt-field"><label>冷／熱</label><select asp-for="Options[i].BeverageTemperature" class="form-select temp-sel" data-field="BeverageTemperature"><option value="">不限</option><option value="@((int)BeverageTemperature.Cold)">冷</option><option value="@((int)BeverageTemperature.Hot)">熱</option></select></div>
+                <div class="opt-field temp-wrap"><label>冷／熱</label><select asp-for="Options[i].BeverageTemperature" class="form-select temp-sel" data-field="BeverageTemperature"><option value="">不限</option><option value="@((int)BeverageTemperature.Cold)">冷</option><option value="@((int)BeverageTemperature.Hot)">熱</option></select></div>
                 <div class="opt-field suffix-wrap"><label>Suffix</label><input asp-for="Options[i].Suffix" class="form-control" placeholder="(02)" data-field="Suffix" /></div>
             </div>
             <div class="sub-fields sub-sweet">
@@ -73,7 +73,7 @@
         </div>
         <div class="opt-sub">
             <div class="sub-fields sub-temp">
-                <div class="opt-field"><label>冷／熱</label><select class="form-select temp-sel" data-field="BeverageTemperature"><option value="">不限</option><option value="0">冷</option><option value="1">熱</option></select></div>
+                <div class="opt-field temp-wrap"><label>冷／熱</label><select class="form-select temp-sel" data-field="BeverageTemperature"><option value="">不限</option><option value="0">冷</option><option value="1">熱</option></select></div>
                 <div class="opt-field suffix-wrap"><label>Suffix</label><input class="form-control" data-field="Suffix" placeholder="(02)" /></div>
             </div>
             <div class="sub-fields sub-sweet">

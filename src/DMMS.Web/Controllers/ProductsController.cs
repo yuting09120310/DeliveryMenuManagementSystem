@@ -17,6 +17,7 @@ public class ProductsController(DmmsDbContext db) : Controller
                 .Include(p => p.Sizes)
                 .Include(p => p.SpecialOptions)
                 .Include(p => p.AddOns)
+                .Include(p => p.RegionPrices).ThenInclude(rp => rp.Region)
                 .AsNoTracking().OrderBy(p => p.SortOrder).ThenBy(p => p.Id).ToListAsync();
             return View(new ProductListViewModel
             {
@@ -27,7 +28,9 @@ public class ProductsController(DmmsDbContext db) : Controller
                     SizeCount = p.Sizes.Count,
                     MissingCode = p.Sizes.Count == 0 || p.Sizes.Any(s => s.IsEnabled && string.IsNullOrWhiteSpace(s.ColdBaseCode) && string.IsNullOrWhiteSpace(s.HotBaseCode)),
                     SpecialOptionCount = p.SpecialOptions.Count(x => x.IsEnabled),
-                    AddOnCount = p.AddOns.Count(x => x.IsEnabled)
+                    AddOnCount = p.AddOns.Count(x => x.IsEnabled),
+                    RegionPrices = string.Join("、", p.RegionPrices.Where(x => x.Region is not null).OrderBy(x => x.Region!.SortOrder)
+                        .Select(x => $"{x.Region!.Name} NT${(x.Price ?? p.BasePrice):N0}"))
                 }).ToList()
             });
         }
@@ -57,6 +60,7 @@ public class ProductsController(DmmsDbContext db) : Controller
             .Include(x => x.ProductCategories)
             .Include(x => x.SpecialOptions)
             .Include(x => x.AddOns)
+            .Include(x => x.RegionPrices)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (p is null) return NotFound();
         return View(await BuildEditModelAsync(ToModel(p)));
@@ -70,6 +74,7 @@ public class ProductsController(DmmsDbContext db) : Controller
         var product = await db.Products
             .Include(x => x.Sizes).Include(x => x.ProductCategories)
             .Include(x => x.SpecialOptions).Include(x => x.AddOns)
+            .Include(x => x.RegionPrices)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (product is null) return NotFound();
         Apply(model, product);
@@ -91,6 +96,13 @@ public class ProductsController(DmmsDbContext db) : Controller
             IcedOnly = a.IcedOnly, FixedRatio = a.FixedRatio,
             SizeSummary = string.Join("｜", a.Sizes.Where(s => s.IsEnabled).OrderBy(s => s.SortOrder).Select(s => $"{s.SizeName} {s.ExternalData} NT${s.Price:N0}"))
         }).ToList();
+
+        // 地區定價：以啟用中的地區為準；POST 回顯時保留已填值
+        var regions = await db.Regions.AsNoTracking().Where(r => r.IsEnabled).OrderBy(r => r.SortOrder).ThenBy(r => r.Id).ToListAsync();
+        var posted = model.RegionPrices.GroupBy(x => x.RegionId).ToDictionary(g => g.Key, g => g.First());
+        model.RegionPrices = regions.Select(r => posted.TryGetValue(r.Id, out var v)
+            ? new ProductRegionPriceInputModel { RegionId = r.Id, RegionName = r.Name, Price = v.Price, ModifiedAt = v.ModifiedAt }
+            : new ProductRegionPriceInputModel { RegionId = r.Id, RegionName = r.Name }).ToList();
 
         if (model.Id > 0 && model.AddOnIds.Count == 0)
         {
@@ -129,7 +141,8 @@ public class ProductsController(DmmsDbContext db) : Controller
             CategoryIds = p.ProductCategories.Select(x => x.CategoryId).ToList(),
             Sizes = p.Sizes.OrderBy(x => x.SortOrder).Select(s => new ProductSizeInputModel { Id = s.Id, Name = s.Name, PriceAdjustment = s.PriceAdjustment, ColdBaseCode = s.ColdBaseCode, HotBaseCode = s.HotBaseCode, IsEnabled = s.IsEnabled, SortOrder = s.SortOrder }).ToList(),
             SpecialOptionIds = p.SpecialOptions.Where(x => x.IsEnabled).Select(x => x.SpecialOptionId).ToList(),
-            AddOnIds = p.AddOns.Where(x => x.IsEnabled).Select(x => x.AddOnId).ToList()
+            AddOnIds = p.AddOns.Where(x => x.IsEnabled).Select(x => x.AddOnId).ToList(),
+            RegionPrices = p.RegionPrices.Select(x => new ProductRegionPriceInputModel { RegionId = x.RegionId, Price = x.Price, ModifiedAt = x.PriceModifiedAt }).ToList()
         };
         return m;
     }
@@ -173,5 +186,22 @@ public class ProductsController(DmmsDbContext db) : Controller
         // 加料：商品層級勾選（品號/價格由加料主檔依尺寸定義，商品不需填）
         foreach (var aid in m.AddOnIds.Distinct())
             p.AddOns.Add(new ProductAddOn { Product = p, AddOnId = aid, IsEnabled = true });
+
+        // 地區定價（upsert）：填值＝該區基礎價；留空＝回退 BasePrice。
+        // 新建商品時留空視為預填 BasePrice（與既有商品遷移行為一致：每商品每區都有明確價格）。
+        foreach (var rp in m.RegionPrices.GroupBy(x => x.RegionId).Select(g => g.Last()))
+        {
+            var price = rp.Price ?? (p.Id == 0 ? m.BasePrice : (decimal?)null);
+            var existing = p.RegionPrices.FirstOrDefault(x => x.RegionId == rp.RegionId);
+            if (existing is null)
+            {
+                p.RegionPrices.Add(new ProductRegionPrice { Product = p, RegionId = rp.RegionId, Price = price, PriceModifiedAt = p.Id == 0 ? null : DateTime.UtcNow });
+            }
+            else if (existing.Price != price)
+            {
+                existing.Price = price;
+                existing.PriceModifiedAt = DateTime.UtcNow;
+            }
+        }
     }
 }

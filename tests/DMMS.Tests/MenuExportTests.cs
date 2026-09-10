@@ -156,4 +156,75 @@ public class MenuExportTests
         var u2 = ReadSheet(b, "Categories&Items&Modifiers", ws => ws.Cell(4, 45).GetString());
         Assert.Equal(u1, u2);
     }
+
+    // ---------- 地區定價 ----------
+
+    private static MenuVersion VersionForRegion(int regionId) => new()
+    {
+        Id = 1, StoreUuid = "59d870fa-c045-5906-935c-9f8a6adc265e", MenuExternalId = "全日菜單_Menu",
+        MenuDisplayName = "全日菜單 Menu", OpenHours = "10:30--20:00",
+        RegionId = regionId, Region = new Region { Id = regionId, Name = regionId == 2 ? "南區" : "北區" }
+    };
+
+    [Fact]
+    public void Region_price_overrides_base_price_for_item_row_size_adjustment_unchanged()
+    {
+        // 913茶王：BasePrice 70（北區）；南區 75 → Item 75、大杯加價 10 全區共用（UE 顯示 85）
+        var p = Product("913 茶王", 70, Cat("原茶", "Classic Tea"),
+            new ProductSize { Id = 1, Name = "中杯", ColdBaseCode = "IT1" },
+            new ProductSize { Id = 2, Name = "大杯", PriceAdjustment = 10, ColdBaseCode = "IT2" });
+        p.RegionPrices.Add(new ProductRegionPrice { ProductId = p.Id, RegionId = 2, Price = 75 });
+        var r = Service().Build([p], VersionForRegion(2));
+        Assert.Equal(75, ReadSheet(r, "Categories&Items&Modifiers", ws => ws.Cell(4, 8).GetDouble())); // Item Delivery Price
+        // 尺寸列：中杯/大杯各自一段（份量 Size 群組列 + 尺寸選項列）；加價全區共用不變
+        var sizePrices = ReadSheet(r, "Categories&Items&Modifiers", ws =>
+        {
+            var list = new List<(string opt, double price)>();
+            for (var i = 2; i <= ws.LastRowUsed()!.RowNumber(); i++)
+            {
+                var opt = ws.Cell(i, 6).GetString();
+                if (opt.StartsWith("中杯") || opt.StartsWith("大杯")) list.Add((opt, ws.Cell(i, 8).GetDouble()));
+            }
+            return list;
+        });
+        Assert.Equal(0, sizePrices.Single(x => x.opt.StartsWith("中杯")).price);
+        Assert.Equal(10, sizePrices.Single(x => x.opt.StartsWith("大杯")).price);
+        Assert.Equal(1, r.PriceStats.Total);
+        Assert.Equal(0, r.PriceStats.Defaulted);
+        Assert.Equal(0, r.PriceStats.Zero);
+    }
+
+    [Fact]
+    public void Missing_or_blank_region_price_falls_back_to_base_price_and_counts_as_defaulted()
+    {
+        var p = Product("紅茶", 50, Cat("原茶", "Classic Tea"));
+        p.Sizes.Add(new ProductSize { Id = 1, ProductId = p.Id, Name = "中杯", ColdBaseCode = "IT1" });
+        p.RegionPrices.Add(new ProductRegionPrice { ProductId = p.Id, RegionId = 1, Price = null }); // 留空
+        var r = Service().Build([p], VersionForRegion(1));
+        Assert.Equal(50, ReadSheet(r, "Categories&Items&Modifiers", ws => ws.Cell(4, 8).GetDouble()));
+        Assert.Equal(1, r.PriceStats.Defaulted);
+    }
+
+    [Fact]
+    public void Negative_region_price_blocks_export()
+    {
+        var p = Product("紅茶", 50, Cat("原茶", "Classic Tea"));
+        p.Sizes.Add(new ProductSize { Id = 1, ProductId = p.Id, Name = "中杯", ColdBaseCode = "IT1" });
+        p.RegionPrices.Add(new ProductRegionPrice { ProductId = p.Id, RegionId = 1, Price = -5 });
+        var r = Service().Build([p], VersionForRegion(1));
+        Assert.Null(r.File);
+        Assert.Contains(r.Errors, x => x.Contains("負數"));
+    }
+
+    [Fact]
+    public void Zero_region_price_is_allowed_but_counted()
+    {
+        var p = Product("贈品茶", 50, Cat("原茶", "Classic Tea"));
+        p.Sizes.Add(new ProductSize { Id = 1, ProductId = p.Id, Name = "中杯", ColdBaseCode = "IT1" });
+        p.RegionPrices.Add(new ProductRegionPrice { ProductId = p.Id, RegionId = 1, Price = 0 });
+        var r = Service().Build([p], VersionForRegion(1));
+        Assert.NotNull(r.File);
+        Assert.Equal(1, r.PriceStats.Zero);
+        Assert.Equal(0, r.PriceStats.Defaulted);
+    }
 }

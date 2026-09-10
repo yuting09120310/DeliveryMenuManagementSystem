@@ -2,8 +2,16 @@
 @{ ViewData["Title"] = "菜單建置／UE 匯出"; }
 <form method="post"><input asp-for="Id" type="hidden" /><div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <section class="panel"><div class="panel-title">版本設定</div>
-<p class="text-muted small mb-3">平台固定為 Uber Eats；店家設定（GlobalSettings／Menus sheet）使用系統固定值，不需填寫。</p>
-<div class="form-grid"><div><label asp-for="Name"></label><input asp-for="Name" class="form-control" /></div></div>
+<p class="text-muted small mb-3">平台固定為 Uber Eats；店家設定（GlobalSettings／Menus sheet）使用系統固定值，不需填寫。地區決定匯出時套用的商品價格。</p>
+<div class="form-grid">
+<div><label asp-for="Name"></label><input asp-for="Name" class="form-control" /></div>
+<div><label asp-for="RegionId"></label>
+<select asp-for="RegionId" class="form-select">
+<option value="">— 請選擇地區 —</option>
+@foreach (var r in Model.Regions) { <option value="@r.Id">@r.Name</option> }
+</select><span asp-validation-for="RegionId" class="text-danger"></span>
+<p class="text-muted small mb-0 mt-1">匯出將使用此地區的商品定價；複製版本會沿用原版本的地區。</p></div>
+</div>
 </section>
 <h3>選取商品（匯出時依商品分類分組）</h3>
 <div class="row">@foreach (var p in Model.Products) {<div class="col-md-4"><label class="border rounded p-2 d-block"><input type="checkbox" name="SelectedProductIds" value="@p.Id" checked="@Model.SelectedProductIds.Contains(p.Id)" /> @p.Name <small class="text-muted">(@(p.Sizes.Count > 0 ? p.Sizes.Count + " 尺寸" : "未設定尺寸"))</small></label></div>}</div>

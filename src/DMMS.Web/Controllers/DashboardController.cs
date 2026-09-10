@@ -26,7 +26,7 @@ public class DashboardController(DmmsDbContext db) : Controller
                 SweetOptionCount = await db.SpecialOptions.CountAsync(o => o.IsEnabled && o.Kind == SpecialOptionKind.Sweetness),
                 MissingCodeProductCount = missing.Count,
                 MissingCodeProductNames = missing.Select(p => p.Name).ToList(),
-                RecentVersions = await db.MenuVersions.Include(v => v.Products).AsNoTracking().OrderByDescending(v => v.CreatedAt).Take(5).ToListAsync()
+                RecentVersions = await db.MenuVersions.Include(v => v.Region).Include(v => v.Products).AsNoTracking().OrderByDescending(v => v.CreatedAt).Take(5).ToListAsync()
             };
         }
         catch (Exception ex) when (ex is DbUpdateException or InvalidOperationException or System.Data.Common.DbException)

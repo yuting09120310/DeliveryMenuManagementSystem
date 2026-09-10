@@ -1,0 +1,11 @@
+@model IReadOnlyList<DMMS.Web.ViewModels.RegionListItemViewModel>
+@{ ViewData["Title"] = "地區管理"; }
+<div class="panel"><div class="panel-heading"><div><h2>價格區列表</h2><p class="text-muted mb-0">不同地區可有不同商品售價；同一商品在各地區的基礎價（中杯價）於商品編輯頁維護。僅可停用，不可刪除。</p></div><a class="btn btn-primary" asp-action="Create">＋ 新增地區</a></div>
+@if (!Model.Any()) { <div class="empty-state">尚無地區資料。</div> } else {
+<div class="table-responsive"><table class="table align-middle"><thead><tr><th>地區名稱</th><th>排序</th><th>已定價商品</th><th>菜單版本</th><th>狀態</th><th></th></tr></thead><tbody>
+@foreach (var r in Model) {
+    <tr><td><a class="fw-semibold" asp-action="Edit" asp-route-id="@r.Id">@r.Name</a></td><td>@r.SortOrder</td><td>@r.PriceCount 項</td><td>@r.MenuVersionCount 個</td>
+    <td><span class="status @(r.IsEnabled ? "on" : "off")">@(r.IsEnabled ? "啟用" : "停用")</span></td>
+    <td class="text-nowrap"><a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@r.Id">編輯</a> <form method="post" asp-action="Toggle" asp-route-id="@r.Id" class="d-inline">@Html.AntiForgeryToken()<button type="submit" class="btn btn-sm btn-outline-secondary">@(r.IsEnabled ? "停用" : "啟用")</button></form></td></tr>
+}</tbody></table></div>
+}</div>

@@ -16,7 +16,7 @@ public class UberEatsMenuVersionsController(DmmsDbContext db, MenuExportService 
     private const string MenuDisplayName = "全日菜單 Menu";
     private const string OpenHours = "10:30--20:00";
 
-    public async Task<IActionResult> Index() => View(await db.MenuVersions.Include(x => x.Products).ThenInclude(x => x.Product).OrderByDescending(x => x.CreatedAt).ToListAsync());
+    public async Task<IActionResult> Index() => View(await db.MenuVersions.Include(x => x.Region).Include(x => x.Products).ThenInclude(x => x.Product).OrderByDescending(x => x.CreatedAt).ToListAsync());
     [HttpGet] public async Task<IActionResult> Create() => View("Edit", await Form(null));
     [HttpPost, ValidateAntiForgeryToken] public async Task<IActionResult> Create(MenuVersionEditViewModel input) => await Save(input, null);
     [HttpGet] public async Task<IActionResult> Edit(int id) => View(await Form(await Load(id)));
@@ -26,15 +26,16 @@ public class UberEatsMenuVersionsController(DmmsDbContext db, MenuExportService 
     {
         var version = await Load(id); if (version is null) return NotFound();
         var result = exporter.Build(version.Products.Select(x => x.Product).ToArray(), version);
-        return View(new MenuVersionPreviewViewModel { Version = version, Errors = result.Errors, Warnings = result.Warnings, RowCounts = result.RowCounts, SheetNames = result.SheetNames });
+        return View(new MenuVersionPreviewViewModel { Version = version, RegionName = version.Region?.Name, Errors = result.Errors, Warnings = result.Warnings, RowCounts = result.RowCounts, SheetNames = result.SheetNames, PriceStats = result.PriceStats });
     }
     [HttpPost, ValidateAntiForgeryToken] public async Task<IActionResult> Export(int id)
     {
         var version = await Load(id); if (version is null) return NotFound();
         var result = exporter.Build(version.Products.Select(x => x.Product).ToArray(), version);
-        if (result.File is null) return View("Preview", new MenuVersionPreviewViewModel { Version = version, Errors = result.Errors, Warnings = result.Warnings, RowCounts = result.RowCounts, SheetNames = result.SheetNames });
+        if (result.File is null) return View("Preview", new MenuVersionPreviewViewModel { Version = version, RegionName = version.Region?.Name, Errors = result.Errors, Warnings = result.Warnings, RowCounts = result.RowCounts, SheetNames = result.SheetNames, PriceStats = result.PriceStats });
         version.Status = "Exported"; version.ExportedAt = DateTime.UtcNow; await db.SaveChangesAsync();
-        return File(result.File, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"DMMS-UE-菜單-V1-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
+        var regionTag = string.IsNullOrWhiteSpace(version.Region?.Name) ? "" : $"-{version.Region!.Name}";
+        return File(result.File, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"DMMS-UE-菜單{regionTag}-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
     }
     /// <summary>複製菜單版本：名稱＝原名_yyyyMMddHHmmss，商品選取原封不動複製（草稿狀態），不需重新勾選。</summary>
     [HttpPost, ValidateAntiForgeryToken]
@@ -50,7 +51,8 @@ public class UberEatsMenuVersionsController(DmmsDbContext db, MenuExportService 
             MenuExternalId = MenuExternalId,
             MenuDisplayName = MenuDisplayName,
             OpenHours = OpenHours,
-            Status = "Draft"
+            Status = "Draft",
+            RegionId = src.RegionId
         };
         db.MenuVersions.Add(copy);
         await db.SaveChangesAsync();
@@ -58,13 +60,23 @@ public class UberEatsMenuVersionsController(DmmsDbContext db, MenuExportService 
         await db.SaveChangesAsync();
         return RedirectToAction(nameof(Build), new { id = copy.Id });
     }
-    private async Task<MenuVersion?> Load(int id) => await db.MenuVersions.Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.ProductCategories).ThenInclude(x => x.Category).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.Sizes).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.SpecialOptions).ThenInclude(x => x.SpecialOption).ThenInclude(x => x.Group).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.SpecialOptions).ThenInclude(x => x.SpecialOption).ThenInclude(x => x.Sizes).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.AddOns).ThenInclude(x => x.AddOn).ThenInclude(x => x.Sizes).SingleOrDefaultAsync(x => x.Id == id);
-    private async Task<MenuVersionEditViewModel> Form(MenuVersion? v) => new() { Id = v?.Id ?? 0, Name = v?.Name ?? "UE 菜單", SelectedProductIds = v?.Products.Select(x => x.ProductId).ToList() ?? [], Products = await db.Products.Where(x => x.IsEnabled).Include(x => x.Sizes).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).ToListAsync() };
+    private async Task<MenuVersion?> Load(int id) => await db.MenuVersions.Include(x => x.Region).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.RegionPrices).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.ProductCategories).ThenInclude(x => x.Category).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.Sizes).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.SpecialOptions).ThenInclude(x => x.SpecialOption).ThenInclude(x => x.Group).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.SpecialOptions).ThenInclude(x => x.SpecialOption).ThenInclude(x => x.Sizes).Include(x => x.Products).ThenInclude(x => x.Product).ThenInclude(x => x.AddOns).ThenInclude(x => x.AddOn).ThenInclude(x => x.Sizes).SingleOrDefaultAsync(x => x.Id == id);
+    private async Task<MenuVersionEditViewModel> Form(MenuVersion? v) => new()
+    {
+        Id = v?.Id ?? 0,
+        Name = v?.Name ?? "UE 菜單",
+        RegionId = v?.RegionId,
+        Regions = await db.Regions.AsNoTracking().Where(r => r.IsEnabled).OrderBy(r => r.SortOrder).ThenBy(r => r.Id).ToListAsync(),
+        SelectedProductIds = v?.Products.Select(x => x.ProductId).ToList() ?? [],
+        Products = await db.Products.Where(x => x.IsEnabled).Include(x => x.Sizes).OrderBy(x => x.SortOrder).ThenBy(x => x.Name).ToListAsync()
+    };
     private async Task<IActionResult> Save(MenuVersionEditViewModel input, int? id)
     {
-        if (!ModelState.IsValid) { input.Products = await db.Products.Where(x => x.IsEnabled).Include(x => x.Sizes).OrderBy(x => x.Name).ToListAsync(); return View("Edit", input); }
+        if (!ModelState.IsValid) { input.Regions = await db.Regions.AsNoTracking().Where(r => r.IsEnabled).OrderBy(r => r.SortOrder).ToListAsync(); input.Products = await db.Products.Where(x => x.IsEnabled).Include(x => x.Sizes).OrderBy(x => x.Name).ToListAsync(); return View("Edit", input); }
+        var region = await db.Regions.FirstOrDefaultAsync(r => r.Id == input.RegionId);
+        if (region is null) { ModelState.AddModelError(nameof(input.RegionId), "請選擇有效的價格區。"); input.Regions = await db.Regions.AsNoTracking().Where(r => r.IsEnabled).OrderBy(r => r.SortOrder).ToListAsync(); input.Products = await db.Products.Where(x => x.IsEnabled).Include(x => x.Sizes).OrderBy(x => x.Name).ToListAsync(); return View("Edit", input); }
         var v = id.HasValue ? await db.MenuVersions.Include(x => x.Products).SingleOrDefaultAsync(x => x.Id == id) : new MenuVersion(); if (v is null) return NotFound();
-        v.Name = input.Name; v.Platform = Platform; v.StoreUuid = StoreUuid; v.MenuExternalId = MenuExternalId; v.MenuDisplayName = MenuDisplayName; v.OpenHours = OpenHours; if (!id.HasValue) db.MenuVersions.Add(v); else v.Products.Clear();
+        v.Name = input.Name; v.Platform = Platform; v.StoreUuid = StoreUuid; v.MenuExternalId = MenuExternalId; v.MenuDisplayName = MenuDisplayName; v.OpenHours = OpenHours; v.RegionId = region.Id; if (!id.HasValue) db.MenuVersions.Add(v); else v.Products.Clear();
         await db.SaveChangesAsync(); foreach (var productId in input.SelectedProductIds.Distinct()) v.Products.Add(new MenuVersionProduct { MenuVersionId = v.Id, ProductId = productId }); await db.SaveChangesAsync(); return RedirectToAction(nameof(Preview), new { id = v.Id });
     }
 }

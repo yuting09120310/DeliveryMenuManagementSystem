@@ -20,6 +20,8 @@ public class DmmsDbContext(DbContextOptions<DmmsDbContext> options) : DbContext(
     public DbSet<ExportHistory> ExportHistories => Set<ExportHistory>();
     public DbSet<MenuVersion> MenuVersions => Set<MenuVersion>();
     public DbSet<MenuVersionProduct> MenuVersionProducts => Set<MenuVersionProduct>();
+    public DbSet<Region> Regions => Set<Region>();
+    public DbSet<ProductRegionPrice> ProductRegionPrices => Set<ProductRegionPrice>();
 
     protected override void OnModelCreating(ModelBuilder b)
     {
@@ -46,5 +48,12 @@ public class DmmsDbContext(DbContextOptions<DmmsDbContext> options) : DbContext(
         b.Entity<MenuVersionProduct>().HasKey(x => new { x.MenuVersionId, x.ProductId });
         b.Entity<MenuVersionProduct>().HasOne(x => x.MenuVersion).WithMany(x => x.Products).HasForeignKey(x => x.MenuVersionId).OnDelete(DeleteBehavior.Cascade);
         b.Entity<MenuVersionProduct>().HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.NoAction);
+        // 地區與商品地區定價
+        b.Entity<ProductRegionPrice>().HasKey(x => x.Id);
+        b.Entity<ProductRegionPrice>().HasIndex(x => new { x.ProductId, x.RegionId }).IsUnique();
+        b.Entity<ProductRegionPrice>().Property(x => x.Price).HasPrecision(18, 2);
+        b.Entity<ProductRegionPrice>().HasOne(x => x.Product).WithMany(x => x.RegionPrices).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.Cascade);
+        b.Entity<ProductRegionPrice>().HasOne(x => x.Region).WithMany(x => x.ProductPrices).HasForeignKey(x => x.RegionId).OnDelete(DeleteBehavior.NoAction);
+        b.Entity<MenuVersion>().HasOne(x => x.Region).WithMany().HasForeignKey(x => x.RegionId).OnDelete(DeleteBehavior.NoAction);
     }
 }
