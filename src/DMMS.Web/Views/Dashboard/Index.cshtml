@@ -16,13 +16,6 @@
     <div class="stat-card"><span>分類數</span><strong>@Model.CategoryCount</strong><em class="d-block text-muted small mt-1">匯出分組依據</em></div>
 </div>
 </section>
-<section class="panel mt-4"><div class="panel-title">匯出前檢查</div>
-@if (Model.MissingCodeProductCount == 0) {
-    <div class="d-flex align-items-center gap-2"><span class="badge text-bg-success">就緒</span><span class="text-muted">所有商品尺寸品號齊全，可直接匯出。</span></div>
-} else {
-    <div class="d-flex align-items-center gap-2"><span class="badge text-bg-danger">@Model.MissingCodeProductCount 項待處理</span><span class="text-muted">@string.Join("、", Model.MissingCodeProductNames) 缺少尺寸品號。</span></div>
-}
-</section>
 <section class="panel mt-4"><div class="panel-heading"><div><div class="panel-title mb-0">Uber Eats 菜單</div></div><a class="btn btn-primary btn-sm" asp-controller="UberEatsMenuVersions" asp-action="Create">＋ 建立 UE 菜單</a></div>
 @if (Model.RecentVersions.Count == 0) {
     <p class="text-muted mb-0">尚未建立菜單版本，點右上「＋ 建立 UE 菜單」開始。</p>

@@ -12,8 +12,6 @@ public sealed class DashboardViewModel
     public int SpecialOptionCount { get; init; }
     public int IceOptionCount { get; init; }
     public int SweetOptionCount { get; init; }
-    public int MissingCodeProductCount { get; init; }
-    public IReadOnlyList<string> MissingCodeProductNames { get; init; } = [];
     public IReadOnlyList<MenuVersion> RecentVersions { get; init; } = [];
     public string? DataError { get; init; }
 }

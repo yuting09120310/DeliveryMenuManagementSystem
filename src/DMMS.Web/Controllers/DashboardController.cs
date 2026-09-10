@@ -14,7 +14,6 @@ public class DashboardController(DmmsDbContext db) : Controller
         try
         {
             var products = await db.Products.Include(p => p.Sizes).AsNoTracking().ToListAsync();
-            var missing = products.Where(p => p.Sizes.Count == 0 || p.Sizes.Any(s => s.IsEnabled && string.IsNullOrWhiteSpace(s.ColdBaseCode) && string.IsNullOrWhiteSpace(s.HotBaseCode))).ToList();
             model = new DashboardViewModel
             {
                 ProductCount = products.Count,
@@ -24,8 +23,6 @@ public class DashboardController(DmmsDbContext db) : Controller
                 SpecialOptionCount = await db.SpecialOptions.CountAsync(o => o.IsEnabled),
                 IceOptionCount = await db.SpecialOptions.CountAsync(o => o.IsEnabled && o.Kind == SpecialOptionKind.Temperature),
                 SweetOptionCount = await db.SpecialOptions.CountAsync(o => o.IsEnabled && o.Kind == SpecialOptionKind.Sweetness),
-                MissingCodeProductCount = missing.Count,
-                MissingCodeProductNames = missing.Select(p => p.Name).ToList(),
                 RecentVersions = await db.MenuVersions.Include(v => v.Region).Include(v => v.Products).AsNoTracking().OrderByDescending(v => v.CreatedAt).Take(5).ToListAsync()
             };
         }
