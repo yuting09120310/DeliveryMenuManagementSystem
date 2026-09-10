@@ -48,13 +48,9 @@ public sealed class ProductEditViewModel
     [Display(Name = "商品描述")] public string? Description { get; set; }
     [Display(Name = "圖片網址")] public string? ImageUrl { get; set; }
     [Range(0, 999999, ErrorMessage = "基礎價格不可小於 0")]
-    [Display(Name = "預設基礎價（僅用於新地區預填，不參與匯出）")] public decimal BasePrice { get; set; }
+    [Display(Name = "預設基礎價")] public decimal BasePrice { get; set; }
     [Display(Name = "啟用商品")] public bool IsEnabled { get; set; } = true;
     [Display(Name = "排序")] public int SortOrder { get; set; }
-    /// <summary>單一尺寸商品是否仍輸出「份量 Size」群組段（原版茶王$65 等單尺寸商品亦宣告 Size group；多多綠茶等則無）。</summary>
-    [Display(Name = "單一尺寸時仍輸出「份量 Size」群組")] public bool HasSizeGroup { get; set; }
-    /// <summary>甜度群組輸出位置：false＝每個尺寸段內各輸出一次(Nesting=2)；true＝尺寸段結束後商品層輸出一次(Nesting=1，原版經典綠茶/珍珠奶茶型)。</summary>
-    [Display(Name = "甜度與尺寸無關（商品層輸出一次）")] public bool SweetnessAtProductLevel { get; set; }
     /// <summary>商品所屬分類（可多選；同商品可掛多個分類，匯出時於各分類下各輸出一次）。</summary>
     [Display(Name = "商品分類")]
     public List<int> CategoryIds { get; set; } = [];

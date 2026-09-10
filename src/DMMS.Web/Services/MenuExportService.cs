@@ -16,9 +16,9 @@ public sealed record MenuExportResult(byte[]? File, IReadOnlyList<string> Errors
 ///  - 多尺寸商品：每個尺寸一段子樹 →「份量 Size」群組列(Nesting=1, 全尺寸同 ExternalID/UUID) +
 ///    尺寸選項列 + 特口群組(Nesting=2)：
 ///      飲料溫度群組 → 冰度選項（ExternalData = Cold/HotBaseCode + Suffix）
-///      甜度群組 → 甜度選項（Standalone ExternalData）+ FixedRatio 加料併入尾端（依尺寸品號）
+///      甜度群組 → 甜度選項（Standalone ExternalData；有依尺寸特化者如醇香蜂蜜，依尺寸輸出）
 ///    所有尺寸段結束後輸出「加點 Add-Ons」群組(Nesting=1, Max=1) + 一般加料(非 FixedRatio)。
-///  - 單尺寸商品：不加 Size 群組，特口群組直接 Nesting=1。
+///  - 單尺寸商品：同樣輸出「份量 Size」群組段（統一結構，不因尺寸數而異）。
 ///  - GlobalSettings：A1=StoreUUID B1=店家UUID、A2=DisableItemInstructions B2=True、A3=Tax(%)、A4=VatRate
 ///  - Menus：ExternalID/Menu/Monday..Sunday(營業時間)/ExternalNotes
 ///  - UUID 以實體 key 產生確定性 UUIDv5（同一商品重複匯出 UUID 不變，UE 才不會重複新增）。
@@ -178,25 +178,10 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
         var specialOptions = (p.SpecialOptions ?? []).Where(x => x.IsEnabled && x.SpecialOption is { IsEnabled: true }).Select(x => x.SpecialOption!).ToList();
         var addOns = (p.AddOns ?? []).Where(x => x.IsEnabled && x.AddOn is not null).Select(x => x.AddOn!).ToList();
 
-        if (sizes.Count == 1 && !p.HasSizeGroup)
-        {
-            WriteSpecialGroups(s, cells, ref r, p, sizes[0], specialOptions, addOns, nestLevel: 1);
-            WriteAddOnsGroup(s, cells, ref r, p, addOns);
-        }
-        else
-        {
-            foreach (var size in sizes)
-            {
-                // B 型商品（甜度與尺寸無關）：尺寸段只輸出溫度特口，甜度群組商品層最後一次輸出
-                var sizeOpts = p.SweetnessAtProductLevel
-                    ? specialOptions.Where(o => o.Kind != SpecialOptionKind.Sweetness).ToList()
-                    : specialOptions;
-                WriteSizeSegment(s, cells, ref r, p, size, sizeOpts, addOns);
-            }
-            if (p.SweetnessAtProductLevel)
-                WriteProductLevelSweetness(s, cells, ref r, p, specialOptions);
-            WriteAddOnsGroup(s, cells, ref r, p, addOns);
-        }
+        // 統一結構：不論尺寸多寡，一律輸出「份量 Size」群組段，特口群組（含甜度）在各尺寸段內各輸出一次（Nesting=2）。
+        foreach (var size in sizes)
+            WriteSizeSegment(s, cells, ref r, p, size, specialOptions, addOns);
+        WriteAddOnsGroup(s, cells, ref r, p, addOns);
     }
 
     /// <summary>尺寸段：份量 Size 群組列(Nesting=1) → 尺寸選項 → 特口群組(Nesting=2)。</summary>
@@ -279,36 +264,6 @@ public sealed class MenuExportService(IWebHostEnvironment environment)
                     cells.Set(s, r, "ExternalData", ResolveExternalData(size, o));
                     cells.Set(s, r, "UUID", optUuid);
                 }
-                r++;
-            }
-        }
-    }
-
-    /// <summary>B 型商品：甜度群組在商品層輸出一次（附件 Nesting=1、UUID 不隨尺寸變）。選項 Standalone 跨商品共用 UUID；依尺寸特化選項（醇香蜂蜜）於此型商品不存在，忽略。</summary>
-    private void WriteProductLevelSweetness(IXLWorksheet s, CellWriter cells, ref int r, Product p, List<SpecialOption> options)
-    {
-        foreach (var grp in options.Where(o => o.Kind == SpecialOptionKind.Sweetness && !(o.Sizes ?? []).Any(x => x.IsEnabled))
-                     .GroupBy(o => o.SpecialOptionGroupId ?? 0).OrderBy(g => g.Key))
-        {
-            var group = grp.First().Group;
-            var groupUuid = StableUuid($"group|{p.Id}|0|{group?.Id ?? 0}");
-            var groupName = group?.Name ?? "選項";
-            cells.Set(s, r, "ExternalID", ExtId(groupName, null, Code5(groupUuid)));
-            cells.Set(s, r, "Modifier Group", groupName);
-            cells.Set(s, r, "Nesting Level", 1);
-            if (group is { Min: > 0 }) cells.Set(s, r, "Min", group.Min);
-            if (group is { Max: > 0 }) cells.Set(s, r, "Max", group.Max);
-            cells.Set(s, r, "UUID", groupUuid);
-            r++;
-            foreach (var o in grp.OrderBy(o => o.Id))
-            {
-                var optUuid = StableUuid($"option|{o.Id}");
-                cells.Set(s, r, "ExternalID", ExtId(o.Name, o.EnglishName, null));
-                cells.Set(s, r, "Modifier Option", Display(o.Name, o.EnglishName));
-                cells.Set(s, r, "Delivery Price", 0d);
-                cells.Set(s, r, "Max", 1);
-                cells.Set(s, r, "ExternalData", o.StandaloneExternalData ?? "");
-                cells.Set(s, r, "UUID", optUuid);
                 r++;
             }
         }

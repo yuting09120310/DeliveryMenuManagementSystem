@@ -123,8 +123,6 @@ public class MenuImportService
             product.ImageUrl = string.IsNullOrWhiteSpace(pi.Img) ? null : pi.Img;
             product.BasePrice = pi.Price;
             if (isNew) product.SortOrder = sort;
-            product.HasSizeGroup = pi.HasSize;
-            product.SweetnessAtProductLevel = pi.SweetAtProductLevel;
 
             // 尺寸：清空重建
             product.Sizes.Clear();

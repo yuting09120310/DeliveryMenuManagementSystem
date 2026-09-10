@@ -104,8 +104,9 @@ public class MenuExportTests
         Assert.Contains(mods, x => x.opt.Contains("熱") && x.extData == "IT6005-U(11)");
     }
     [Fact]
-    public void Single_size_product_has_no_size_group_and_nesting_level_1()
+    public void Single_size_product_still_emits_size_group_with_sweetness_inside()
     {
+        // 統一結構：單一尺寸商品同樣輸出「份量 Size」群組段，特口（含甜度）在其尺寸段內 Nesting=2
         var p = Product("紅茶", 50, Cat("原茶", "Classic Tea"));
         p.Sizes.Add(new ProductSize { Id = 1, ProductId = p.Id, Name = "中杯", ColdBaseCode = "IT1" });
         var sugarGroup = new SpecialOptionGroup { Id = 2, Name = "甜度 Sweetness Level", Min = 1, Max = 1 };
@@ -118,8 +119,8 @@ public class MenuExportTests
                 list.Add((ws.Cell(i, 5).GetString(), ws.Cell(i, 6).GetString(), ws.Cell(i, 7).GetString()));
             return list;
         }).Where(x => x.group != "" || x.opt != "").ToList();
-        Assert.DoesNotContain(mods, x => x.group == "份量 Size");
-        Assert.Contains(mods, x => x.group.Contains("甜度") && x.level == "1");
+        Assert.Contains(mods, x => x.group == "份量 Size" && x.level == "1");
+        Assert.Contains(mods, x => x.group.Contains("甜度") && x.level == "2");
     }
     [Fact]
     public void Global_settings_and_menus_match_template()

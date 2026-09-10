@@ -1,6 +1,6 @@
 -- ===================================================
 -- DMMS (外送菜單管理系統) 資料庫備份
--- 產生時間: 2026-09-10 10:18:39
+-- 產生時間: 2026-09-10 12:00:40
 -- 資料庫:   DMMS (schema: dmms)
 -- 還原:     sqlcmd -S <server> -U sa -P <pwd> -C -d DMMS -i DMMS-backup-20260910.sql
 -- ===================================================
@@ -146,8 +146,6 @@ CREATE TABLE dmms.[Products] (
     [SortOrder] int NOT NULL,
     [SourceExternalId] nvarchar(max) NULL,
     [SourceUuid] nvarchar(max) NULL,
-    [HasSizeGroup] bit NOT NULL DEFAULT (CONVERT([bit],(0))),
-    [SweetnessAtProductLevel] bit NOT NULL DEFAULT (CONVERT([bit],(0))),
     CONSTRAINT [PK_Products] PRIMARY KEY ([Id])
 );
 CREATE TABLE dmms.[SpecialOptionSizes] (
@@ -332,84 +330,158 @@ INSERT INTO dmms.[ProductRegionPrices] ([Id], [ProductId], [RegionId], [Price], 
 INSERT INTO dmms.[ProductRegionPrices] ([Id], [ProductId], [RegionId], [Price], [PriceModifiedAt]) VALUES (146, 76, 2, 65.00, NULL);
 SET IDENTITY_INSERT dmms.[ProductRegionPrices] OFF;
 
--- MenuVersionProducts: 73 列
+-- MenuVersionProducts: 146 列
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 3);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 3);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 5);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 5);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 6);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 6);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 7);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 7);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 8);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 8);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 9);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 9);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 10);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 10);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 11);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 11);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 12);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 12);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 13);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 13);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 14);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 14);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 15);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 15);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 16);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 16);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 17);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 17);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 18);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 18);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 19);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 19);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 20);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 20);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 21);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 21);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 22);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 22);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 23);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 23);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 24);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 24);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 25);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 25);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 26);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 26);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 27);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 27);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 28);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 28);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 29);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 29);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 30);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 30);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 31);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 31);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 32);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 32);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 33);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 33);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 34);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 34);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 35);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 35);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 36);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 36);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 37);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 37);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 38);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 38);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 39);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 39);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 40);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 40);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 41);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 41);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 42);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 42);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 43);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 43);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 44);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 44);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 45);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 45);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 46);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 46);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 47);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 47);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 48);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 48);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 49);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 49);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 50);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 50);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 51);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 51);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 52);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 52);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 53);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 53);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 54);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 54);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 55);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 55);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 56);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 56);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 57);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 57);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 58);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 58);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 59);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 59);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 60);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 60);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 61);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 61);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 62);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 62);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 63);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 63);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 64);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 64);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 65);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 65);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 66);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 66);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 67);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 67);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 68);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 68);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 69);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 69);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 70);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 70);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 71);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 71);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 72);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 72);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 73);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 73);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 74);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 74);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 75);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 75);
 INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (1, 76);
+INSERT INTO dmms.[MenuVersionProducts] ([MenuVersionId], [ProductId]) VALUES (8, 76);
 
--- MenuVersions: 1 列
+-- MenuVersions: 2 列
 SET IDENTITY_INSERT dmms.[MenuVersions] ON;
-INSERT INTO dmms.[MenuVersions] ([Id], [Name], [Platform], [Status], [CreatedAt], [ExportedAt], [MenuDisplayName], [MenuExternalId], [OpenHours], [StoreUuid], [RegionId]) VALUES (1, N'UE 菜單 V1', N'UberEats', N'Exported', '2026-09-07 18:22:27.451762', '2026-09-10 02:17:57.220866', N'全日菜單 Menu', N'全日菜單_Menu', N'10:30--20:00', N'59d870fa-c045-5906-935c-9f8a6adc265e', 1);
+INSERT INTO dmms.[MenuVersions] ([Id], [Name], [Platform], [Status], [CreatedAt], [ExportedAt], [MenuDisplayName], [MenuExternalId], [OpenHours], [StoreUuid], [RegionId]) VALUES (1, N'UE 菜單 V1', N'UberEats', N'Exported', '2026-09-07 18:22:27.451762', '2026-09-10 04:00:25.352784', N'全日菜單 Menu', N'全日菜單_Menu', N'10:30--20:00', N'59d870fa-c045-5906-935c-9f8a6adc265e', 1);
+INSERT INTO dmms.[MenuVersions] ([Id], [Name], [Platform], [Status], [CreatedAt], [ExportedAt], [MenuDisplayName], [MenuExternalId], [OpenHours], [StoreUuid], [RegionId]) VALUES (8, N'UE 菜單_南區', N'UberEats', N'Exported', '2026-09-10 02:30:29.309478', '2026-09-10 03:39:46.576267', N'全日菜單 Menu', N'全日菜單_Menu', N'10:30--20:00', N'59d870fa-c045-5906-935c-9f8a6adc265e', 2);
 SET IDENTITY_INSERT dmms.[MenuVersions] OFF;
 
 -- Regions: 2 列
@@ -805,7 +877,6 @@ SET IDENTITY_INSERT dmms.[PlatformProductMappings] OFF;
 
 -- ProductSizes: 138 列
 SET IDENTITY_INSERT dmms.[ProductSizes] ON;
-INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (572, 76, N'大杯', 0.00, N'IT0953-U', N'IT6935-U', 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (573, 5, N'大杯', 0.00, N'IT1932-U', N'IT7925-U', 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (574, 6, N'大杯', 0.00, N'IT2961-U', N'IT8936-U', 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (575, 7, N'大杯', 0.00, N'IT0955-U', NULL, 1, 0);
@@ -819,8 +890,6 @@ INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (583, 12, N'大杯', 10.00, N'IT0901-U', N'IT6901-U', 1, 1);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (584, 13, N'中杯', 0.00, N'IT0002-U', N'IT6002-U', 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (585, 13, N'大杯', 10.00, N'IT0902-U', N'IT6902-U', 1, 1);
-INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (586, 14, N'中杯', 0.00, N'IT0011-U', NULL, 1, 0);
-INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (587, 14, N'大杯', 20.00, N'IT0919-U', NULL, 1, 1);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (588, 15, N'中杯', 0.00, N'IT0016-U', N'IT6015-U', 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (589, 15, N'大杯', 10.00, N'IT0914-U', N'IT6907-U', 1, 1);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (590, 16, N'中杯', 0.00, N'IT0021-U', N'IT6023-U', 1, 0);
@@ -886,8 +955,6 @@ INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (650, 46, N'大杯', 30.00, N'IT3910-U', NULL, 1, 1);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (651, 47, N'中杯', 0.00, N'IT3004-U', NULL, 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (652, 47, N'大杯', 30.00, N'IT3911-U', NULL, 1, 1);
-INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (653, 48, N'中杯', 0.00, N'IT3077-U', NULL, 1, 0);
-INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (654, 48, N'大杯', 30.00, N'IT3924-U', NULL, 1, 1);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (655, 49, N'中杯', 0.00, N'IT2074-U', N'IT8050-U', 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (656, 49, N'大杯', 20.00, N'IT2967-U', N'IT8938-U', 1, 1);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (657, 50, N'中杯', 0.00, N'IT2001-U', N'IT8001-U', 1, 0);
@@ -941,8 +1008,13 @@ INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (705, 74, N'中杯', 0.00, N'IT9106-U', N'IT9018-U', 1, 0);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (706, 74, N'大杯', 25.00, N'IT9110-U', N'IT9022-U', 1, 1);
 INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (707, 75, N'大杯', 0.00, N'IT9108-U', N'IT9020-U', 1, 0);
-INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (708, 3, N'中杯', 0.00, N'IT0005-U', N'IT6005-U', 1, 0);
-INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (709, 3, N'大杯', 10.00, N'IT0903-U', N'IT6903-U', 1, 1);
+INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (710, 76, N'大杯', 0.00, N'IT0953-U', N'IT6935-U', 1, 0);
+INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (711, 3, N'中杯', 0.00, N'IT0005-U', N'IT6005-U', 1, 0);
+INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (712, 3, N'大杯', 10.00, N'IT0903-U', N'IT6903-U', 1, 1);
+INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (713, 48, N'中杯', 0.00, N'IT3077-U', NULL, 1, 0);
+INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (714, 48, N'大杯', 30.00, N'IT3924-U', NULL, 1, 1);
+INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (715, 14, N'中杯', 0.00, N'IT0011-U', NULL, 1, 0);
+INSERT INTO dmms.[ProductSizes] ([Id], [ProductId], [Name], [PriceAdjustment], [ColdBaseCode], [HotBaseCode], [IsEnabled], [SortOrder]) VALUES (716, 14, N'大杯', 20.00, N'IT0919-U', NULL, 1, 1);
 SET IDENTITY_INSERT dmms.[ProductSizes] OFF;
 
 -- ProductSpecialOptions: 637 列
@@ -1586,110 +1658,110 @@ INSERT INTO dmms.[ProductSpecialOptions] ([ProductId], [SpecialOptionId], [IsEna
 
 -- Products: 73 列
 SET IDENTITY_INSERT dmms.[Products] ON;
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (3, N'913 茶王', N'913 Tea', N'
-天仁招牌茶, 採用高山烏龍茶薰製美國花旗蔘, 自然回甘, 請您細細品嘗。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 121 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 156 毫克。原產地: 台灣。', NULL, 70.00, 1, 0, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (5, N'茶王 1953 奶茶', N'King''s Oolong 1953 Milk Tea', N'採用天仁限定烏龍茶調製而成的奶茶, 自然濃郁甘醇。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 448 大卡。大杯冰飲咖啡因: 140 毫克。茶產地: 台灣。', NULL, 75.00, 1, 2, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (6, N'茶王 1953 鮮奶茶', N'King''s Oolong 1953 Tea Latte', N'天仁限店烏龍茶與香濃鮮奶的新組合, 為你帶來濃郁又甘醇的滋味。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 356 大卡。大杯冰飲咖啡因: 145 毫克。茶產地: 台灣。', NULL, 110.00, 1, 3, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (7, N'多多綠茶', N'Probiotic Green Tea', N'經典天仁綠茶, 搭配多多飲品, 熟悉滋味與綠茶的清爽相融, 入口清新解渴。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 416 大卡。大杯冰飲咖啡因: 113 毫克。茶產地: 台灣。', NULL, 75.00, 1, 4, NULL, NULL, 0, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (8, N'多多洛神冰茶', N'Probiotic Roselle Green Tea', N'每日新鮮熬煮洛神原汁, 釋放洛神的酸甜風味與鮮紅色澤, 搭配天仁優質綠茶與優多飲品, 洛神果韻酸甜有層次。大杯冰飲總糖量: 90 公克。大杯冰飲總熱量: 414 大卡。大杯冰飲咖啡因: 57 毫克。原產地: 台灣。', NULL, 80.00, 1, 5, NULL, NULL, 0, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (9, N'913 桑葚果釀', N'913 King''s Oolong Mulberry Vinegar Tea', N'以 913 茶王基底, 醇厚茶韻, 搭配台灣在地桑椹果釀, 經過長時間靜置手工發酵釀造熟成, 無添加糖, 時間淬鍊下散發極致自然原味, 天然全新風味。中杯冰飲總糖量: 76 公克。中杯冰飲總熱量: 328 大卡。咖啡因含量: 87 毫克。大杯冰飲總糖量: 109 公克。大杯冰飲總熱量: 475 大卡。咖啡因含量: 87 毫克。茶產地: 台灣。', NULL, 105.00, 1, 6, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (10, N'多多檸檬綠茶', N'Probiotic Lemon Green Tea', N'以清新綠茶為基底, 加入 HPP 台灣檸檬汁, 完整保留檸檬的鮮香與營養, 搭配多多飲品, 酸甜熟悉的滋味在口中綻放。大杯冰飲總糖量: 107 公克。大杯冰飲總熱量: 491 大卡。大杯冰飲咖啡因: 28 毫克。茶產地: 台灣。', NULL, 115.00, 1, 7, NULL, NULL, 0, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (11, N'一茉綠', N'Jasmine Green Tea', N'以綠茶的清新為底, 揉捻茉莉花的芬芳, 茶香與花香交織出淡雅時光。中杯冰飲總糖量: 143 公克。中杯冰飲總熱量: 32 大卡。中杯冰飲咖啡因: 207 毫克。大杯冰飲總糖量: 237 公克。大杯冰飲總熱量: 54 大卡。大杯冰飲咖啡因: 266 毫克。茶產地：越南。', NULL, 45.00, 1, 8, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (12, N'經典綠茶', N'Classic Green Tea', N'新鮮, 甘醇的綠茶是一年四季皆可品飲的最優茶。中杯總糖量: 32 公克。中杯總熱量: 143 大卡。中杯咖啡因: 158 毫克。大杯總糖量: 54 公克。大杯總熱量: 237 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。', NULL, 50.00, 1, 9, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (13, N'經典紅茶', N'Classic Black Tea', N'阿薩姆紅茶醇厚紮實的風味, 飲用時順入口喉, 立即回甘。中杯總糖量: 32 公克。中杯總熱量: 138 大卡。中杯咖啡因: 178 毫克。大杯總糖量: 54 公克。大杯總熱量: 230 大卡。大杯咖啡因: 229 毫克。原產地: 印度。', NULL, 50.00, 1, 10, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (14, N'桂花金萱冰茶', N'Jinxuan Iced Tea with Osmanthus', N'金萱的牛奶香味薰以秋天桂花的香氣, 茶湯透澈, 滋味清雅。中杯冰飲總糖量: 32  公克, 中杯冰飲總熱量: 141 大卡。大杯冰飲總糖量: 54 公克, 大杯冰飲總熱量: 235 大卡。原產地: 台灣。', NULL, 80.00, 1, 11, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (15, N'菊花普洱茶', N'Pu-Er Tea with Chrysanthemum', N'普洱湯色栗紅, 滋味醇厚圓滑, 加上菊花香氣, 獨特的風韻是茶中極品。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 327 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 421 毫克。原產地: 中國。', NULL, 70.00, 1, 12, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (16, N'炟客烏龍茶', N'Roasted Oolong', N'限店茶飲。透過烘焙技巧, 使茶葉及茶湯色澤加深, 口感濃厚, 喉韻濃洌甘醇。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 271 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 349 毫克。原產地: 台灣。', NULL, 70.00, 1, 13, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (17, N'四季烏龍', N'Sihji Oolong Tea', N'以當季的上等烏龍茶所調製, 喉韻甘醇濃郁。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 159 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。', NULL, 60.00, 1, 14, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (18, N'洛神冰茶', N'Roselle Iced Tea', N'洛神加上甘醇的綠茶, 酸澀又帶點香甜的滋味。中杯總糖量: 65 公克。中杯總熱量: 291 大卡。中杯咖啡因: 57 毫克。大杯總糖量: 93 公克。大杯總熱量: 419 大卡。大杯咖啡因: 74 毫克。原產地: 台灣。', N'https://tb-static.uber.com/prod/image-proc/processed_images/ee17f9e4e00b86e229d151c66744aa8c/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg', 60.00, 1, 15, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (19, N'紅烏龍', N'Red Oolong', N'嚴選紅烏龍茶葉沖泡, 兼具紅茶的甘甜與烏龍茶的醇厚, 茶湯帶有天然熟果香與蜜香, 入口溫潤順口, 尾韻回甘, 是一款層次豐富, 耐人回味的特色茶飲。中杯冰飲總糖量: 32 公克。中杯冰飲總熱量: 138 大卡。咖啡因含量: 69 毫克。大杯冰飲總糖量: 47 公克。大杯冰飲總熱量: 199 大卡。咖啡因含量: 91 毫克。原產地: 台灣。', NULL, 45.00, 1, 16, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (20, N'茉香奶綠', N'Jasmine Milk Green Tea', N'以嚴選茉莉綠茶為基底, 融合細緻奶香, 茶湯中帶有淡雅花香與濃郁滑順口感。入口柔和順口, 甜而不膩, 是經典不敗的奶茶選擇, 適合喜愛香濃風味的族群。中杯冰飲總糖量: 288 公克。中杯冰飲總熱量: 37 大卡。中杯冰飲咖啡因: 207 毫克。大杯冰飲總糖量: 453 公克。大杯冰飲總熱量: 61 大卡。大杯冰飲咖啡因: 266 毫克。茶產地：越南。', NULL, 55.00, 1, 17, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (21, N'茶香奶綠', N'Jasmine Milk Green Tea', N'天仁的濃郁奶綠, 包含著清新與濃醇的好滋味。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 288 大卡。中杯冰飲咖啡因: 158 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 453 大卡。大杯冰飲咖啡因: 204 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 432 大卡。中杯熱飲咖啡因: 158 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 597 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。', NULL, 60.00, 1, 18, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (22, N'金香奶茶', N'Assam Black Tea with Milk', N'阿薩姆紅茶搭配濃厚的奶香, 香醇濃郁美味可口。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 282 大卡。中杯冰飲咖啡因: 178 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 446 大卡。大杯冰飲咖啡因: 229 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 426 大卡。中杯熱飲咖啡因: 178 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 590 大卡。大杯熱飲咖啡因: 229 毫克。原產地: 印度。', NULL, 60.00, 1, 19, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (23, N'珍珠奶綠', N'Milk Green Tea with Tapioca', N'特調綠茶調製而成的奶綠, 加上香 Q 的珍珠, 清香自然又濃郁。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 410 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 592 大卡。大杯冰飲咖啡因: 141 毫克。中杯熱飲總糖量: 48 公克。中杯熱飲總熱量: 555 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 66 公克。大杯熱飲總熱量: 736 大卡。大杯熱飲咖啡因: 141 毫克。原產地: 台灣。', NULL, 60.00, 1, 20, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (24, N'913 奶茶', N'913 Milk Tea', N'採用天仁的招牌烏龍茶調製而成的奶茶, 自然濃郁甘醇。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。中杯冰飲咖啡因: 121 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。大杯冰飲咖啡因: 156 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。中杯熱飲咖啡因: 121 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。大杯熱飲咖啡因: 156 毫克。原產地: 台灣。', NULL, 80.00, 1, 21, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (25, N'抹茶冰淇淋奶綠', N'Milk Green Tea with Matcha Ice Cream', N'限店茶飲。抹茶冰淇淋加上香濃滑順的奶綠, 搭配出豐富口感。中杯冰飲總糖量: 48 公克。中杯冰飲總熱量: 464 大卡。咖啡因: 125 毫克。原產地: 台灣。', NULL, 100.00, 1, 22, NULL, NULL, 0, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (26, N'普洱奶茶', N'Pu-Er Milk Tea', N'醇厚回甘的菊花普洱茶調製而成的奶茶, 獨特風味, 值得一嚐再嚐。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。中杯咖啡因: 327 毫克、大杯咖啡因: 421 毫克。原產地: 中國。', NULL, 80.00, 1, 23, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (27, N'炟客奶茶', N'Roasted Milk Tea', N'限店茶飲。以重焙火的烏龍喉韻製成的醇厚奶茶, 濃郁口感, 是夏日裡的沁涼茶飲。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。中杯咖啡因: 271 毫克、大杯咖啡因: 349 毫克。原產地: 台灣。', NULL, 80.00, 1, 24, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (28, N'四季烏龍奶茶', N'Sihji Oolong Milk Tea', N'以四季春烏龍茶所調製的烏龍奶茶, 口感濃郁清香。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。中杯冰飲咖啡因: 159 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。大杯冰飲咖啡因: 204 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。中杯熱飲咖啡因: 159 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。大杯熱飲咖啡因: 204 毫克。原產地: 台灣。', NULL, 70.00, 1, 25, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (29, N'香芋奶綠', N'Milk Green Tea with Taro', N'每日新鮮現煮芋頭讓您每一口都品嘗到濃濃的芋香。中杯冰飲總糖量: 52 公克。中杯冰飲總熱量: 379 大卡。大杯冰飲總糖量: 65 公克。大杯冰飲總熱量: 500 大卡。中杯熱飲總糖量: 57 公克。中杯熱飲總熱量: 523 大卡。大杯熱飲總糖量: 70 公克。大杯熱飲總熱量: 645 大卡。中杯咖啡因: 113 毫克、大杯咖啡因: 141 毫克。原產地: 台灣。', N'https://tb-static.uber.com/prod/image-proc/processed_images/21e38be5ddc38d4a84bdb8d04ffb4f39/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg', 85.00, 1, 26, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (30, N'珍珠奶茶', N'Milk Tea with Tapioca', N'嚴選阿薩姆紅茶調製而成的奶茶, 加上香 Q 的珍珠, 香醇濃郁超好喝。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 406 大卡。中杯冰飲咖啡因: 127 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 587 大卡。大杯咖啡因: 159 毫克。中杯熱飲總糖量: 48 公克。中杯熱飲總熱量: 551 大卡。中杯熱飲咖啡因: 127 毫克。大杯熱飲總糖量: 66 公克。大杯熱飲總熱量: 731 大卡。大杯熱飲咖啡因: 159 毫克。原產地: 印度。', N'https://tb-static.uber.com/prod/image-proc/processed_images/23a74d002b096d55da63e743b1bec4a0/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg', 60.00, 1, 27, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (31, N'甜漾紅烏龍奶茶', N'Red Ooloong Milk Tea', N'以香醇紅烏龍為基底, 搭配濃郁奶香調製, 茶香與奶香完美融合, 口感滑順細緻, 保留紅烏龍獨特的焙香與甘甜, 每一口都香濃不膩。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 282 大卡。咖啡因含量: 55 毫克。大杯冰飲總糖量: 53 公克。大杯冰飲總熱量: 415 大卡。咖啡因含量: 73 毫克。原產地: 台灣。', NULL, 55.00, 1, 28, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (32, N'甜漾奶綠', N'Green Milk Tea', N'以茉香綠茶為茶底, 融合香濃奶香, 散發淡雅茉莉花香與清新茶韻。入口滑順, 茶香清雅, 奶香柔和, 清爽不甜膩, 是經典耐喝的奶茶選擇。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 284 大卡。咖啡因含量: 89 毫克。大杯冰飲總糖量: 53 公克。大杯冰飲總熱量: 418 大卡。咖啡因含量: 118 毫克。原產地: 越南。', NULL, 55.00, 1, 29, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (33, N'醇蜜綠茶', N'Green Tea with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與綠茶香完美結合。
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (3, N'913 茶王', N'913 Tea', N'
+天仁招牌茶, 採用高山烏龍茶薰製美國花旗蔘, 自然回甘, 請您細細品嘗。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 121 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 156 毫克。原產地: 台灣。', NULL, 70.00, 1, 0, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (5, N'茶王 1953 奶茶', N'King''s Oolong 1953 Milk Tea', N'採用天仁限定烏龍茶調製而成的奶茶, 自然濃郁甘醇。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 448 大卡。大杯冰飲咖啡因: 140 毫克。茶產地: 台灣。', NULL, 75.00, 1, 2, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (6, N'茶王 1953 鮮奶茶', N'King''s Oolong 1953 Tea Latte', N'天仁限店烏龍茶與香濃鮮奶的新組合, 為你帶來濃郁又甘醇的滋味。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 356 大卡。大杯冰飲咖啡因: 145 毫克。茶產地: 台灣。', NULL, 110.00, 1, 3, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (7, N'多多綠茶', N'Probiotic Green Tea', N'經典天仁綠茶, 搭配多多飲品, 熟悉滋味與綠茶的清爽相融, 入口清新解渴。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 416 大卡。大杯冰飲咖啡因: 113 毫克。茶產地: 台灣。', NULL, 75.00, 1, 4, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (8, N'多多洛神冰茶', N'Probiotic Roselle Green Tea', N'每日新鮮熬煮洛神原汁, 釋放洛神的酸甜風味與鮮紅色澤, 搭配天仁優質綠茶與優多飲品, 洛神果韻酸甜有層次。大杯冰飲總糖量: 90 公克。大杯冰飲總熱量: 414 大卡。大杯冰飲咖啡因: 57 毫克。原產地: 台灣。', NULL, 80.00, 1, 5, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (9, N'913 桑葚果釀', N'913 King''s Oolong Mulberry Vinegar Tea', N'以 913 茶王基底, 醇厚茶韻, 搭配台灣在地桑椹果釀, 經過長時間靜置手工發酵釀造熟成, 無添加糖, 時間淬鍊下散發極致自然原味, 天然全新風味。中杯冰飲總糖量: 76 公克。中杯冰飲總熱量: 328 大卡。咖啡因含量: 87 毫克。大杯冰飲總糖量: 109 公克。大杯冰飲總熱量: 475 大卡。咖啡因含量: 87 毫克。茶產地: 台灣。', NULL, 105.00, 1, 6, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (10, N'多多檸檬綠茶', N'Probiotic Lemon Green Tea', N'以清新綠茶為基底, 加入 HPP 台灣檸檬汁, 完整保留檸檬的鮮香與營養, 搭配多多飲品, 酸甜熟悉的滋味在口中綻放。大杯冰飲總糖量: 107 公克。大杯冰飲總熱量: 491 大卡。大杯冰飲咖啡因: 28 毫克。茶產地: 台灣。', NULL, 115.00, 1, 7, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (11, N'一茉綠', N'Jasmine Green Tea', N'以綠茶的清新為底, 揉捻茉莉花的芬芳, 茶香與花香交織出淡雅時光。中杯冰飲總糖量: 143 公克。中杯冰飲總熱量: 32 大卡。中杯冰飲咖啡因: 207 毫克。大杯冰飲總糖量: 237 公克。大杯冰飲總熱量: 54 大卡。大杯冰飲咖啡因: 266 毫克。茶產地：越南。', NULL, 45.00, 1, 8, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (12, N'經典綠茶', N'Classic Green Tea', N'新鮮, 甘醇的綠茶是一年四季皆可品飲的最優茶。中杯總糖量: 32 公克。中杯總熱量: 143 大卡。中杯咖啡因: 158 毫克。大杯總糖量: 54 公克。大杯總熱量: 237 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。', NULL, 50.00, 1, 9, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (13, N'經典紅茶', N'Classic Black Tea', N'阿薩姆紅茶醇厚紮實的風味, 飲用時順入口喉, 立即回甘。中杯總糖量: 32 公克。中杯總熱量: 138 大卡。中杯咖啡因: 178 毫克。大杯總糖量: 54 公克。大杯總熱量: 230 大卡。大杯咖啡因: 229 毫克。原產地: 印度。', NULL, 50.00, 1, 10, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (14, N'桂花金萱冰茶', N'Jinxuan Iced Tea with Osmanthus', N'金萱的牛奶香味薰以秋天桂花的香氣, 茶湯透澈, 滋味清雅。中杯冰飲總糖量: 32  公克, 中杯冰飲總熱量: 141 大卡。大杯冰飲總糖量: 54 公克, 大杯冰飲總熱量: 235 大卡。原產地: 台灣。', NULL, 80.00, 1, 0, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (15, N'菊花普洱茶', N'Pu-Er Tea with Chrysanthemum', N'普洱湯色栗紅, 滋味醇厚圓滑, 加上菊花香氣, 獨特的風韻是茶中極品。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 327 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 421 毫克。原產地: 中國。', NULL, 70.00, 1, 12, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (16, N'炟客烏龍茶', N'Roasted Oolong', N'限店茶飲。透過烘焙技巧, 使茶葉及茶湯色澤加深, 口感濃厚, 喉韻濃洌甘醇。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 271 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 349 毫克。原產地: 台灣。', NULL, 70.00, 1, 13, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (17, N'四季烏龍', N'Sihji Oolong Tea', N'以當季的上等烏龍茶所調製, 喉韻甘醇濃郁。中杯總糖量: 32 公克。中杯總熱量: 140 大卡。中杯咖啡因: 159 毫克。大杯總糖量: 54 公克。大杯總熱量: 233 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。', NULL, 60.00, 1, 14, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (18, N'洛神冰茶', N'Roselle Iced Tea', N'洛神加上甘醇的綠茶, 酸澀又帶點香甜的滋味。中杯總糖量: 65 公克。中杯總熱量: 291 大卡。中杯咖啡因: 57 毫克。大杯總糖量: 93 公克。大杯總熱量: 419 大卡。大杯咖啡因: 74 毫克。原產地: 台灣。', N'https://tb-static.uber.com/prod/image-proc/processed_images/ee17f9e4e00b86e229d151c66744aa8c/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg', 60.00, 1, 15, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (19, N'紅烏龍', N'Red Oolong', N'嚴選紅烏龍茶葉沖泡, 兼具紅茶的甘甜與烏龍茶的醇厚, 茶湯帶有天然熟果香與蜜香, 入口溫潤順口, 尾韻回甘, 是一款層次豐富, 耐人回味的特色茶飲。中杯冰飲總糖量: 32 公克。中杯冰飲總熱量: 138 大卡。咖啡因含量: 69 毫克。大杯冰飲總糖量: 47 公克。大杯冰飲總熱量: 199 大卡。咖啡因含量: 91 毫克。原產地: 台灣。', NULL, 45.00, 1, 16, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (20, N'茉香奶綠', N'Jasmine Milk Green Tea', N'以嚴選茉莉綠茶為基底, 融合細緻奶香, 茶湯中帶有淡雅花香與濃郁滑順口感。入口柔和順口, 甜而不膩, 是經典不敗的奶茶選擇, 適合喜愛香濃風味的族群。中杯冰飲總糖量: 288 公克。中杯冰飲總熱量: 37 大卡。中杯冰飲咖啡因: 207 毫克。大杯冰飲總糖量: 453 公克。大杯冰飲總熱量: 61 大卡。大杯冰飲咖啡因: 266 毫克。茶產地：越南。', NULL, 55.00, 1, 17, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (21, N'茶香奶綠', N'Jasmine Milk Green Tea', N'天仁的濃郁奶綠, 包含著清新與濃醇的好滋味。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 288 大卡。中杯冰飲咖啡因: 158 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 453 大卡。大杯冰飲咖啡因: 204 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 432 大卡。中杯熱飲咖啡因: 158 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 597 大卡。大杯咖啡因: 204 毫克。原產地: 台灣。', NULL, 60.00, 1, 18, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (22, N'金香奶茶', N'Assam Black Tea with Milk', N'阿薩姆紅茶搭配濃厚的奶香, 香醇濃郁美味可口。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 282 大卡。中杯冰飲咖啡因: 178 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 446 大卡。大杯冰飲咖啡因: 229 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 426 大卡。中杯熱飲咖啡因: 178 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 590 大卡。大杯熱飲咖啡因: 229 毫克。原產地: 印度。', NULL, 60.00, 1, 19, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (23, N'珍珠奶綠', N'Milk Green Tea with Tapioca', N'特調綠茶調製而成的奶綠, 加上香 Q 的珍珠, 清香自然又濃郁。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 410 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 592 大卡。大杯冰飲咖啡因: 141 毫克。中杯熱飲總糖量: 48 公克。中杯熱飲總熱量: 555 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 66 公克。大杯熱飲總熱量: 736 大卡。大杯熱飲咖啡因: 141 毫克。原產地: 台灣。', NULL, 60.00, 1, 20, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (24, N'913 奶茶', N'913 Milk Tea', N'採用天仁的招牌烏龍茶調製而成的奶茶, 自然濃郁甘醇。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。中杯冰飲咖啡因: 121 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。大杯冰飲咖啡因: 156 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。中杯熱飲咖啡因: 121 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。大杯熱飲咖啡因: 156 毫克。原產地: 台灣。', NULL, 80.00, 1, 21, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (25, N'抹茶冰淇淋奶綠', N'Milk Green Tea with Matcha Ice Cream', N'限店茶飲。抹茶冰淇淋加上香濃滑順的奶綠, 搭配出豐富口感。中杯冰飲總糖量: 48 公克。中杯冰飲總熱量: 464 大卡。咖啡因: 125 毫克。原產地: 台灣。', NULL, 100.00, 1, 22, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (26, N'普洱奶茶', N'Pu-Er Milk Tea', N'醇厚回甘的菊花普洱茶調製而成的奶茶, 獨特風味, 值得一嚐再嚐。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。中杯咖啡因: 327 毫克、大杯咖啡因: 421 毫克。原產地: 中國。', NULL, 80.00, 1, 23, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (27, N'炟客奶茶', N'Roasted Milk Tea', N'限店茶飲。以重焙火的烏龍喉韻製成的醇厚奶茶, 濃郁口感, 是夏日裡的沁涼茶飲。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。中杯咖啡因: 271 毫克、大杯咖啡因: 349 毫克。原產地: 台灣。', NULL, 80.00, 1, 24, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (28, N'四季烏龍奶茶', N'Sihji Oolong Milk Tea', N'以四季春烏龍茶所調製的烏龍奶茶, 口感濃郁清香。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 285 大卡。中杯冰飲咖啡因: 159 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 449 大卡。大杯冰飲咖啡因: 204 毫克。中杯熱飲總糖量: 41 公克。中杯熱飲總熱量: 429 大卡。中杯熱飲咖啡因: 159 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 594 大卡。大杯熱飲咖啡因: 204 毫克。原產地: 台灣。', NULL, 70.00, 1, 25, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (29, N'香芋奶綠', N'Milk Green Tea with Taro', N'每日新鮮現煮芋頭讓您每一口都品嘗到濃濃的芋香。中杯冰飲總糖量: 52 公克。中杯冰飲總熱量: 379 大卡。大杯冰飲總糖量: 65 公克。大杯冰飲總熱量: 500 大卡。中杯熱飲總糖量: 57 公克。中杯熱飲總熱量: 523 大卡。大杯熱飲總糖量: 70 公克。大杯熱飲總熱量: 645 大卡。中杯咖啡因: 113 毫克、大杯咖啡因: 141 毫克。原產地: 台灣。', N'https://tb-static.uber.com/prod/image-proc/processed_images/21e38be5ddc38d4a84bdb8d04ffb4f39/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg', 85.00, 1, 26, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (30, N'珍珠奶茶', N'Milk Tea with Tapioca', N'嚴選阿薩姆紅茶調製而成的奶茶, 加上香 Q 的珍珠, 香醇濃郁超好喝。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 406 大卡。中杯冰飲咖啡因: 127 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 587 大卡。大杯咖啡因: 159 毫克。中杯熱飲總糖量: 48 公克。中杯熱飲總熱量: 551 大卡。中杯熱飲咖啡因: 127 毫克。大杯熱飲總糖量: 66 公克。大杯熱飲總熱量: 731 大卡。大杯熱飲咖啡因: 159 毫克。原產地: 印度。', N'https://tb-static.uber.com/prod/image-proc/processed_images/23a74d002b096d55da63e743b1bec4a0/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg', 60.00, 1, 27, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (31, N'甜漾紅烏龍奶茶', N'Red Ooloong Milk Tea', N'以香醇紅烏龍為基底, 搭配濃郁奶香調製, 茶香與奶香完美融合, 口感滑順細緻, 保留紅烏龍獨特的焙香與甘甜, 每一口都香濃不膩。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 282 大卡。咖啡因含量: 55 毫克。大杯冰飲總糖量: 53 公克。大杯冰飲總熱量: 415 大卡。咖啡因含量: 73 毫克。原產地: 台灣。', NULL, 55.00, 1, 28, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (32, N'甜漾奶綠', N'Green Milk Tea', N'以茉香綠茶為茶底, 融合香濃奶香, 散發淡雅茉莉花香與清新茶韻。入口滑順, 茶香清雅, 奶香柔和, 清爽不甜膩, 是經典耐喝的奶茶選擇。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 284 大卡。咖啡因含量: 89 毫克。大杯冰飲總糖量: 53 公克。大杯冰飲總熱量: 418 大卡。咖啡因含量: 118 毫克。原產地: 越南。', NULL, 55.00, 1, 29, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (33, N'醇蜜綠茶', N'Green Tea with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與綠茶香完美結合。
 中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：109大卡。咖啡因含量：113毫克。
 大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：168大卡。咖啡因含量：159毫克。
-原產地：台灣', NULL, 60.00, 1, 30, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (34, N'醇蜜紅茶', N'Black Tea with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與紅茶香完美結合。
+原產地：台灣', NULL, 60.00, 1, 30, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (34, N'醇蜜紅茶', N'Black Tea with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與紅茶香完美結合。
 中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：105大卡。咖啡因含量：127毫克。
 大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：168大卡。咖啡因含量：159毫克。
-原產地：台灣', NULL, 60.00, 1, 31, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (35, N'醇蜜菊普茶', N'Chrysanthemum and Pu-er Tea with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與菊普茶香完美結合。
+原產地：台灣', NULL, 60.00, 1, 31, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (35, N'醇蜜菊普茶', N'Chrysanthemum and Pu-er Tea with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與菊普茶香完美結合。
 中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：107大卡。咖啡因含量：234毫克。
 大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：171大卡。咖啡因含量：292毫克。
-原產地：台灣', NULL, 80.00, 1, 32, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (36, N'醇蜜四季烏龍', N'Sihji Oolong with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與四季烏龍茶香完美結合。
+原產地：台灣', NULL, 80.00, 1, 32, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (36, N'醇蜜四季烏龍', N'Sihji Oolong with Honey', N'甜度固定。嚴選真蜂蜜，綿延的甜蜜與四季烏龍茶香完美結合。
 中杯冰/熱飲總糖量：23公克。中杯冰/熱飲總熱量：107大卡。咖啡因含量：113毫克。
 大杯冰/熱飲總糖量：37公克。大杯冰/熱飲總熱量：171大卡。咖啡因含量：142毫克。
-原產地：台灣', NULL, 70.00, 1, 33, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (37, N'醇蜜奶綠', N'Milk Green Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 34, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (38, N'醇蜜奶茶', N'Milk Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 35, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (39, N'醇蜜珍珠奶茶', N'Tapioca Milk Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 36, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (40, N'醇蜜珍珠奶綠', N'Tapioca Milk Green Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 37, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (41, N'醇蜜鮮奶茶', N'Fresh Milk Tea with Hoeny', N'甜度固定。濃醇蜜香搭配香濃的鮮奶茶，入口滑順，完美調和。
+原產地：台灣', NULL, 70.00, 1, 33, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (37, N'醇蜜奶綠', N'Milk Green Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 34, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (38, N'醇蜜奶茶', N'Milk Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 35, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (39, N'醇蜜珍珠奶茶', N'Tapioca Milk Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 36, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (40, N'醇蜜珍珠奶綠', N'Tapioca Milk Green Tea with Honey', N'甜度固定。', NULL, 70.00, 1, 37, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (41, N'醇蜜鮮奶茶', N'Fresh Milk Tea with Hoeny', N'甜度固定。濃醇蜜香搭配香濃的鮮奶茶，入口滑順，完美調和。
 中杯冰/熱飲總糖量：29公克。中杯冰/熱飲總熱量：193大卡。咖啡因含量：96毫克。
 大杯冰/熱飲總糖量：47公克。大杯冰/熱飲總熱量：303大卡。咖啡因含量：142毫克。
-原產地：台灣', NULL, 95.00, 1, 38, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (42, N'醇蜜鮮奶綠', N'Fresh Milk Green Tea with Honey', N'甜度固定。濃醇蜜香搭配香濃的鮮奶綠，入口滑順，完美調和。
+原產地：台灣', NULL, 95.00, 1, 38, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (42, N'醇蜜鮮奶綠', N'Fresh Milk Green Tea with Honey', N'甜度固定。濃醇蜜香搭配香濃的鮮奶綠，入口滑順，完美調和。
 中杯冰/熱飲總糖量：29公克。中杯冰/熱飲總熱量：193大卡。咖啡因含量：96毫克。
 大杯冰/熱飲總糖量：47公克。大杯冰/熱飲總熱量：303大卡。咖啡因含量：142毫克。
-原產地：台灣', NULL, 95.00, 1, 39, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (43, N'醇蜜珍珠鮮奶茶', N'Tapioca Fresh Milk Tea with Honey', N'甜度固定。', NULL, 95.00, 1, 40, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (44, N'醇蜜珍珠鮮奶綠', N'Tapioca Fresh Milk Green Tea with Honey', N'甜度固定。', NULL, 95.00, 1, 41, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (45, N'醇蜜四季鮮奶茶', N'Sihji Fresh Milk Tea with Honey', N'甜度固定。濃醇蜜香搭配香濃的四季烏龍鮮奶茶，入口滑順，完美調和。
+原產地：台灣', NULL, 95.00, 1, 39, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (43, N'醇蜜珍珠鮮奶茶', N'Tapioca Fresh Milk Tea with Honey', N'甜度固定。', NULL, 95.00, 1, 40, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (44, N'醇蜜珍珠鮮奶綠', N'Tapioca Fresh Milk Green Tea with Honey', N'甜度固定。', NULL, 95.00, 1, 41, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (45, N'醇蜜四季鮮奶茶', N'Sihji Fresh Milk Tea with Honey', N'甜度固定。濃醇蜜香搭配香濃的四季烏龍鮮奶茶，入口滑順，完美調和。
 中杯冰/熱飲總糖量：29公克。中杯冰飲總熱量：193大卡。咖啡因含量：96毫克。
 大杯冰飲總糖量：47公克。大杯冰飲總熱量：303大卡。咖啡因含量：142毫克。
-原產地：台灣', NULL, 105.00, 1, 42, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (46, N'醇蜜檸檬綠茶', N'Green Tea with Hoeny and Lemon', N'甜度固定。蜂蜜與檸檬的相遇，再搭配綠茶，帶給您清爽的酸甜好滋味。
+原產地：台灣', NULL, 105.00, 1, 42, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (46, N'醇蜜檸檬綠茶', N'Green Tea with Hoeny and Lemon', N'甜度固定。蜂蜜與檸檬的相遇，再搭配綠茶，帶給您清爽的酸甜好滋味。
 中杯冰飲總糖量：37公克。中杯冰飲總熱量：177大卡。咖啡因含量：102毫克。
 大杯冰飲總糖量：45公克。大杯冰飲總熱量：218大卡。咖啡因含量：136毫克。
-原產地：台灣', NULL, 95.00, 1, 43, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (47, N'醇蜜檸檬紅茶', N'Black Tea with Hoeny and Lemon', N'甜度固定。蜂蜜與檸檬的相遇，再搭配紅茶，帶給您清爽的酸甜好滋味。
+原產地：台灣', NULL, 95.00, 1, 43, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (47, N'醇蜜檸檬紅茶', N'Black Tea with Hoeny and Lemon', N'甜度固定。蜂蜜與檸檬的相遇，再搭配紅茶，帶給您清爽的酸甜好滋味。
 中杯冰飲總糖量：37公克。中杯冰飲總熱量：174大卡。咖啡因含量：114毫克。
 大杯冰飲總糖量：45公克。大杯冰飲總熱量：213大卡。咖啡因含量：152毫克。
-原產地：台灣', NULL, 95.00, 1, 44, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (48, N'醇蜜檸檬四季烏龍', N'Sihji Oolong with Honey and Lemon', N'甜度固定。蜂蜜與檸檬的相遇，帶給您清爽的酸甜好滋味。
+原產地：台灣', NULL, 95.00, 1, 44, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (48, N'醇蜜檸檬四季烏龍', N'Sihji Oolong with Honey and Lemon', N'甜度固定。蜂蜜與檸檬的相遇，帶給您清爽的酸甜好滋味。
 中杯冰飲總糖量：37公克。中杯冰飲總熱量：175大卡。咖啡因含量：102毫克。
 大杯冰飲總糖量：45公克。大杯冰飲總熱量：216大卡。咖啡因含量：136毫克。
-原產地：台灣', NULL, 105.00, 1, 45, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (49, N'茉香鮮奶綠', N'Jasmine  Green Tea Latte', N'選用清香茉莉綠茶, 搭配新鮮牛奶調製而成, 保留茶葉本身的自然花香, 同時增添溫潤奶香。整體口感清爽不厚重, 風味純淨, 是追求清新口感的理想選擇。中杯冰飲總糖量: 219 公克。中杯冰飲總熱量: 38 大卡。中杯冰飲咖啡因: 133 毫克。大杯冰飲總糖量: 358 公克。大杯冰飲總熱量: 63 大卡。大杯冰飲咖啡因: 192 毫克。茶產地：越南。', NULL, 80.00, 1, 46, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (50, N'鮮奶綠', N'Fresh Milk Green Tea', N'香濃的鮮奶加上糖香濃郁的優等綠茶, 香濃綿密的鮮奶泡中不失鮮採綠茶的茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 227 大卡。中杯冰飲咖啡因: 96 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 367 大卡。大杯冰飲咖啡因: 141 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 241 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 381 大卡。大杯熱飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 47, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (51, N'鮮奶茶', N'Fresh Milk Tea', N'香濃的鮮奶加上糖香濃郁的優等紅茶, 香濃綿密的鮮奶泡中不失鮮採茶的茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 224 大卡。中杯冰飲咖啡因: 108 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 362 大卡。大杯冰飲咖啡因: 159 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 237 大卡。中杯熱飲咖啡因: 127 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 375 大卡。大杯熱飲咖啡因: 178 毫克。原產地: 印度。', NULL, 85.00, 1, 48, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (52, N'珍珠鮮奶茶', N'Fresh Milk Tea with Tapioca', N'香濃鮮奶與紅茶調製成新鮮奶茶, 搭配香 Q 的珍珠, 是您更加健康的新選擇, 享受美味也能輕鬆無負擔。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 335 大卡。中杯冰飲咖啡因: 102 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 470 大卡。大杯冰飲咖啡因: 127 毫克。中杯熱飲總糖量: 45 公克。中杯熱飲總熱量: 349 大卡。中杯熱飲咖啡因: 114 毫克。大杯熱飲總糖量: 63 公克。大杯熱飲總熱量: 491 大卡。大杯熱飲咖啡因: 140 毫克。原產地: 印度。', NULL, 85.00, 1, 49, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (53, N'珍珠鮮奶綠', N'Fresh Milk Green Tea with Tapioca', N'香濃鮮奶與綠茶調製成新鮮奶綠, 搭配香 Q 的珍珠, 是您更加健康的新選擇, 享受美味也能輕鬆無負擔。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 338 大卡。中杯冰飲咖啡因: 91 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 474 大卡。大杯冰飲咖啡因: 113 毫克。中杯熱飲總糖量: 45 公克。中杯熱飲總熱量: 352 大卡。中杯熱飲咖啡因: 102 毫克。大杯熱飲總糖量: 63 公克。大杯熱飲總熱量: 494 大卡。大杯熱飲咖啡因: 124 毫克。原產地: 台灣。', NULL, 85.00, 1, 50, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (54, N'香芋鮮奶綠', N'Fresh Milk Green Tea with Taro', N'使用現煮新鮮芋頭和頂級鮮奶調配而成, 有濃濃的芋頭香, 奶香, 絕對讓你念念不忘。中杯冰飲總糖量: 53 公克。中杯冰飲總熱量: 307 大卡。中杯冰飲咖啡因: 91 毫克。大杯冰飲總糖量: 65 公克。大杯冰飲總熱量: 382 大卡。大杯冰飲咖啡因: 113 毫克。中杯熱飲總糖量: 54 公克。中杯熱飲總熱量: 320 大卡。中杯冰飲咖啡因: 102 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 391 大卡。大杯熱飲咖啡因: 124 毫克。原產地: 台灣。', NULL, 110.00, 1, 51, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (55, N'913 鮮奶茶', N'913 Fresh Milk Tea', N'天仁的招牌烏龍茶與香濃鮮奶的新組合, 為你帶來濃郁又甘醇的滋味。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 74 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 108 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 87 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 121 毫克。原產地: 台灣。', NULL, 105.00, 1, 52, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (56, N'四季烏龍鮮奶茶', N'Sihji Oolong Fresh Milk Tea', N'以四季春烏龍結合鮮乳所調製, 入口濃醇奶香中透出了清新茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 96 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 142 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 159 毫克。原產地: 台灣。', NULL, 95.00, 1, 53, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (57, N'普洱拿鐵', N'Pu-Er Latte', N'香濃鮮奶加上醇厚回甘的菊花普洱茶, 是您嚐鮮的最佳選擇。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 199 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 292 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 234 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 327 毫克。原產地: 中國。', NULL, 105.00, 1, 54, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (58, N'炟客拿鐵', N'Roasted Latte', N'限店茶飲。香濃鮮奶加上重焙火的烏龍喉韻, 茶香奶香一飲而下, 絕對齒頰留香。中杯冰飲總糖量 : 38  公克。中杯冰飲總熱量 : 231  大卡。大杯冰飲總糖量 : 53  公克。大杯冰飲總熱量 : 323  大卡。原產地 : 台灣。', NULL, 105.00, 1, 55, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (59, N'仙草鮮奶茶', N'Fresh Milk Tea', N'限店茶飲。古早味的仙草滑順又 Q 彈, 搭配濃香鮮奶茶是最懷舊的新茶飲。中杯冰飲總糖量: 42 公克。中杯冰飲總熱量: 235 大卡。中杯冰飲咖啡因: 108 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量:317 大卡。大杯冰飲咖啡因: 133 毫克。中杯熱飲總糖量: 43 公克。中杯熱飲總熱量:248 大卡。中杯熱飲咖啡因: 121 毫克。大杯熱飲總糖量: 54 公克。大杯熱飲總熱量: 317 大卡。大杯熱飲咖啡因: 146 毫克。原產地: 印度。', NULL, 90.00, 1, 56, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (60, N'甜漾紅烏龍鮮奶茶', N'Red Oolong Fresh Milk Tea', N'選用紅烏龍茶搭配新鮮鮮奶, 呈現自然純粹的風味。鮮奶的濃醇襯托出紅烏龍的蜜香與回甘, 口感更加清爽柔順, 享受茶與鮮奶最純粹的比例。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 196 大卡。咖啡因含量: 46 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量: 277 大卡。咖啡因含量: 64 毫克。原產地: 台灣。', NULL, 70.00, 1, 57, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (61, N'甜漾鮮奶綠', N'Green Fresh Milk Tea', N'選用茉香綠茶搭配新鮮鮮奶調製, 茉莉花香自然淡雅, 茶感清新, 鮮奶香醇順口, 層次細膩且口感輕盈, 呈現清爽又富有質感的鮮奶茶風味。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 198 大卡。咖啡因含量: 74 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量: 280 大卡。咖啡因含量: 103 毫克。原產地: 越南。', NULL, 70.00, 1, 58, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (62, N'茉莉百香果釀', N'Jasmine Passionfruit Vinegar Green Tea', N'以茉莉綠茶為底, 加入香氣濃郁的百香果醋, 交織出清新花香與酸甜果韻。口感輕盈爽口, 層次豐富, 特別適合炎熱天氣飲用, 帶來沁涼解渴的享受。中杯冰飲總糖量: 286 公克。中杯冰飲總熱量: 66 大卡。中杯冰飲咖啡因: 148 毫克。大杯冰飲總糖量: 412 公克。大杯冰飲總熱量: 95 大卡。大杯冰飲咖啡因: 199 毫克。茶產地：越南。', NULL, 105.00, 1, 59, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (63, N'檸檬綠茶', N'Lemon Green Tea', N'新鮮現榨檸檬汁加上綠茶, 酸酸甜甜天然好滋味。中杯冰飲總糖量: 65 公克。中杯冰飲總熱量: 288 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 412 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 60, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (64, N'檸檬紅茶', N'Lemon Black Tea', N'新鮮現榨檸檬汁加上紅茶, 酸酸甜甜天然好滋味。中杯冰飲總糖量: 65 公克。中杯冰飲總熱量: 284 大卡。中杯冰飲咖啡因: 127 毫克。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 407 大卡。大杯冰飲咖啡因: 178 毫克。原產地: 台灣。', NULL, 85.00, 1, 61, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (65, N'香橙綠茶', N'Orange Green Tea', N'使用 HPP 台灣鮮榨柳丁汁搭配綠茶, 保有新鮮柳丁風味的果茶。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 219 大卡。中杯冰飲咖啡因: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 354 大卡。大杯冰飲咖啡因: 91 毫克。原產地: 台灣。', NULL, 85.00, 1, 62, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (66, N'香橙四季烏龍', N'Sihji Oolong with Orange', N'使用 HPP 台灣鮮榨柳丁汁搭配四季烏龍茶, 保有新鮮柳丁風味的果茶。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 218 大卡。中杯冰飲咖啡因: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 353 大卡。大杯冰飲咖啡因: 91 毫克。原產地: 台灣。', NULL, 95.00, 1, 63, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (67, N'金桔綠茶', N'Kumquat Green Tea', N'飲品含有蜂蜜。清新的綠茶加上新鮮的金桔, 檸檬, 茶味清新, 口感解膩。中杯冰飲總糖量: 56 公克。中杯冰飲總熱量: 257 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 92 公克。大杯冰飲總熱量: 422 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 64, NULL, NULL, 1, 1);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (68, N'梅子綠茶', N'Plum Green Tea', N'特別調製的酸梅原汁消暑祕方, 絕對讚不絕口。中杯冰飲總糖量: 50 公克。中杯冰飲總熱量: 239 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 90 公克。大杯冰飲總熱量: 430 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 65, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (69, N'金橙綠果茶', N'Kumquat Green Tea with Orange', N'結合金桔的清酸, 柳橙的果香甜韻, 加上綠茶的清爽底味, 呈現酸甜層次, 完美平衡。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 222 大卡。咖啡因含量: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 360 大卡。咖啡因含量: 91 毫克。茶產地: 台灣。', NULL, 110.00, 1, 66, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (70, N'西西里冰茶', N'Sicilian Iced Tea', N'不含咖啡, 以火味十足的炟客烏龍取代咖啡基底, 透過與檸檬酸甜結合完美比例, 還原西西里的特色, 在炙熱夏日上市, 急速解熱! 中杯冰飲總糖量: 94 公克。中杯冰飲總熱量: 412 大卡。咖啡因含量: 194 毫克。大杯冰飲總糖量: 112 公克。大杯冰飲總熱量: 495 大卡。咖啡因含量: 271 毫克。茶產地: 台灣。', NULL, 110.00, 1, 67, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (71, N'西西里凍飲', N'Sicilian Iced Drink', N'不含咖啡, 以火味十足的炟客烏龍取代咖啡基底, 與檸檬酸甜結合完美比例, 再加上麥茶凍增加豐富層次, 在炙熱夏日上市, 急速解熱。中杯冰飲總糖量: 76 公克。中杯冰飲總熱量: 328 大卡。咖啡因含量：136 毫克。大杯冰飲總糖量: 109 公克。大杯冰飲總熱量: 475 大卡。咖啡因含量: 194 毫克。茶產地: 台灣。', NULL, 110.00, 1, 68, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (72, N'六条麥茶', N'Signature Wheat Tea', N'無咖啡因日本六条麥茶, 焙香適口恰到好處, 清爽無負擔。中杯冰及熱飲總糖量: 32 公克。中杯冰及熱飲總熱量: 138 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 54 公克。大杯冰及熱飲總熱量: 230 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 60.00, 1, 69, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (73, N'六条麥桔茶', N'Signature Kumquat Wheat Tea', N'無咖啡因日本六条麥茶結合酸香金桔汁, 絕妙新品超乎想像好喝。中杯冰及熱飲總糖量: 47 公克。中杯冰及熱飲總熱量: 202 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 65 公克。大杯冰及熱飲總熱量: 281 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 85.00, 1, 70, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (74, N'六条麥茶鮮奶', N'Signature Fresh Milk Wheat Tea', N'無咖啡因日本六条麥茶搭配小農鮮乳, 濃醇奶味散發煎焙麥香 中杯冰及熱飲總糖量: 37 公克。中杯冰及熱飲總熱量: 204 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 54 公克。大杯冰及熱飲總熱量: 298 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 95.00, 1, 71, NULL, NULL, 1, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (75, N'六条麥茶冬露', N'Signature Wheat Tea with White Gourd Drink', N'限大杯。無咖啡因日本六条麥茶加入冬瓜茶, 香甜好喝是夏日最佳選擇。大杯冰及熱飲總糖量: 55 公克。大杯冰及熱飲總熱量: 235 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 80.00, 1, 72, NULL, NULL, 0, 0);
-INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid], [HasSizeGroup], [SweetnessAtProductLevel]) VALUES (76, N'茶王', N'1953 King''s Oolong 1953', N'源自天仁茗茶 1953 年創立的初心, 承襲七十餘年製茶工藝。茶湯厚實飽滿, 韻味深長, 盡顯品牌底蘊與情感價值, 因此命名為「茶王1953」, 象徵傳承與經典。大杯總糖量: 54 公克。大杯總熱量: 232 大卡。大杯咖啡因: 140 毫克。茶產地: 台灣。', N'https://tb-static.uber.com/prod/image-proc/processed_images/447c173a2d505d1bc7440215775fe117/d03e52b3c8af19d8fa8222e23efd9cfa.jpeg', 65.00, 1, 1, NULL, NULL, 1, 0);
+原產地：台灣', NULL, 105.00, 1, 0, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (49, N'茉香鮮奶綠', N'Jasmine  Green Tea Latte', N'選用清香茉莉綠茶, 搭配新鮮牛奶調製而成, 保留茶葉本身的自然花香, 同時增添溫潤奶香。整體口感清爽不厚重, 風味純淨, 是追求清新口感的理想選擇。中杯冰飲總糖量: 219 公克。中杯冰飲總熱量: 38 大卡。中杯冰飲咖啡因: 133 毫克。大杯冰飲總糖量: 358 公克。大杯冰飲總熱量: 63 大卡。大杯冰飲咖啡因: 192 毫克。茶產地：越南。', NULL, 80.00, 1, 46, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (50, N'鮮奶綠', N'Fresh Milk Green Tea', N'香濃的鮮奶加上糖香濃郁的優等綠茶, 香濃綿密的鮮奶泡中不失鮮採綠茶的茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 227 大卡。中杯冰飲咖啡因: 96 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 367 大卡。大杯冰飲咖啡因: 141 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 241 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 381 大卡。大杯熱飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 47, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (51, N'鮮奶茶', N'Fresh Milk Tea', N'香濃的鮮奶加上糖香濃郁的優等紅茶, 香濃綿密的鮮奶泡中不失鮮採茶的茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 224 大卡。中杯冰飲咖啡因: 108 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 362 大卡。大杯冰飲咖啡因: 159 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 237 大卡。中杯熱飲咖啡因: 127 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 375 大卡。大杯熱飲咖啡因: 178 毫克。原產地: 印度。', NULL, 85.00, 1, 48, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (52, N'珍珠鮮奶茶', N'Fresh Milk Tea with Tapioca', N'香濃鮮奶與紅茶調製成新鮮奶茶, 搭配香 Q 的珍珠, 是您更加健康的新選擇, 享受美味也能輕鬆無負擔。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 335 大卡。中杯冰飲咖啡因: 102 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 470 大卡。大杯冰飲咖啡因: 127 毫克。中杯熱飲總糖量: 45 公克。中杯熱飲總熱量: 349 大卡。中杯熱飲咖啡因: 114 毫克。大杯熱飲總糖量: 63 公克。大杯熱飲總熱量: 491 大卡。大杯熱飲咖啡因: 140 毫克。原產地: 印度。', NULL, 85.00, 1, 49, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (53, N'珍珠鮮奶綠', N'Fresh Milk Green Tea with Tapioca', N'香濃鮮奶與綠茶調製成新鮮奶綠, 搭配香 Q 的珍珠, 是您更加健康的新選擇, 享受美味也能輕鬆無負擔。中杯冰飲總糖量: 44 公克。中杯冰飲總熱量: 338 大卡。中杯冰飲咖啡因: 91 毫克。大杯冰飲總糖量: 61 公克。大杯冰飲總熱量: 474 大卡。大杯冰飲咖啡因: 113 毫克。中杯熱飲總糖量: 45 公克。中杯熱飲總熱量: 352 大卡。中杯熱飲咖啡因: 102 毫克。大杯熱飲總糖量: 63 公克。大杯熱飲總熱量: 494 大卡。大杯熱飲咖啡因: 124 毫克。原產地: 台灣。', NULL, 85.00, 1, 50, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (54, N'香芋鮮奶綠', N'Fresh Milk Green Tea with Taro', N'使用現煮新鮮芋頭和頂級鮮奶調配而成, 有濃濃的芋頭香, 奶香, 絕對讓你念念不忘。中杯冰飲總糖量: 53 公克。中杯冰飲總熱量: 307 大卡。中杯冰飲咖啡因: 91 毫克。大杯冰飲總糖量: 65 公克。大杯冰飲總熱量: 382 大卡。大杯冰飲咖啡因: 113 毫克。中杯熱飲總糖量: 54 公克。中杯熱飲總熱量: 320 大卡。中杯冰飲咖啡因: 102 毫克。大杯熱飲總糖量: 65 公克。大杯熱飲總熱量: 391 大卡。大杯熱飲咖啡因: 124 毫克。原產地: 台灣。', NULL, 110.00, 1, 51, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (55, N'913 鮮奶茶', N'913 Fresh Milk Tea', N'天仁的招牌烏龍茶與香濃鮮奶的新組合, 為你帶來濃郁又甘醇的滋味。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 74 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 108 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 87 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 121 毫克。原產地: 台灣。', NULL, 105.00, 1, 52, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (56, N'四季烏龍鮮奶茶', N'Sihji Oolong Fresh Milk Tea', N'以四季春烏龍結合鮮乳所調製, 入口濃醇奶香中透出了清新茶香。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 96 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 142 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 113 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 159 毫克。原產地: 台灣。', NULL, 95.00, 1, 53, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (57, N'普洱拿鐵', N'Pu-Er Latte', N'香濃鮮奶加上醇厚回甘的菊花普洱茶, 是您嚐鮮的最佳選擇。中杯冰飲總糖量: 38 公克。中杯冰飲總熱量: 225 大卡。中杯冰飲咖啡因: 199 毫克。大杯冰飲總糖量: 63 公克。大杯冰飲總熱量: 364 大卡。大杯冰飲咖啡因: 292 毫克。中杯熱飲總糖量: 39 公克。中杯熱飲總熱量: 239 大卡。中杯熱飲咖啡因: 234 毫克。大杯熱飲總糖量: 64 公克。大杯熱飲總熱量: 378 大卡。大杯熱飲咖啡因: 327 毫克。原產地: 中國。', NULL, 105.00, 1, 54, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (58, N'炟客拿鐵', N'Roasted Latte', N'限店茶飲。香濃鮮奶加上重焙火的烏龍喉韻, 茶香奶香一飲而下, 絕對齒頰留香。中杯冰飲總糖量 : 38  公克。中杯冰飲總熱量 : 231  大卡。大杯冰飲總糖量 : 53  公克。大杯冰飲總熱量 : 323  大卡。原產地 : 台灣。', NULL, 105.00, 1, 55, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (59, N'仙草鮮奶茶', N'Fresh Milk Tea', N'限店茶飲。古早味的仙草滑順又 Q 彈, 搭配濃香鮮奶茶是最懷舊的新茶飲。中杯冰飲總糖量: 42 公克。中杯冰飲總熱量: 235 大卡。中杯冰飲咖啡因: 108 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量:317 大卡。大杯冰飲咖啡因: 133 毫克。中杯熱飲總糖量: 43 公克。中杯熱飲總熱量:248 大卡。中杯熱飲咖啡因: 121 毫克。大杯熱飲總糖量: 54 公克。大杯熱飲總熱量: 317 大卡。大杯熱飲咖啡因: 146 毫克。原產地: 印度。', NULL, 90.00, 1, 56, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (60, N'甜漾紅烏龍鮮奶茶', N'Red Oolong Fresh Milk Tea', N'選用紅烏龍茶搭配新鮮鮮奶, 呈現自然純粹的風味。鮮奶的濃醇襯托出紅烏龍的蜜香與回甘, 口感更加清爽柔順, 享受茶與鮮奶最純粹的比例。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 196 大卡。咖啡因含量: 46 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量: 277 大卡。咖啡因含量: 64 毫克。原產地: 台灣。', NULL, 70.00, 1, 57, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (61, N'甜漾鮮奶綠', N'Green Fresh Milk Tea', N'選用茉香綠茶搭配新鮮鮮奶調製, 茉莉花香自然淡雅, 茶感清新, 鮮奶香醇順口, 層次細膩且口感輕盈, 呈現清爽又富有質感的鮮奶茶風味。中杯冰飲總糖量: 37 公克。中杯冰飲總熱量: 198 大卡。咖啡因含量: 74 毫克。大杯冰飲總糖量: 52 公克。大杯冰飲總熱量: 280 大卡。咖啡因含量: 103 毫克。原產地: 越南。', NULL, 70.00, 1, 58, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (62, N'茉莉百香果釀', N'Jasmine Passionfruit Vinegar Green Tea', N'以茉莉綠茶為底, 加入香氣濃郁的百香果醋, 交織出清新花香與酸甜果韻。口感輕盈爽口, 層次豐富, 特別適合炎熱天氣飲用, 帶來沁涼解渴的享受。中杯冰飲總糖量: 286 公克。中杯冰飲總熱量: 66 大卡。中杯冰飲咖啡因: 148 毫克。大杯冰飲總糖量: 412 公克。大杯冰飲總熱量: 95 大卡。大杯冰飲咖啡因: 199 毫克。茶產地：越南。', NULL, 105.00, 1, 59, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (63, N'檸檬綠茶', N'Lemon Green Tea', N'新鮮現榨檸檬汁加上綠茶, 酸酸甜甜天然好滋味。中杯冰飲總糖量: 65 公克。中杯冰飲總熱量: 288 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 412 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 60, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (64, N'檸檬紅茶', N'Lemon Black Tea', N'新鮮現榨檸檬汁加上紅茶, 酸酸甜甜天然好滋味。中杯冰飲總糖量: 65 公克。中杯冰飲總熱量: 284 大卡。中杯冰飲咖啡因: 127 毫克。大杯冰飲總糖量: 93 公克。大杯冰飲總熱量: 407 大卡。大杯冰飲咖啡因: 178 毫克。原產地: 台灣。', NULL, 85.00, 1, 61, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (65, N'香橙綠茶', N'Orange Green Tea', N'使用 HPP 台灣鮮榨柳丁汁搭配綠茶, 保有新鮮柳丁風味的果茶。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 219 大卡。中杯冰飲咖啡因: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 354 大卡。大杯冰飲咖啡因: 91 毫克。原產地: 台灣。', NULL, 85.00, 1, 62, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (66, N'香橙四季烏龍', N'Sihji Oolong with Orange', N'使用 HPP 台灣鮮榨柳丁汁搭配四季烏龍茶, 保有新鮮柳丁風味的果茶。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 218 大卡。中杯冰飲咖啡因: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 353 大卡。大杯冰飲咖啡因: 91 毫克。原產地: 台灣。', NULL, 95.00, 1, 63, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (67, N'金桔綠茶', N'Kumquat Green Tea', N'飲品含有蜂蜜。清新的綠茶加上新鮮的金桔, 檸檬, 茶味清新, 口感解膩。中杯冰飲總糖量: 56 公克。中杯冰飲總熱量: 257 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 92 公克。大杯冰飲總熱量: 422 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 64, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (68, N'梅子綠茶', N'Plum Green Tea', N'特別調製的酸梅原汁消暑祕方, 絕對讚不絕口。中杯冰飲總糖量: 50 公克。中杯冰飲總熱量: 239 大卡。中杯冰飲咖啡因: 113 毫克。大杯冰飲總糖量: 90 公克。大杯冰飲總熱量: 430 大卡。大杯冰飲咖啡因: 158 毫克。原產地: 台灣。', NULL, 85.00, 1, 65, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (69, N'金橙綠果茶', N'Kumquat Green Tea with Orange', N'結合金桔的清酸, 柳橙的果香甜韻, 加上綠茶的清爽底味, 呈現酸甜層次, 完美平衡。中杯冰飲總糖量: 47 公克。中杯冰飲總熱量: 222 大卡。咖啡因含量: 57 毫克。大杯冰飲總糖量: 76 公克。大杯冰飲總熱量: 360 大卡。咖啡因含量: 91 毫克。茶產地: 台灣。', NULL, 110.00, 1, 66, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (70, N'西西里冰茶', N'Sicilian Iced Tea', N'不含咖啡, 以火味十足的炟客烏龍取代咖啡基底, 透過與檸檬酸甜結合完美比例, 還原西西里的特色, 在炙熱夏日上市, 急速解熱! 中杯冰飲總糖量: 94 公克。中杯冰飲總熱量: 412 大卡。咖啡因含量: 194 毫克。大杯冰飲總糖量: 112 公克。大杯冰飲總熱量: 495 大卡。咖啡因含量: 271 毫克。茶產地: 台灣。', NULL, 110.00, 1, 67, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (71, N'西西里凍飲', N'Sicilian Iced Drink', N'不含咖啡, 以火味十足的炟客烏龍取代咖啡基底, 與檸檬酸甜結合完美比例, 再加上麥茶凍增加豐富層次, 在炙熱夏日上市, 急速解熱。中杯冰飲總糖量: 76 公克。中杯冰飲總熱量: 328 大卡。咖啡因含量：136 毫克。大杯冰飲總糖量: 109 公克。大杯冰飲總熱量: 475 大卡。咖啡因含量: 194 毫克。茶產地: 台灣。', NULL, 110.00, 1, 68, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (72, N'六条麥茶', N'Signature Wheat Tea', N'無咖啡因日本六条麥茶, 焙香適口恰到好處, 清爽無負擔。中杯冰及熱飲總糖量: 32 公克。中杯冰及熱飲總熱量: 138 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 54 公克。大杯冰及熱飲總熱量: 230 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 60.00, 1, 69, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (73, N'六条麥桔茶', N'Signature Kumquat Wheat Tea', N'無咖啡因日本六条麥茶結合酸香金桔汁, 絕妙新品超乎想像好喝。中杯冰及熱飲總糖量: 47 公克。中杯冰及熱飲總熱量: 202 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 65 公克。大杯冰及熱飲總熱量: 281 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 85.00, 1, 70, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (74, N'六条麥茶鮮奶', N'Signature Fresh Milk Wheat Tea', N'無咖啡因日本六条麥茶搭配小農鮮乳, 濃醇奶味散發煎焙麥香 中杯冰及熱飲總糖量: 37 公克。中杯冰及熱飲總熱量: 204 大卡。咖啡因含量: 0 毫克。大杯冰及熱飲總糖量: 54 公克。大杯冰及熱飲總熱量: 298 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 95.00, 1, 71, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (75, N'六条麥茶冬露', N'Signature Wheat Tea with White Gourd Drink', N'限大杯。無咖啡因日本六条麥茶加入冬瓜茶, 香甜好喝是夏日最佳選擇。大杯冰及熱飲總糖量: 55 公克。大杯冰及熱飲總熱量: 235 大卡。咖啡因含量: 0 毫克。原產地: 日本靜岡。', NULL, 80.00, 1, 72, NULL, NULL);
+INSERT INTO dmms.[Products] ([Id], [Name], [EnglishName], [Description], [ImageUrl], [BasePrice], [IsEnabled], [SortOrder], [SourceExternalId], [SourceUuid]) VALUES (76, N'茶王 1953', N'King''s Oolong 1953', N'源自天仁茗茶 1953 年創立的初心, 承襲七十餘年製茶工藝。茶湯厚實飽滿, 韻味深長, 盡顯品牌底蘊與情感價值, 因此命名為「茶王1953」, 象徵傳承與經典。大杯總糖量: 54 公克。大杯總熱量: 232 大卡。大杯咖啡因: 140 毫克。茶產地: 台灣。', NULL, 65.00, 1, 0, NULL, NULL);
 SET IDENTITY_INSERT dmms.[Products] OFF;
 
 -- SpecialOptionSizes: 2 列

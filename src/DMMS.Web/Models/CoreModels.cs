@@ -24,10 +24,6 @@ public class Product
     public decimal BasePrice { get; set; }
     public bool IsEnabled { get; set; } = true;
     public int SortOrder { get; set; }
-    /// <summary>單一尺寸商品是否仍輸出「份量 Size」群組段（原版茶王$65 等單尺寸商品亦宣告 Size group；多多綠茶等則無）。</summary>
-    public bool HasSizeGroup { get; set; }
-    /// <summary>甜度群組輸出位置：false＝每個尺寸段內各輸出一次（原版 913茶王 型，Nesting=2）；true＝尺寸段結束後商品層輸出一次（原版 經典綠茶/珍珠奶茶 型，Nesting=1，與尺寸無關）。</summary>
-    public bool SweetnessAtProductLevel { get; set; }
     public string? SourceExternalId { get; set; }
     public string? SourceUuid { get; set; }
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
